@@ -1,5 +1,6 @@
 import { Radio, Menu, Dropdown, Button, Icon, message } from 'antd';
 import React, { Component } from 'react';
+import QuickResultItem from "./QuickResultItem";
 
 const RadioGroup = Radio.Group;
 
@@ -38,9 +39,9 @@ class QuickResult extends Component {
 
 
                 <RadioGroup onChange={this.onChange} value={this.state.value} buttonStyle="solid">
-                    <p><Radio.Button className="radioStyle" value={1}>Option A</Radio.Button ></p>
-                    <p><Radio.Button className="radioStyle" value={2}>Option B</Radio.Button ></p>
-                    <p><Radio.Button className="radioStyle" value={3}>Option C</Radio.Button ></p>
+                <QuickResultItem/>
+                <QuickResultItem/>
+                <QuickResultItem/>
                 </RadioGroup></div>
         );
     }
