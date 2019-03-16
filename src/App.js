@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import {Button} from 'antd';
+import { Route } from "react-router-dom";
+import Homepage from "./Homepage/Homepage";
+import QuickChoose from "./QuickChoose/QuickChoose";
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <Button type="primary">HI</Button>
+        <header>
+         
         </header>
+     
+
+      {/* Router */}
+      <Route exact path = "/" component={QuickChoose} />
       </div>
     );
   }
