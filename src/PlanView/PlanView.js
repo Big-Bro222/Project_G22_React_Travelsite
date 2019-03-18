@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Row, Col,Affix } from 'antd';
 import SideView from "../Side/SideView";
-// import PlanItemView from "../PlanView/PlanItemView";
+import PlanItemView from "../PlanView/PlanItemView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 
 class PlanView extends Component {
-    state = {}
+    constructor(props) {
+        super(props);
+        this.state = { value: 0, previous: 0 };
+      }
+    componentWillMount() {
+        this.data  =  <PlanItemView/>;
+    }
     render() {
         return (
             <div>
@@ -18,7 +24,7 @@ class PlanView extends Component {
                 <Row>
                     <Col span={2} />
                     <Col span={22}>
-                    <Timeline/>
+                    <Timeline content={this.data}/>
                     </Col>
                 </Row>
             </div>
