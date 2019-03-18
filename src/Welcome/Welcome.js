@@ -7,6 +7,8 @@ import {
 } from 'antd';
 import moment from "moment"
 import './Welcome.css'
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 class WelcomeForm extends Component {
@@ -98,14 +100,14 @@ class WelcomeForm extends Component {
             <Form >
                 <Row type="flex" justify="center" >
                     <Col {...colLayout_2}>
-                        <Form.Item label="From" >
+                        <Form.Item label={this.props.departureplace} >
                             {getFieldDecorator('From', {
                                 rules: [{
                                     required: true,
                                     message: 'Please input your starting points',
                                 }],
                             })(
-                                <Input placeholder="Country, city or airport" />
+                                <Input placeholder={this.props.departureplace} onChange={this.props.onChangedeparture} />
                             )}
                         </Form.Item>
                     </Col>
@@ -187,9 +189,9 @@ class WelcomeForm extends Component {
                 </Row>
                 <Row>
                     <Col {...buttonLayout}>
-                        
+                        <Link to="/Payment">
                             <Button type="primary" htmlType="submit">Submit</Button>
-                       
+                        </Link>
                     </Col>
                 </Row>
 
@@ -198,5 +200,19 @@ class WelcomeForm extends Component {
     }
 }
 const Welcome = Form.create({})(WelcomeForm);
+function mapStateToProps(state){
+    return{
+        departureplace:state.departureplace
+    }
+}
 
-export default Welcome
+function mapDispatchToProps(dispatch){
+    return {
+        onChangedeparture:(e)=>{
+        const action={type:"ON_CHANGE_DEPARTURE",payload:e.target.value};
+        dispatch(action);
+        (console.log(e.target.value))}
+        
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Welcome)

@@ -3,14 +3,19 @@ import {Row, Col,Divider, Button,Icon} from 'antd';
 import Navbar from "../Navbar/Navbar";
 import PaymentItem from "./PaymentItem/PaymentItem";
 import "./Payment.css";
-
+import { connect } from "react-redux";
 class Payment extends Component {
-    state = {
-        total: 1234,
+    constructor(props) {
+        super(props);
+        this.state = {
+            total: 1234,
+    }
+    
     }
     render() {
         return (
             <div>
+                <div>{this.props.departureplace}</div>
                 <Navbar />
                 <Row type="flex" justify="center">
                     <Col span={7} className="defaultBack">
@@ -37,5 +42,12 @@ class Payment extends Component {
         );
     }
 }
+function mapStateToProps(state){
+    return{
+        departureplace:state.departureplace
+    }
+}
 
-export default Payment;
+
+export default connect(mapStateToProps)(Payment)
+

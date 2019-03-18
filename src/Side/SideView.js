@@ -4,6 +4,7 @@ import QuickResultItem from "../QuickResult/QuickResultItem";
 
 
 class SideView extends Component {
+    
     state = { 
       title: "Flight",
      }
@@ -11,7 +12,7 @@ class SideView extends Component {
     render() { 
         return ( 
             <div style={{ width: "100%" }}>
-            <h2>{this.state.title + "  List"}</h2>
+            <h2>{this.state.title + this.props.departureplace}</h2>
             <QuickResultItem/>
             <QuickResultItem/>
             <QuickResultItem/>
