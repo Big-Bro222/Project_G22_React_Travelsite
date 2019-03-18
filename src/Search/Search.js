@@ -6,13 +6,13 @@ import {
     Form, InputNumber, Input, Switch, Radio, Button, DatePicker, Row, Col, Carousel, Icon,
 } from 'antd';
 import moment from "moment"
-import './Welcome.css'
-import Navbar from "../Navbar/Navbar"
+import './Search.css'
+
 
 const ButtonGroup = Button.Group;
 
 
-class WelcomeForm extends Component {
+class searchView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -77,14 +77,14 @@ class WelcomeForm extends Component {
 
         return (
             <div >
-                <Navbar />
+                {/* <Navbar />
                 <Carousel autoplay>
                     <div><h3>1</h3></div>
                     <div><h3>2</h3></div>
                     <div><h3>3</h3></div>
                     <div><h3>4</h3></div>
                 </Carousel>
-
+ */}
 
                 <div className="searchView">
                     <Radio.Group className="radio_group" onChange={this.onRadioChange} defaultValue={this.state.radioValue} >
@@ -93,8 +93,8 @@ class WelcomeForm extends Component {
                     </Radio.Group>
 
                     <Form>
-                        <Row  type="flex"  justify="center">
-                            <Col span={12}>
+                        <Row type="flex" justify="start">
+                            <Col span={7}>
                                 <Row>
                                     <b className="typeStyle">FROM</b>
                                 </Row>
@@ -109,7 +109,11 @@ class WelcomeForm extends Component {
                                         )}
                                     </Form.Item>
                                 </Row>
-                                <b className="typeStyle">TO</b>
+                            </Col>
+                            <Col span={7}>
+                                <Row>
+                                    <b className="typeStyle">TO</b>
+                                </Row>
                                 <Row>
                                     <Form.Item >
                                         {getFieldDecorator('To', {
@@ -122,8 +126,7 @@ class WelcomeForm extends Component {
                                     </Form.Item>
                                 </Row>
                             </Col>
-
-                            <Col span={5} className="typeStyle" >
+                            <Col span={5} >
                                 <Row>
                                     <b className="typeStyle">DEPART</b>
                                 </Row>
@@ -145,8 +148,10 @@ class WelcomeForm extends Component {
                                         )}
                                     </Form.Item>
                                 </Row>
+                            </Col>
+                            <Col span={5}>
                                 <Row>
-                                    <b  className="typeStyle">RETURN</b>
+                                    <b className="typeStyle">RETURN</b>
                                 </Row>
                                 <Row>
                                     <Form.Item >
@@ -168,55 +173,50 @@ class WelcomeForm extends Component {
                                     </Form.Item>
                                 </Row>
                             </Col>
-
                         </Row>
                     </Form>
 
 
 
 
-                    <Row>
-                        <Col span={8} >
-                            <Row>
-                                <b className="typeStyle">Adult:(12+ yrs)</b>
-                            </Row>
-                            <Row>
-                                <ButtonGroup>
-                                    <Button type="primary" icon="minus" />
-                                    <InputNumber style={{ marginTop: "2px" }} min={1} max={10} id='Adults' defaultValue={1} />
-                                    <Button type="primary" icon="plus" />
-                                </ButtonGroup>
-                            </Row>
-                        </Col>
+                <Row type="flex" justify="start">
+                    <Col span={5} >
+                        <Row>
+                            <b className="typeStyle">Adult:(12+ yrs)</b>
+                        </Row>
+                        <Row>
+                            <ButtonGroup>
+                                <Button type="primary" icon="minus" />
+                                <InputNumber style={{ marginTop: "2px" }} min={1} max={10} id='Adults' defaultValue={1} />
+                                <Button type="primary" icon="plus" />
+                            </ButtonGroup>
+                        </Row>
+                    </Col>
+                    <Col span={5}  >
+                        <Row>
+                            <b className="typeStyle">Child:(2-11 yrs)</b>
+                        </Row>
+                        <Row>
+                            <ButtonGroup>
+                                <Button type="primary" icon="minus" />
+                                <InputNumber style={{ marginTop: "2px" }} min={0} max={10} id='Children' defaultValue={0} />
+                                <Button type="primary" icon="plus" />
+                            </ButtonGroup>
+                        </Row>
+                    </Col>
+                    <Col span={5} >
+                        <Row>
+                            <Button type="primary" htmlType="submit">Submit</Button>
+                        </Row>
+                        
+                    </Col>
+                </Row>
 
-                        <Col span={8}  >
-                            <Row>
-                                <b className="typeStyle">Child:(2-11 yrs)</b>
-                            </Row>
-                            <Row>
-                                <ButtonGroup>
-                                    <Button type="primary" icon="minus" />
-                                    <InputNumber style={{ marginTop: "2px" }} min={0} max={10} id='Children' defaultValue={0} />
-                                    <Button type="primary" icon="plus" />
-                                </ButtonGroup>
-                            </Row>
-                        </Col>
-
-                        <Col span={8} >
-                            <Row>
-                                <b className="typeStyle">Car Rental</b>
-                            </Row>
-                            <Row>
-                                <Button type="primary" htmlType="submit">Submit</Button>
-                            </Row>
-                        </Col>
-                    </Row>
-
-                </div>
             </div>
+            </div >
         )
     }
 }
-const Welcome = Form.create({})(WelcomeForm);
+const Search = Form.create({})(searchView);
 
-export default Welcome
+export default Search

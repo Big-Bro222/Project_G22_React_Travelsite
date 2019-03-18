@@ -4,21 +4,10 @@ import React, {
 } from "react";
 import 'antd/dist/antd.css';
 import './DetailsItem.css';
-import { Card, Icon, Collapse, Rate, List, Avatar } from 'antd';
+import { Card, Icon, Collapse, Rate, List, Avatar, Row, Col } from 'antd';
 
 const { Meta } = Card;
 const Panel = Collapse.Panel;
-
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
 
 const IconText = ({ type, text }) => (
   <span>
@@ -43,7 +32,17 @@ class DetailsItem extends Component {
 
 
   render() {
-
+    const listData = [];
+    for (let i = 0; i < 3; i++) {
+      listData.push({
+        airlineLogos: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Scandinavian_Airlines_logo.svg/1200px-Scandinavian_Airlines_logo.svg.png",
+        href: 'http://ant.design',
+        title: 'Scandinavian Airlines',
+        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+        content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+      });
+    }
 
     return (
       <div>
@@ -55,14 +54,49 @@ class DetailsItem extends Component {
             <List.Item
               key={item.title}
               actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-              extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
             >
-              <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
-              />
-              {item.content}
+              {<div>
+                <Row>
+                  <Col span={2}>
+                    <Row>
+                      <Avatar src={item.airlineLogos} />
+                    </Row>
+                  </Col>
+                  <Col span={4}>
+                    <Row>
+                      <b>airlineName</b>
+                    </Row>
+                    <Row>
+                      <b>airline Type</b>
+                    </Row>
+                  </Col>
+                  <Col span={3}>
+                    <Row>
+                      <b>17:50</b>
+                    </Row>
+                    <Row>
+                      <b>airport</b>
+                    </Row>
+                  </Col>
+                  <Col span={3}>
+                    <Row>
+                      <b>18:50</b>
+                    </Row>
+                    <Row>
+                      <b>airport</b>
+                    </Row>
+                  </Col>
+                  <Col span={1}>
+                    <b>$</b>
+                  </Col>
+                  <Col span={4}>
+                    <Row>
+                      <b>1500</b>
+                    </Row>
+                  </Col>
+
+                </Row>
+              </div>}
             </List.Item>
           )}
         />
@@ -70,7 +104,7 @@ class DetailsItem extends Component {
 
 
 
-        
+
         <Card
           style={{ width: "100%" }}
           cover={<img alt="example" src="https://www3.hilton.com/resources/media/hi/IADMRHF/en_US/img/shared/full_page_image_gallery/main/HH_hotelextdusk_2_675x359_FitToBoxSmallDimensionSmallDimension_Center.jpg" />}

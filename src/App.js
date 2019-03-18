@@ -19,9 +19,9 @@ class App extends Component {
       {/* Router */}
       {/* <Route exact path = "/" component={QuickChoose} /> */}
       {/* <Route exact path = "/" component={Payment} /> */}
-      {/* <Route exact path = "/" component={Side} /> */}{/* <Route exact path = "/" component={Side} /> */}
-      {/* <Route exact path = "/" component={Welcome} />  */}
+      {/* <Route exact path = "/" component={Side} /> */}
       <Route exact path = "/" component={Welcome} /> 
+      {/* <Route exact path = "/" component={DetailView} />  */}
       </div>
     );
   }

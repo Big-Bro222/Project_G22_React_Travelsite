@@ -3,21 +3,21 @@ import React, {
 } from "react";
 import 'antd/dist/antd.css';
 import {
-    Form, InputNumber, Input, Switch, Radio, Button, DatePicker, Row, Col, Carousel, Icon,
+    Form, Button, DatePicker, Row, Col, Carousel,
 } from 'antd';
 import moment from "moment"
 import './Welcome.css'
 import Navbar from "../Navbar/Navbar"
 
-const ButtonGroup = Button.Group;
 
 
-class WelcomeForm extends Component {
+
+class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startValue:null,
-            endValue:null,
+            startValue: null,
+            endValue: null,
             endOpen: false,
             disabled: false,
             radioValue: "Return",
@@ -25,24 +25,24 @@ class WelcomeForm extends Component {
     }
 
     disabledStartDate = (current) => {
-        if(this.state.endValue===null){
-            return current&&current < moment().endOf('day') ;
+        if (this.state.endValue === null) {
+            return current && current < moment().endOf('day');
         }
-        else{
-            if((current > this.state.endValue) && (current < moment.endOf('day')))
-            return current
+        else {
+            if ((current > this.state.endValue) && (current < moment.endOf('day')))
+                return current
         }
     }
 
     disabledEndDate = (endValue) => {
-        if(this.state.startValue){
+        if (this.state.startValue) {
             return endValue && endValue < moment().endOf('day');
         }
-        else{
+        else {
             return endValue && endValue > this.state.startValue;
         }
-        
-      
+
+
     }
 
     onChange = (field, value) => {
@@ -83,11 +83,12 @@ class WelcomeForm extends Component {
                     <div><h3>3</h3></div>
                     <div><h3>4</h3></div>
                 </Carousel>
+
                 <div className="searchView">
                     <Row type="flex" justify="start" align="middle">
                         <Col span={3} className="typeCol"><b className="typeStyle">DEPART</b></Col>
                         <Col span={8}>
-                            <DatePicker  className="datePicker"
+                            <DatePicker className="datePicker"
                                 size="large"
                                 disabledDate={this.disabledStartDate}
                                 format="DD-MM-YYYY"
@@ -117,6 +118,6 @@ class WelcomeForm extends Component {
         )
     }
 }
-const Welcome = Form.create({})(WelcomeForm);
+
 
 export default Welcome
