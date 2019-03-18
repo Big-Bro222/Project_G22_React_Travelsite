@@ -13,7 +13,7 @@ class Navbar extends Component {
                 <Affix offsetTop={this.state.top}>
                 <Menu mode="horizontal" className = "background">
                 <Menu.Item  style={{float:"left"}}>
-                <Icon type="smile"/>
+                <Icon type="smile" theme="twoTone"/>
                     </Menu.Item>
                     <Menu.Item style={{float:"right"}}>
                     <Icon type="user"/>

@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
-// import {  } from 'antd';
+import { Menu, Icon } from 'antd';
 import QuickResultItem from "../QuickResult/QuickResultItem";
+import "./SideView.css"
+
+const MenuItemGroup = Menu.ItemGroup;
 
 
 class SideView extends Component {
-    state = { 
-      title: "Flight",
-     }
+    state = {
+        value: 1,
+    }
 
-    render() { 
-        return ( 
-            <div style={{ width: "100%" }}>
-            <h2>{this.state.title + "  List"}</h2>
-            <QuickResultItem/>
-            <QuickResultItem/>
-            <QuickResultItem/>
-      </div>
-         );
+    handleClick = (e) => {
+        console.log('click ', e);
+    }
+
+
+    render() {
+        return (
+            <div className="menu">
+                <Menu
+                    onClick={this.handleClick}
+                    defaultSelectedKeys={['1']}
+                    mode="vertical-left"
+                >
+                    <Menu.Item key="1"><Icon type="rocket" /></Menu.Item>
+                    <Menu.Item key="2"><Icon type="home" /></Menu.Item>
+                </Menu>
+
+            </div>
+        );
     }
 }
- 
+
 export default SideView;
