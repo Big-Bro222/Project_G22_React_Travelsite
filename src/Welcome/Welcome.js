@@ -3,15 +3,16 @@ import React, {
 } from "react";
 import 'antd/dist/antd.css';
 import {
-    Form, InputNumber, Input, Switch, Radio, Button, DatePicker, Row, Col,
+    Form, Button, DatePicker, Row, Col, Carousel,
 } from 'antd';
 import moment from "moment"
 import './Welcome.css'
-import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar"
 
 
 
-class WelcomeForm extends Component {
+
+class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,25 +23,26 @@ class WelcomeForm extends Component {
             radioValue: "Return",
         }
     }
-    onRadioChange = (e) => {
-
-        if (e.target.value === "Return") { this.setState({ disabled: false }) }
-        else { this.setState({ disabled: true }) }
-        this.setState({
-            radioValue: e.target.value,
-        });
-    }
 
     disabledStartDate = (current) => {
-        return current && current < moment().endOf('day');
+        if (this.state.endValue === null) {
+            return current && current < moment().endOf('day');
+        }
+        else {
+            if ((current > this.state.endValue) && (current < moment.endOf('day')))
+                return current
+        }
     }
 
     disabledEndDate = (endValue) => {
-        const startValue = this.state.startValue;
-        if (!endValue || !startValue) {
-            return false;
+        if (this.state.startValue) {
+            return endValue && endValue < moment().endOf('day');
         }
-        return endValue.valueOf() <= startValue.valueOf();
+        else {
+            return endValue && endValue > this.state.startValue;
+        }
+
+
     }
 
     onChange = (field, value) => {
@@ -70,137 +72,52 @@ class WelcomeForm extends Component {
     }
 
     render() {
-
-        const { getFieldDecorator } = this.props.form;
         const { startValue, endValue, endOpen } = this.state;
 
-        const colLayout_2 = {
-            xs: { span: 24 },
-            md: { span: 5 }
-        }
-        const colLayout_3 = {
-            xs: { span: 24 },
-            md: { span: 3 }
-        }
-        const colLayout_4 = {
-            xs: { span: 24 },
-            md: { span: 4 }
-        }
-        const buttonLayout = {
-            xs: { span: 24 },
-            md: { span: 10, offset: 12 }
-        };
-
         return (
-            <div>
-                <Radio.Group onChange={this.onRadioChange} defaultValue={this.state.radioValue} >
-                    <Radio value="Return">Return</Radio>
-                    <Radio value='One_way'>One way</Radio>
-                </Radio.Group>
+            <div >
+                <Navbar />
+                <Carousel autoplay>
+                    <div><h3>1</h3></div>
+                    <div><h3>2</h3></div>
+                    <div><h3>3</h3></div>
+                    <div><h3>4</h3></div>
+                </Carousel>
 
-                <Form >
-                    <Row type="flex" justify="center" >
-                        <Col {...colLayout_2}>
-                            <Form.Item label="From" >
-                                {getFieldDecorator('From', {
-                                    rules: [{
-                                        required: true,
-                                        message: 'Please input your starting points',
-                                    }],
-                                })(
-                                    <Input placeholder="Country, city or airport" />
-                                )}
-                            </Form.Item>
+                <div className="searchView">
+                    <Row type="flex" justify="start" align="middle">
+                        <Col span={3} className="typeCol"><b className="typeStyle">DEPART</b></Col>
+                        <Col span={8}>
+                            <DatePicker className="datePicker"
+                                size="large"
+                                disabledDate={this.disabledStartDate}
+                                format="DD-MM-YYYY"
+                                initialValue={startValue}
+                                onChange={this.onStartChange}
+                                onOpenChange={this.handleStartOpenChange}
+                            />
                         </Col>
-                        <Col {...colLayout_2}>
-                            <Form.Item label="To">
-                                {getFieldDecorator('To', {
-                                    rules: [{
-                                        required: true,
-                                        message: 'Please input your destination',
-                                    }],
-                                })(
-                                    <Input placeholder="Country, city or airport" />
-                                )}
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row type="flex" justify="center">
-                        <Col {...colLayout_2}>
-                            <Form.Item label="Depart" >
-                                {getFieldDecorator('Depart', {
-                                    rules: [{
-                                        type: 'object',
-                                        required: true,
-                                        message: 'Select date',
-                                    }],
-                                })(
-                                    <DatePicker
-                                        disabledDate={this.disabledStartDate}
-                                        format="DD-MM-YYYY"
-                                        initialValue={startValue}
-                                        onChange={this.onStartChange}
-                                        onOpenChange={this.handleStartOpenChange}
-                                    />
-                                )}
-                            </Form.Item>
-                        </Col>
-                        <Col {...colLayout_2}>
-                            <Form.Item label="Return">
-                                {getFieldDecorator('Return', {
-                                    rules: [{
-                                        type: 'object',
-                                        required: true,
-                                        message: 'Select date',
-                                    }],
-                                })(
-                                    <DatePicker
-                                        disabledDate={this.disabledEndDate}
-                                        format="DD-MM-YYYY"
-                                        initialValue={endValue}
-                                        onChange={this.onEndChange}
-                                        open={endOpen}
-                                        onOpenChange={this.handleEndOpenChange}
-                                        disabled={this.state.disabled} />
-                                )}
-                            </Form.Item>
+                        <Col span={2} className="typeCol"><b className="typeStyle">TO</b></Col>
+                        <Col span={8}  >
+                            <DatePicker className="datePicker"
+                                size="large"
+                                disabledDate={this.disabledEndDate}
+                                format="DD-MM-YYYY"
+                                initialValue={endValue}
+                                onChange={this.onEndChange}
+                                open={endOpen}
+                                onOpenChange={this.handleEndOpenChange}
+                            />
                         </Col>
                     </Row>
-
-                </Form>
-
-                <Row type="flex" justify="center">
-                    <Col {...colLayout_3}>
-                        <InputNumber min={1} max={10} id='Adults' defaultValue={1} />
-                        <span > Adults</span>
-
-                    </Col>
-                    <Col {...colLayout_3} >
-                        <span > Children</span>
-                        <InputNumber min={0} max={10} id='Children' defaultValue={1} />
-
-
-                    </Col>
-                    <Col {...colLayout_4} >
-
-                        Car Rental
-                                <Switch />
-
-
-                    </Col>
-                </Row>
-                <Row>
-                    <Col {...buttonLayout}>
-                        <Link to="/quickchoose">
-                            <Button type="primary" htmlType="submit">Submit</Button>
-                        </Link>
-                    </Col>
-                </Row>
-
+                    <Row type="flex" justify="center" align="middle" className="buttonStyle">
+                        <Button size="large" type="primary" htmlType="submit">Get Your Plan</Button>
+                    </Row>
+                </div>
             </div>
         )
     }
 }
-const Welcome = Form.create({})(WelcomeForm);
+
 
 export default Welcome

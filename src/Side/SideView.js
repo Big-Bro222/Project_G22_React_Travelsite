@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
-import QuickResultItem from "../QuickResult/QuickResultItem";
 import "./SideView.css"
-
-const MenuItemGroup = Menu.ItemGroup;
 
 
 class SideView extends Component {

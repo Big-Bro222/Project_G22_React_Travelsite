@@ -3,6 +3,7 @@ import HorizontalTimeline from "react-horizontal-timeline"
 import PlanItemView from "../PlanView/PlanItemView";
 import SwipeableViews from 'react-swipeable-views';
 
+
 class Timeline extends Component {
     constructor(props) {
         super(props);
@@ -14,8 +15,23 @@ class Timeline extends Component {
     };
 }
 
+    // getViews(){
+    //     for (let i = 0; i < this.state.Points.length; i++) {
+           
+    //     }
+    // }
+   
+    
+
     render() {
-        const views = this.props.content;
+        const views = this.state.Points.map((date, index) => {
+            return (
+              <div className='container' key={index}>
+                { this.props.content }
+              </div>
+            );
+          });
+        
 
         return (
             <div>
