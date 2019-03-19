@@ -3,7 +3,14 @@ import{Button} from 'antd';
 import "./PlanItemView.css"
 
 class PlanItemView extends Component {
-    state = {  }
+constructor(props){
+    super(props);
+    this.state ={
+        value: true,
+    }
+}
+
+
     render() { 
         return ( 
             <div>

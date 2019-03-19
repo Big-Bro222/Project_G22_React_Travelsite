@@ -1,50 +1,14 @@
-.header{
-    background: #ffffff,
-    padding 10
-}
-
 .searchView {
-    width:100%;
-    padding-top: 1px;
-    padding-bottom:3px;
-    border: 1px solid #bfbfbf;
-    border-radius:15px;
-    margin: auto;
-    background:#bfbfbf; 
-
-  }
-
-.ant-carousel .slick-slide {
-    text-align: center;
-    height: 100%;
-    line-height: 250px;
-    background: #364d79;
-    overflow: hidden;
-  }
-  
-  .ant-carousel .slick-slide h3 {
-    color: #fff;
-  }
-
-  .radio_group{
-     margin-top: 5%
-  }
-  .typeStyle{
-      color:#002329;
-
-  }
-  .typeCol{
-    text-align: end;
-    padding-right: 15px
-  }
-  /* .typeCol_1{
-    padding-right: 25px 
-  } */
-
-  .datePicker{
-      width:100%
-  }
-
-  .buttonStyle{
-      margin-top: 40px
-  }
+  width:100%;
+  padding-top: 10px;
+  padding-bottom:0px;
+  border: 1px solid #bfbfbf;
+  border-radius:15px;
+  margin: auto;
+  background:#bfbfbf; 
+}
+.typeStyle{
+    color:#002329;
+    padding-left:5px;
+    margin: 10px
+}

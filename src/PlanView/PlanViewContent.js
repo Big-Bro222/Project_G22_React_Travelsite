@@ -14,6 +14,7 @@ import DetailItem from "../Details/DetailsItem";
     {
         date: '2019-01-05',
         content : <Search/>
+
     },
     {
         date:'2019-01-08',

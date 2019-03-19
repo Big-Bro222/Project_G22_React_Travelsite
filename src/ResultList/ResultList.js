@@ -1,85 +1,86 @@
 import React, { Component } from 'react';
-import {  Icon, List, Avatar, Row, Col } from 'antd';
+import { Avatar, Row, Col, Card, Divider, Button, Popover, Icon } from 'antd';
+import "./ResultList.css"
 
-const IconText = ({ type, text }) => (
-    <span>
-        <Icon type={type} style={{ marginRight: 8 }} />
-        {text}
-    </span>
-);
+
+
 class ResultList extends Component {
-    state = {}
+    state = {
+    }
+
     render() {
-        const listData = [];
-        for (let i = 0; i < 3; i++) {
-            listData.push({
-                airlineLogos: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Scandinavian_Airlines_logo.svg/1200px-Scandinavian_Airlines_logo.svg.png",
-                href: 'http://ant.design',
-                title: 'Scandinavian Airlines',
-                avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-                content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-            });
-        }
+        const hoverContent = (
+            <div>
+                Add to your plan
+            </div>
+        );
 
         return (
-            <div>
+            <Card className="listStyle">
+                <Row type="flex" justify="space-around" align="middle">
+                    <Col span={1}>
+                        <Row type="flex" justify="start">
+                            <Avatar alt="airline" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Scandinavian_Airlines_logo.svg/1200px-Scandinavian_Airlines_logo.svg.png" />
+                        </Row>
+                    </Col>
+                    <Col span={5}>
+                        <Row type="flex" justify="start" className="airLineStyle">
+                            <h2 className="airLineStyle">Scandinavian Airlines</h2>
+                        </Row>
+                        <Row type="flex" justify="start" >
+                            Airbus A321-100/200
+                        </Row>
+                    </Col>
+                    <Col span={2}>
+                        <Row type="flex" justify="space-around">
+                            <b className="timeStyle">17:50</b>
+                        </Row>
+                        <Row type="flex" justify="start" className="airportStyle">
+                            <b>PEK</b>
+                        </Row>
+                    </Col>
+                    <Col span={2}>
+                        <Row type="flex" justify="center">
+                            8h10m
+                        </Row>
+                        <Row type="flex" justify="center">
+                            <Icon type="minus" /><Icon type="minus" /><Icon type="rocket" rotate="90"/><Icon type="minus" /><Icon type="minus" />
+                        </Row>
+                        <Row type="flex" justify="center">
+                            <b className="priceStyle">1 stop STD</b>
+                        </Row>
+                    </Col>
 
-                        <List
-                            itemLayout="vertical"
-                            size="large"
-                            dataSource={listData}
-                            renderItem={item => (
-                                <List.Item
-                                    key={item.title}
-                                    actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-                                >
-                                    {<div style={{width:"100%"}}>
-                                        <Row>
-                                            <Col span={8}>
-                                                <Row>
-                                                    <Avatar src={item.airlineLogos} />
-                                                </Row>
-                                            </Col>
-                                            <Col span={4}>
-                                                <Row>
-                                                    <b>airlineName</b>
-                                                </Row>
-                                                <Row>
-                                                    <b>airline Type</b>
-                                                </Row>
-                                            </Col>
-                                            <Col span={4}>
-                                                <Row>
-                                                    <b>17:50</b>
-                                                </Row>
-                                                <Row>
-                                                    <b>airport</b>
-                                                </Row>
-                                            </Col>
-                                            <Col span={4}>
-                                                <Row>
-                                                    <b>18:50</b>
-                                                </Row>
-                                                <Row>
-                                                    <b>airport</b>
-                                                </Row>
-                                            </Col>
-                                            <Col span={1}>
-                                                <b>$</b>
-                                            </Col>
-                                            <Col span={3}>
-                                                <Row>
-                                                    <b>1500</b>
-                                                </Row>
-                                            </Col>
+                    <Col span={3}>
+                        <Row type="flex" justify="start">
+                            <b className="timeStyle">18:50</b>
+                        </Row>
+                        <Row type="flex" justify="start" className="airportStyle">
+                            <b>ARN</b>
+                        </Row>
+                    </Col>
+                    <Col span={4}>
+                        <Row type="flex" justify="start" className="airLineStyle">
+                            <h2 className="airLineStyle"> Economy</h2>
+                        </Row>
+                        <Row type="flex" justify="start">
+                            Lowest Price: <b className="priceStyle"> $1500 </b>
+                        </Row>
+                    </Col>
+                    <Divider type="vertical" style={{ height: "80px" }} />
+                    <Col span={3}>
+                        <Button shape="round" icon="down" size="large">View More</Button>
+                    </Col>
+                    <Col span={3} >
+                        <Row type="flex" justify="end">
+                            <Popover style={{ width: 500 }} content={hoverContent}>
+                                <Button type="primary" shape="circle" icon="plus" />
+                            </Popover>
 
-                                        </Row>
-                                    </div>}
-                                </List.Item>
-                            )}
-                        />
-            </div>
+                        </Row>
+                    </Col>
+                </Row>
+            </Card>
 
         );
     }

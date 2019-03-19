@@ -1,0 +1,25 @@
+.listStyle{
+    width:100%;
+    border: 1px solid #bfbfbf;
+    border-radius:15px;
+    padding-top: -20px;
+}
+.classStlye{
+    margin-bottom: 0px;
+    padding-bottom: 0px
+}
+.airLineStyle{
+    margin-bottom: 0px;
+    padding-bottom: 0px
+}
+.airportStyle{
+    padding-left: 5px
+}
+.timeStyle{
+    font-size: 40px;
+}
+.priceStyle{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: tomato
+}

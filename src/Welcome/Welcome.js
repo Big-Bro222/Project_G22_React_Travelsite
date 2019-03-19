@@ -2,8 +2,7 @@ import React, {
     Component
 } from "react";
 import 'antd/dist/antd.css';
-import {
-    Form, Button, DatePicker, Row, Col, Carousel,
+import { Button, DatePicker, Row, Col, Carousel,
 } from 'antd';
 import moment from "moment"
 import './Welcome.css'
@@ -23,6 +22,7 @@ class Welcome extends Component {
             radioValue: "Return",
         }
     }
+
 
     disabledStartDate = (current) => {
         if (this.state.endValue === null) {
@@ -84,10 +84,10 @@ class Welcome extends Component {
                     <div><h3>4</h3></div>
                 </Carousel>
 
-                <div className="searchView">
-                    <Row type="flex" justify="start" align="middle">
-                        <Col span={3} className="typeCol"><b className="typeStyle">DEPART</b></Col>
-                        <Col span={8}>
+                <div className="divBack">
+                    <Row type="flex" justify="center" align="middle" gutter={{xs:8, sm: 16, md: 24, lg: 32 }}>
+                        <Col span={7}>
+                            <h3>DEPARTURE</h3>
                             <DatePicker className="datePicker"
                                 size="large"
                                 disabledDate={this.disabledStartDate}
@@ -97,8 +97,8 @@ class Welcome extends Component {
                                 onOpenChange={this.handleStartOpenChange}
                             />
                         </Col>
-                        <Col span={2} className="typeCol"><b className="typeStyle">TO</b></Col>
-                        <Col span={8}  >
+                        <Col span={7}>
+                        <h3>RETURN</h3>
                             <DatePicker className="datePicker"
                                 size="large"
                                 disabledDate={this.disabledEndDate}
@@ -111,10 +111,12 @@ class Welcome extends Component {
                         </Col>
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
-                        <Button size="large" type="primary" htmlType="submit">Get Your Plan</Button>
+                    <Col span={4}>
+                        <Button size="large" type="primary" htmlType="submit" href="/planview" block>Start</Button>
+                    </Col>
                     </Row>
                 </div>
-            </div>
+                </div>
         )
     }
 }
