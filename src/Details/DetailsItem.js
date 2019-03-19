@@ -33,7 +33,9 @@ class DetailsItem extends Component {
         <Meta
             title={this.state.hotel_name}
           />
+
         <Rate disabled defaultValue={3} />
+        
         <Meta
             description={this.state.hotel_description}
           />

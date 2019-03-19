@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Row, Col,Affix } from 'antd';
 import SideView from "../Side/SideView";
-import PlanItemView from "../PlanView/PlanItemView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
-import ResultList from "../ResultList/ResultList";
-import Search from "../Search/Search";
-import DetailItem from "../Details/DetailsItem";
+import Content from "./PlanViewContent";
 
 class PlanView extends Component {
     constructor(props) {
         super(props);
         this.state = { value: 0, previous: 0 };
       }
-    componentWillMount() {
-        this.data  =  <DetailItem/>;
-        // <PlanItemView/>;
-    }
+      componentWillMount() {
+        this.data = Content.map((view, index) => {
+          return ({
+            date: view.date,
+            component: (
+              <div key={index}>
+                { view.content}
+              </div>
+            )
+          });
+        });
+      }
+
     render() {
         return (
             <div>
