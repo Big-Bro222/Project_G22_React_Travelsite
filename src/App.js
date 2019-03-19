@@ -16,8 +16,9 @@ class App extends Component {
      
 
       {/* Router */}
-      <Route exact path = "/PlanView" component={PlanView} /> 
       <Route exact path = "/Welcome" component={Welcome} /> 
+
+      <Route exact path = "/PlanView" component={PlanView} /> 
       </div>
       </Provider>
     );

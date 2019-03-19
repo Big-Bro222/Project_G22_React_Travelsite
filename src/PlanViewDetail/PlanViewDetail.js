@@ -11,6 +11,7 @@ class PlanViewDetail extends Component {
     state = {
     }
     render() {
+        console.log()
         switch (this.props.UI) {
             case "DetailItem": {
                 return (
@@ -27,6 +28,7 @@ class PlanViewDetail extends Component {
             case "PlanItemView": {
                 return (
                     <div>
+
                     <PlanItemView/>
                     </div>)
             }

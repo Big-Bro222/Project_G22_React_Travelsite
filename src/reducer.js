@@ -25,8 +25,8 @@ export default function Datereducer(state=initialstate,action){
         return Object.assign({},state,{departuredate:action.payload})
         case "ON_CHANGE_RETURN":
         return Object.assign({},state,{returndate:action.payload})
-        case "GET_PLAN":
-        return Object.assign({},state,{big:action.payload1})
+        case "GENERATE_TIME_LINE":
+        return Object.assign({},state,{timeline:action.payload})
         default:
         return state;
     }

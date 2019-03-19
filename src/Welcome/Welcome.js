@@ -45,13 +45,12 @@ class Welcome extends Component {
 
     onStartChange = (value) => {
         this.onChange('startValue', value);
-        this.props.onChangedeparture(value._d.toISOString().slice(0,10));
-        console.log(value)
+        this.props.onChangedeparture(value._d.getTime());
     }
 
     onEndChange = (value) => {
         this.onChange('endValue', value);
-        this.props.onChangereturn(value._d.toISOString().slice(0,10));
+        this.props.onChangereturn(value._d.getTime());
         console.log(value._d.toISOString())
     }
 
@@ -66,13 +65,27 @@ class Welcome extends Component {
     handleEndOpenChange = (open) => {
         this.setState({ endOpen: open });
     }
+    generateTimeLine = () => {
+        var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
+        this.props.generateTimeLine(timeline);
+    }
+
+    timeLinearr = (startdate, enddate) => {
+        var datearray = [];
+        for (var i = startdate; i <= enddate; i = i + 60 * 60 * 24 * 1000) {
+            var ISO = new Date(i)
+            var formatdate = ISO.toISOString().slice(0, 10);
+            datearray.push(formatdate);
+        }
+        return datearray;
+    }
 
     render() {
         const { startValue, endValue, endOpen } = this.state;
 
         return (
             <div >
-                <div>{this.props.returndate}</div>
+                <div>{this.props.departuredate + "this.props." + this.props.returndate}</div>
                 <Navbar />
                 <Carousel autoplay>
                     <div><h3>1</h3></div>
@@ -109,7 +122,7 @@ class Welcome extends Component {
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
                         <Link to="/Planview">
-                        <Button size="large" type="primary" htmlType="submit">Get Your Plan</Button>
+                            <Button size="large" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Get Your Plan</Button>
                         </Link>
                     </Row>
                 </div>
@@ -120,7 +133,8 @@ class Welcome extends Component {
 function mapStateToProps(state) {
     return {
         departuredate: state.departuredate,
-        returndate:state.returndate
+        returndate: state.returndate,
+        timeline: state.timeline
     }
 }
 
@@ -135,6 +149,15 @@ function mapDispatchToProps(dispatch) {
             const action = { type: "ON_CHANGE_RETURN", payload: value };
             dispatch(action);
             (console.log("input2"))
+        },
+        generateTimeLine: (value) => {
+            console.log(this.props)
+            const action = {
+                type: "GENERATE_TIME_LINE",
+                payload: value
+                
+            };
+            dispatch(action);
         }
 
     }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import HorizontalTimeline from "react-horizontal-timeline"
-import PlanItemView from "../PlanView/PlanItemView";
 import SwipeableViews from 'react-swipeable-views';
 
 
