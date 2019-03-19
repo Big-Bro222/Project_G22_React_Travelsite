@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Row, Col, Affix } from 'antd';
 import PlanItemView from "../PlanView/PlanItemView";
 import ResultList from "../ResultList/ResultList";
 import Search from "../Search/Search";
@@ -12,7 +11,7 @@ class PlanViewDetail extends Component {
     state = {
     }
     render() {
-        switch (this.props.PlanViewUI) {
+        switch (this.props.UI) {
             case "DetailItem": {
                 return (
                     <div>

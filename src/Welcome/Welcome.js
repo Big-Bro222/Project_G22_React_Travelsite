@@ -8,7 +8,8 @@ import {
 import moment from "moment"
 import './Welcome.css'
 import Navbar from "../Navbar/Navbar"
-
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 
@@ -26,15 +27,15 @@ class Welcome extends Component {
 
     disabledStartDate = (current) => {
         return current && current < moment().endOf('day');
-        }
-        
-        disabledEndDate = (endValue) => {
+    }
+
+    disabledEndDate = (endValue) => {
         const startValue = this.state.startValue;
         if (!endValue || !startValue) {
-        return false;
+            return false;
         }
         return endValue.valueOf() <= startValue.valueOf();
-        }
+    }
 
     onChange = (field, value) => {
         this.setState({
@@ -44,10 +45,14 @@ class Welcome extends Component {
 
     onStartChange = (value) => {
         this.onChange('startValue', value);
+        this.props.onChangedeparture(value._d.toISOString().slice(0,10));
+        console.log(value)
     }
 
     onEndChange = (value) => {
         this.onChange('endValue', value);
+        this.props.onChangereturn(value._d.toISOString().slice(0,10));
+        console.log(value._d.toISOString())
     }
 
     handleStartOpenChange = (open) => {
@@ -67,6 +72,7 @@ class Welcome extends Component {
 
         return (
             <div >
+                <div>{this.props.returndate}</div>
                 <Navbar />
                 <Carousel autoplay>
                     <div><h3>1</h3></div>
@@ -102,13 +108,35 @@ class Welcome extends Component {
                         </Col>
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
+                        <Link to="/Planview">
                         <Button size="large" type="primary" htmlType="submit">Get Your Plan</Button>
+                        </Link>
                     </Row>
                 </div>
             </div>
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+        departuredate: state.departuredate,
+        returndate:state.returndate
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return {
+        onChangedeparture: (value) => {
+            const action = { type: "ON_CHANGE_DEPARTURE", payload: value };
+            dispatch(action);
+            (console.log("input"))
+        },
+        onChangereturn: (value) => {
+            const action = { type: "ON_CHANGE_RETURN", payload: value };
+            dispatch(action);
+            (console.log("input2"))
+        }
 
-export default Welcome
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome)

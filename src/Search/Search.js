@@ -2,12 +2,14 @@ import React, {
     Component
 } from "react";
 import {
-    Form, InputNumber, Input, Radio, Button, DatePicker, Row, Col,} from 'antd';
+    Form, InputNumber, Input, Radio, Button, DatePicker, Row, Col, Select
+} from 'antd';
 import moment from "moment"
 import './Search.css'
 import { connect } from "react-redux";
 
 const ButtonGroup = Button.Group;
+const Option = Select.Option;
 
 
 class searchView extends Component {
@@ -19,6 +21,9 @@ class searchView extends Component {
             endOpen: false,
             disabled: false,
             radioValue: "Return",
+            adults: 3,
+            children: 0,
+            infants: 0,
         }
     }
     onRadioChange = (e) => {
@@ -67,6 +72,39 @@ class searchView extends Component {
     handleEndOpenChange = (open) => {
         this.setState({ endOpen: open });
     }
+    adultsMinusChange = () => {
+        var adults = this.state.adults;
+        if (adults > 1) {
+            this.setState({ adults: adults - 1 });
+        }
+    }
+    adultsPlusChange = () => {
+        var adults = this.state.adults;
+        this.setState({ adults: adults + 1 });
+    }
+    childrenMinusChange = () => {
+        var children = this.state.children;
+        if (children >= 1) {
+            this.setState({ children: children - 1 });
+        }
+        console.log(this.state.children)
+    }
+    childrenPlusChange = () => {
+        var children = this.state.children;
+        this.setState({ children: children + 1 });
+    }
+    infantsMinusChange = () => {
+        var infants = this.state.infants;
+        if (infants >= 1) {
+            this.setState({ infants: infants - 1 });
+        }
+    }
+    infantsPlusChange = () => {
+        var infants = this.state.infants;
+        this.setState({ infants: infants + 1 });
+    }
+
+
 
     render() {
 
@@ -74,24 +112,75 @@ class searchView extends Component {
         const { startValue, endValue, endOpen } = this.state;
 
         return (
-            <div >
-                {/* <Navbar />
-                <Carousel autoplay>
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
-                </Carousel>
- */}
+            <div className="searchView">
+                <div>
+                    <Row type="flex" justify="center">
+                        <Col span={4}>
+                            <Select defaultValue="One Way" style={{ width: 120 }} >
+                                <Option value="One Way">One Way</Option>
+                                <Option value="Return">Return</Option>
+                            </Select>
+                        </Col>
 
-                <div className="searchView">
-                    <Radio.Group className="radio_group" onChange={this.onRadioChange} defaultValue={this.state.radioValue} >
-                        <Radio value="Return">Return</Radio>
-                        <Radio value='One_way'>One way</Radio>
-                    </Radio.Group>
+                        <Col span={15}>
 
+                            <Row>
+                                <Col span={10}>
+
+                                    <Select defaultValue="Economy" style={{ width: 120 }} >
+                                        <Option value="Economy">Economy</Option>
+                                        <Option value="Premium Economy">Premium Economy</Option>
+                                        <Option value="Business Class">Business Class</Option>
+                                        <Option value="First Class">First Class</Option>
+                                    </Select>
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col span={5}>
+                                    Adults(12+)
+                                </Col>
+                                <Col span={5}>
+                                    <Button type="primary" shape="circle" icon="minus" onClick={this.adultsMinusChange} />
+
+                                    <Input style={{ width: "40px" }} value={this.state.adults} />
+
+                                    <Button type="primary" shape="circle" icon="plus" onClick={this.adultsPlusChange} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col span={5}>
+                                    Children(2-11)
+                                    </Col>
+                                <Col span={5}>
+                                    <Button type="primary" shape="circle" icon="minus" onClick={this.childrenMinusChange} />
+
+                                    <Input defaultValue="0" style={{ width: "40px" }} value={this.state.children} />
+
+                                    <Button type="primary" shape="circle" icon="plus" onClick={this.childrenPlusChange} />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col span={5}>
+                                    Infants
+                                    </Col>
+                                <Col span={5}>
+                                    <Button type="primary" shape="circle" icon="minus" onClick={this.infantsMinusChange} />
+
+                                    <Input defaultValue="0" style={{ width: "40px" }} value={this.state.infants} />
+
+                                    <Button type="primary" shape="circle" icon="plus" onClick={this.infantsPlusChange} />
+                                </Col>
+                            </Row>
+
+                        </Col>
+                    </Row>
+                </div>
+
+
+                <div>
                     <Form>
-                        <Row type="flex" justify="start">
+                        <Row type="flex" justify="center">
                             <Col span={7}>
                                 <Row>
                                     <b className="typeStyle">FROM</b>
@@ -125,92 +214,11 @@ class searchView extends Component {
                                 </Row>
                             </Col>
                             <Col span={5} >
-                                <Row>
-                                    <b className="typeStyle">DEPART</b>
-                                </Row>
-                                <Row>
-                                    <Form.Item>
-                                        {getFieldDecorator('Depart', {
-                                            rules: [{
-                                                type: 'object',
-                                                message: 'Select date',
-                                            }],
-                                        })(
-                                            <DatePicker size="large"
-                                                disabledDate={this.disabledStartDate}
-                                                format="DD-MM-YYYY"
-                                                initialValue={startValue}
-                                                onChange={this.onStartChange}
-                                                onOpenChange={this.handleStartOpenChange}
-                                            />
-                                        )}
-                                    </Form.Item>
-                                </Row>
-                            </Col>
-                            <Col span={5}>
-                                <Row>
-                                    <b className="typeStyle">RETURN</b>
-                                </Row>
-                                <Row>
-                                    <Form.Item >
-                                        {getFieldDecorator('Return', {
-                                            rules: [{
-                                                type: 'object',
-                                                message: 'Select date',
-                                            }],
-                                        })(
-                                            <DatePicker size="large"
-                                                disabledDate={this.disabledEndDate}
-                                                format="DD-MM-YYYY"
-                                                initialValue={endValue}
-                                                onChange={this.onEndChange}
-                                                open={endOpen}
-                                                onOpenChange={this.handleEndOpenChange}
-                                                disabled={this.state.disabled} />
-                                        )}
-                                    </Form.Item>
-                                </Row>
+                                <Button type="primary" htmlType="submit"onClick={this.props.onChangedeparture}>Submit</Button>
                             </Col>
                         </Row>
                     </Form>
-
-
-
-
-                <Row type="flex" justify="start">
-                    <Col span={5} >
-                        <Row>
-                            <b className="typeStyle">Adult:(12+ yrs)</b>
-                        </Row>
-                        <Row>
-                            <ButtonGroup>
-                                <Button type="primary" icon="minus" />
-                                <InputNumber style={{ marginTop: "2px" }} min={1} max={10} id='Adults' defaultValue={1} />
-                                <Button type="primary" icon="plus" />
-                            </ButtonGroup>
-                        </Row>
-                    </Col>
-                    <Col span={5}  >
-                        <Row>
-                            <b className="typeStyle">Child:(2-11 yrs)</b>
-                        </Row>
-                        <Row>
-                            <ButtonGroup>
-                                <Button type="primary" icon="minus" />
-                                <InputNumber style={{ marginTop: "2px" }} min={0} max={10} id='Children' defaultValue={0} />
-                                <Button type="primary" icon="plus" />
-                            </ButtonGroup>
-                        </Row>
-                    </Col>
-                    <Col span={5} >
-                        <Row>
-                            <Button type="primary" htmlType="submit" onClick={this.props.onChangedeparture}>Submit</Button>
-                        </Row>
-                        
-                    </Col>
-                </Row>
-
-            </div>
+                </div>
             </div >
         )
     }
@@ -225,7 +233,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         onChangedeparture:()=>{
-        const action={type:"SEARCH",payload:'ResultList'};
+        const action={type:"SEARCH",payload:'DetailItem'};
         dispatch(action);
         (console.log("button clicked"))}
         

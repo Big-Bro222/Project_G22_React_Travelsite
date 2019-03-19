@@ -3,22 +3,30 @@ import { Row, Col,Affix } from 'antd';
 import SideView from "../Side/SideView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
-import PlanViewDetail from "../PlanViewDetail/PlanViewDetail";
+import Content from "./PlanViewContent";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 class PlanView extends Component {
     constructor(props) {
         super(props);
         this.state = { value: 0, previous: 0 };
       }
-    componentWillMount() {
-        this.data  =  <PlanViewDetail/>;
-        // <PlanItemView/>;
-    }
+      componentWillMount() {
+        this.data = Content.map((view, index) => {
+          return ({
+            date: view.date,
+            component: (
+              <div key={index}>
+                { view.content}
+              </div>
+            )
+          });
+        });
+      }
+
     render() {
         return (
             <div>
-                <div>{this.props.departureplace}</div>
+                <div>{this.props.departuredate+this.props.returndate}</div>
                 <Navbar/>
                 
                 
@@ -35,12 +43,11 @@ class PlanView extends Component {
         );
     }
 }
-function mapStateToProps(state){
-    return{
-        departureplace:state.departureplace,
-        component:state.component
+function mapStateToProps(state) {
+    return {
+        departuredate: state.departuredate,
+        returndate:state.returndate
     }
 }
-
 
 export default connect(mapStateToProps)(PlanView)
