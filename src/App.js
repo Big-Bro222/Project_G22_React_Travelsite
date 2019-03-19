@@ -4,10 +4,12 @@ import Welcome from "./Welcome/Welcome";
 import PlanView from "./PlanView/PlanView";
 import Side from "./Side/SideView";
 import './App.css';
-
+import store from "./store";
+import { Provider } from 'react-redux'
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <div className="App">
         <header>
          
@@ -20,6 +22,7 @@ class App extends Component {
       {/* <Route exact path = "/" component={Welcome} />  */}
       {/* <Route exact path = "/" component={DetailView} />  */}
       </div>
+      </Provider>
     );
   }
 }

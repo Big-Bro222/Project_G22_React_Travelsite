@@ -5,7 +5,7 @@ import {
     Form, InputNumber, Input, Radio, Button, DatePicker, Row, Col,} from 'antd';
 import moment from "moment"
 import './Search.css'
-
+import { connect } from "react-redux";
 
 const ButtonGroup = Button.Group;
 
@@ -204,7 +204,7 @@ class searchView extends Component {
                     </Col>
                     <Col span={5} >
                         <Row>
-                            <Button type="primary" htmlType="submit">Submit</Button>
+                            <Button type="primary" htmlType="submit" onClick={this.props.onChangedeparture}>Submit</Button>
                         </Row>
                         
                     </Col>
@@ -216,5 +216,19 @@ class searchView extends Component {
     }
 }
 const Search = Form.create({})(searchView);
+function mapStateToProps(state){
+    return{
+        PlanViewUI:state.PlanViewUI
+    }
+}
 
-export default Search
+function mapDispatchToProps(dispatch){
+    return {
+        onChangedeparture:()=>{
+        const action={type:"SEARCH",payload:'ResultList'};
+        dispatch(action);
+        (console.log("button clicked"))}
+        
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Search)

@@ -25,25 +25,16 @@ class Welcome extends Component {
     }
 
     disabledStartDate = (current) => {
-        if (this.state.endValue === null) {
-            return current && current < moment().endOf('day');
+        return current && current < moment().endOf('day');
         }
-        else {
-            if ((current > this.state.endValue) && (current < moment.endOf('day')))
-                return current
+        
+        disabledEndDate = (endValue) => {
+        const startValue = this.state.startValue;
+        if (!endValue || !startValue) {
+        return false;
         }
-    }
-
-    disabledEndDate = (endValue) => {
-        if (this.state.startValue) {
-            return endValue && endValue < moment().endOf('day');
+        return endValue.valueOf() <= startValue.valueOf();
         }
-        else {
-            return endValue && endValue > this.state.startValue;
-        }
-
-
-    }
 
     onChange = (field, value) => {
         this.setState({
