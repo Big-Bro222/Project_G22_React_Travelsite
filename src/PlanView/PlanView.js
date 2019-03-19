@@ -21,9 +21,7 @@ class PlanView extends Component {
         return (
             <div>
                 <Navbar/>
-                <Affix style={{ position: 'absolute', top:"50%"}}>
-                <SideView/>
-                </Affix>
+                
                 
                 <Row>
                     <Col span={2} />
@@ -31,6 +29,9 @@ class PlanView extends Component {
                     <Timeline content={this.data}/>
                     </Col>
                 </Row>
+                <Affix style={{ position: 'absolute', top:"50%"}}>
+                <SideView/>
+                </Affix>
             </div>
         );
     }
