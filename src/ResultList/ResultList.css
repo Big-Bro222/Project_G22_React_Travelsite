@@ -1,25 +1,27 @@
 .listStyle{
     width:100%;
-    border: 1px solid #bfbfbf;
-    border-radius:15px;
-}
-.classStlye{
+    }
+    .classStlye{
     margin-bottom: 0px;
     padding-bottom: 0px
-}
-.airLineStyle{
+    }
+    .airLineStyle{
     margin-bottom: 0px;
     padding-bottom: 0px
-}
-
-.airportStyle{
+    }
+    .airportStyle{
     padding-left: 5px
-}
-.timeStyle{
+    }
+    .timeStyle{
     font-size: 40px;
-}
-.priceStyle{
+    }
+    .priceStyle{
     margin-bottom: 0px;
     padding-bottom: 0px;
     color: tomato
-}
+    }
+    .customPanelStyle{
+    background: #d6e4ff;
+    margin-bottom: 12;
+    overflow: 'hidden',
+    }

@@ -17,7 +17,7 @@ class PlanView extends Component {
     var Content=[];
     for(var i=0;i<=len-1;i++)
     {
-    Content.push({date:this.props.timeline[i],content:<PlanViewDetails/>});
+    Content.push({date:this.props.timeline[i],content:<PlanViewDetails UI="Search"/>});
     }
     return Content;
     // var Content = [
@@ -57,15 +57,18 @@ class PlanView extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.timeline}</div>
+        <div>{this.props.timeline+"yes"}</div>
+        <div>{this.props.UI}</div>
+
         <Navbar />
 
 
         <Row>
           <Col span={2} />
-          <Col span={22}>
+          <Col span={21}>
             <Timeline content={this.data} />
           </Col>
+          <Col span={1}/>
         </Row>
         <Affix style={{ position: 'absolute', top: "50%" }}>
           <SideView />

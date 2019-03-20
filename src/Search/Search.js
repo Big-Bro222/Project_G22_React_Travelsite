@@ -1,242 +1,220 @@
-import React, {
-    Component
-} from "react";
+import React, { Component } from "react";
 import {
-    Form, InputNumber, Input, Radio, Button, DatePicker, Row, Col, Select
+    Form, Input, Button, Row, Col, Select
 } from 'antd';
-import moment from "moment"
 import './Search.css'
-import { connect } from "react-redux";
+import ResultList from "../ResultList/ResultList";
 
-const ButtonGroup = Button.Group;
+
 const Option = Select.Option;
 
-
-class searchView extends Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startValue: null,
-            endValue: null,
-            endOpen: false,
-            disabled: false,
-            radioValue: "Return",
-            adults: 3,
-            children: 0,
-            infants: 0,
         }
     }
-    onRadioChange = (e) => {
+    render() {
+        return (
+            <div>
+                <div className="searchView">
+                    <div>
+                        <ClassPeople />
+                    </div>
+                    <div>
+                        <SearchLocation />
+                    </div>
+                </div>
+                <div style={{ marginTop: "5%" }}>
+                    <ResultList />
+                </div>
 
-        if (e.target.value === "Return") { this.setState({ disabled: false }) }
-        else { this.setState({ disabled: true }) }
-        this.setState({
-            radioValue: e.target.value,
-        });
+            </div>
+        )
     }
+}
+export default Search
 
-    disabledStartDate = (current) => {
-        return current && current < moment().endOf('day');
-    }
+/*******************************ClassPeople--&&--SearchLocation*************************************/
 
-    disabledEndDate = (endValue) => {
-        const startValue = this.state.startValue;
-        if (!endValue || !startValue) {
-            return false;
-        }
-        return endValue.valueOf() <= startValue.valueOf();
-    }
-
-    onChange = (field, value) => {
-        this.setState({
-            [field]: value,
-        });
-    }
-
-    onStartChange = (value) => {
-        this.onChange('startValue', value);
-    }
-
-    onEndChange = (value) => {
-        this.onChange('endValue', value);
-    }
-
-    handleStartOpenChange = (open) => {
-        if (this.state.disabled !== true) {
-            if (!open) {
-                this.setState({ endOpen: true });
-            }
+class ClassPeopleForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
         }
     }
 
-    handleEndOpenChange = (open) => {
-        this.setState({ endOpen: open });
-    }
     adultsMinusChange = () => {
-        var adults = this.state.adults;
+        var adults = this.props.form.getFieldValue('adults')
         if (adults > 1) {
-            this.setState({ adults: adults - 1 });
+            var adult = adults - 1
+            this.props.form.setFieldsValue({
+                adults: adult,
+            })
         }
     }
     adultsPlusChange = () => {
-        var adults = this.state.adults;
-        this.setState({ adults: adults + 1 });
+        var adults = this.props.form.getFieldValue('adults')
+        var adult = adults + 1
+        this.props.form.setFieldsValue({
+            adults: adult,
+        })
     }
     childrenMinusChange = () => {
-        var children = this.state.children;
+        var children = this.props.form.getFieldValue('children')
         if (children >= 1) {
-            this.setState({ children: children - 1 });
+            var child = children - 1
+            this.props.form.setFieldsValue({
+                children: child,
+            })
         }
-        console.log(this.state.children)
     }
     childrenPlusChange = () => {
-        var children = this.state.children;
-        this.setState({ children: children + 1 });
+        var children = this.props.form.getFieldValue('children')
+        var child = children + 1
+        this.props.form.setFieldsValue({
+            children: child,
+        })
     }
     infantsMinusChange = () => {
-        var infants = this.state.infants;
+        var infants = this.props.form.getFieldValue('infants')
         if (infants >= 1) {
-            this.setState({ infants: infants - 1 });
+            var infant = infants - 1
+            this.props.form.setFieldsValue({
+                infants: infant,
+            })
         }
     }
     infantsPlusChange = () => {
-        var infants = this.state.infants;
-        this.setState({ infants: infants + 1 });
+        var infants = this.props.form.getFieldValue('infants')
+        var infant = infants + 1
+        this.props.form.setFieldsValue({
+            infants: infant,
+        })
     }
 
-
-
     render() {
-
         const { getFieldDecorator } = this.props.form;
-        const { startValue, endValue, endOpen } = this.state;
-
         return (
-            <div className="searchView">
-                <div>
-                    <Row type="flex" justify="center">
-                        <Col span={4}>
-                            <Select defaultValue="One Way" style={{ width: 120 }} >
-                                <Option value="One Way">One Way</Option>
-                                <Option value="Return">Return</Option>
-                            </Select>
-                        </Col>
-
-                        <Col span={15}>
-
-                            <Row>
-                                <Col span={10}>
-
-                                    <Select defaultValue="Economy" style={{ width: 120 }} >
+            <Form>
+                <Row >
+                    <Col xs={10} sm={12} md={7} lg={6} xl={4}>
+                        <Row justify="start">
+                            <Form.Item>
+                                <b className="typeStyle">Route</b>
+                                {getFieldDecorator('route', { initialValue: 'One Way' })(
+                                    <Select style={{ width: 110 }} >
+                                        <Option value="One Way">One Way</Option>
+                                        <Option value="Return">Return</Option>
+                                    </Select>
+                                )}
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={10} sm={12} md={16} lg={10} xl={4}>
+                        <Row justify="start">
+                            <Form.Item>
+                                <b className="typeStyle">Class</b>
+                                {getFieldDecorator('class', { initialValue: 'Economy' })(
+                                    <Select style={{ width: 150 }} >
                                         <Option value="Economy">Economy</Option>
                                         <Option value="Premium Economy">Premium Economy</Option>
                                         <Option value="Business Class">Business Class</Option>
                                         <Option value="First Class">First Class</Option>
                                     </Select>
-
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={5}>
-                                    Adults(12+)
-                                </Col>
-                                <Col span={5}>
-                                    <Button type="primary" shape="circle" icon="minus" onClick={this.adultsMinusChange} />
-
-                                    <Input style={{ width: "40px" }} value={this.state.adults} />
-
-                                    <Button type="primary" shape="circle" icon="plus" onClick={this.adultsPlusChange} />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={5}>
-                                    Children(2-11)
-                                    </Col>
-                                <Col span={5}>
-                                    <Button type="primary" shape="circle" icon="minus" onClick={this.childrenMinusChange} />
-
-                                    <Input defaultValue="0" style={{ width: "40px" }} value={this.state.children} />
-
-                                    <Button type="primary" shape="circle" icon="plus" onClick={this.childrenPlusChange} />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={5}>
-                                    Infants
-                                    </Col>
-                                <Col span={5}>
-                                    <Button type="primary" shape="circle" icon="minus" onClick={this.infantsMinusChange} />
-
-                                    <Input defaultValue="0" style={{ width: "40px" }} value={this.state.infants} />
-
-                                    <Button type="primary" shape="circle" icon="plus" onClick={this.infantsPlusChange} />
-                                </Col>
-                            </Row>
-
-                        </Col>
-                    </Row>
-                </div>
-
-
-                <div>
-                    <Form>
-                        <Row type="flex" justify="center">
-                            <Col span={7}>
-                                <Row>
-                                    <b className="typeStyle">FROM</b>
-                                </Row>
-                                <Row >
-                                    <Form.Item >
-                                        {getFieldDecorator('From', {
-                                            rules: [{
-                                                message: 'Please input your starting points',
-                                            }],
-                                        })(
-                                            <Input size="large" allowClear placeholder="Country, city or airport" />
-                                        )}
-                                    </Form.Item>
-                                </Row>
-                            </Col>
-                            <Col span={7}>
-                                <Row>
-                                    <b className="typeStyle">TO</b>
-                                </Row>
-                                <Row>
-                                    <Form.Item >
-                                        {getFieldDecorator('To', {
-                                            rules: [{
-                                                message: 'Please input your destination',
-                                            }],
-                                        })(
-                                            <Input size="large" placeholder="Country, city or airport" />
-                                        )}
-                                    </Form.Item>
-                                </Row>
-                            </Col>
-                            <Col span={5} >
-                                <Button type="primary" htmlType="submit"onClick={this.props.onChangedeparture}>Submit</Button>
-                            </Col>
+                                )}
+                            </Form.Item>
                         </Row>
-                    </Form>
-                </div>
-            </div >
-        )
-    }
-}
-const Search = Form.create({})(searchView);
-function mapStateToProps(state){
-    return{
-        PlanViewUI:state.PlanViewUI
-    }
-}
+                    </Col>
+                    <Col xs={24} sm={12} md={8} lg={6} xl={4}>
+                        <Row type="flex" justify="start">
+                            <Form.Item>
+                                <b className="typeStyle">Adults(12+)</b>
+                                <Button type="primary" shape="circle" icon="minus" onClick={this.adultsMinusChange} />
+                                {getFieldDecorator('adults', { initialValue: 1 })(
+                                    <Input style={{ width: "40px" }} />)}
+                                <Button type="primary" shape="circle" icon="plus" onClick={this.adultsPlusChange} />
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={9} lg={8} xl={5}>
+                        <Row type="flex" justify="start">
+                            <Form.Item>
+                                <b className="typeStyle">Children(2-12)</b>
+                                <Button type="primary" shape="circle" icon="minus" onClick={this.childrenMinusChange} />
+                                {getFieldDecorator('children', { initialValue: 0 })(
+                                    <Input style={{ width: "40px" }} />)}
+                                <Button type="primary" shape="circle" icon="plus" onClick={this.childrenPlusChange} />
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={7} lg={7} xl={4}>
+                        <Row type="flex" justify="start">
+                            <Form.Item>
+                                <b className="typeStyle">Infants</b>
+                                <Button type="primary" shape="circle" icon="minus" onClick={this.infantsMinusChange} />
+                                {getFieldDecorator('infants', { initialValue: 0 })(
+                                    <Input style={{ width: "40px" }} />)}
+                                <Button type="primary" shape="circle" icon="plus" onClick={this.infantsPlusChange} />
+                            </Form.Item>
+                        </Row>
+                    </Col>
 
-function mapDispatchToProps(dispatch){
-    return {
-        onChangedeparture:()=>{
-        const action={type:"SEARCH",payload:'DetailItem'};
-        dispatch(action);
-        (console.log("button clicked"))}
-        
+                </Row>
+
+            </Form>
+        );
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Search)
+const ClassPeople = Form.create({ name: 'ClassPeople' })(ClassPeopleForm);
+
+
+class SearchLocationForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        return (
+            <Form>
+                <Row justify="start">
+                    <Col xs={21} sm={12} md={17} lg={11} xl={10} >
+                        <Row >
+                            <Form.Item >
+                                <b className="typeStyle">From</b>
+                                {getFieldDecorator('From', { rules: [{ message: 'Please input your starting points', }], })(
+                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "80%" }} />)}
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={2} sm={12} md={2} lg={2} xl={1}>
+                        <Row >
+                            <Form.Item>
+                                <Button shape="round" icon="swap" size="large"></Button>
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={17} lg={11} xl={10} style={{ marginLeft: "-2%" }}>
+                        <Row >
+                            <Form.Item >
+                                <b className="typeStyle">TO</b>
+                                {getFieldDecorator('To', { rules: [{ message: 'Please input your destination', }], })(
+                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "85%" }} />)}
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={2} lg={23} xl={3}  style={{ marginLeft: "1%" }}>
+                        <Row>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit" size="large" icon="right-circle">Submit</Button>
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                </Row>
+            </Form>);
+    }
+}
+const SearchLocation = Form.create({ name: 'SearchLocation' })(SearchLocationForm);
+
+

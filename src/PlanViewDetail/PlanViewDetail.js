@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PlanItemView from "../PlanView/PlanItemView";
-import ResultList from "../ResultList/ResultList";
 import Search from "../Search/Search";
 import DetailItem from "../Details/DetailsItem";
 import { connect } from "react-redux";
@@ -17,12 +16,6 @@ class PlanViewDetail extends Component {
                 return (
                     <div>
                     <DetailItem/>
-                    </div>)
-            }
-            case "ResultList": {
-                return (
-                    <div>
-                    <ResultList/>
                     </div>)
             }
             case "PlanItemView": {

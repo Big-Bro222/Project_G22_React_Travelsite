@@ -67,7 +67,8 @@ class Welcome extends Component {
     }
     generateTimeLine = () => {
         var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
-        this.props.generateTimeLine(timeline);
+        var UI=Array(timeline.length).fill("DetailItem")
+        this.props.generateTimeLine(timeline,UI);
     }
 
     timeLinearr = (startdate, enddate) => {
@@ -150,11 +151,13 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
             (console.log("input2"))
         },
-        generateTimeLine: (value) => {
+        generateTimeLine: (timeline,UI) => {
             console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
-                payload: value
+                timeline: timeline,
+                UI: UI
+
                 
             };
             dispatch(action);
