@@ -76,7 +76,7 @@ class Searchbars extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.onSearchSubmit(values.From)
+                this.props.onSearchSubmit(values)
 
             }
 
@@ -160,7 +160,7 @@ class Searchbars extends Component {
                             <Form.Item >
                                 <b className="typeStyle">From</b>
                                 {getFieldDecorator('From', { rules: [{ message: 'Please input your starting points', }], })(
-                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "80%" }} />)}
+                                    <Input size="large" allowClear placeholder="Input IATA code,eg. ARN for Arlanda airport" style={{ width: "80%" }} />)}
                             </Form.Item>
                         </Row>
                     </Col>
@@ -176,7 +176,7 @@ class Searchbars extends Component {
                             <Form.Item >
                                 <b className="typeStyle">TO</b>
                                 {getFieldDecorator('To', { rules: [{ message: 'Please input your destination', }], })(
-                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "85%" }} />)}
+                                    <Input size="large" allowClear placeholder="Input IATA code,eg. LAX for LosAngeles airport" style={{ width: "85%" }} />)}
                             </Form.Item>
                         </Row>
                     </Col>
@@ -198,8 +198,9 @@ const Searchbar = Form.create({ name: 'ClassPeople' })(Searchbars);
 const mapDispatchToProps = (dispatch) => ({
     onSearchSubmit: (data) => dispatch(fetchPostsIfNeeded(data))
 })
+const mapStateToProps=()=>({});
 
-export default connect(mapDispatchToProps)(Searchbar)
+export default connect(mapStateToProps,mapDispatchToProps)(Searchbar)
 
 
 // export default Searchbar

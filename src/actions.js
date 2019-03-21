@@ -54,7 +54,7 @@ function fetchPosts(data) {
         console.log("fetch begin");
         dispatch(requestPosts())
         return fetch(BASE_URL, {
-            body: "inboundDate=2019-04-10&cabinClass=economy&children=0&infants=0&country=US&currency=USD&locale=en-US&originPlace="+data+"&destinationPlace=PEK-sky&outboundDate=2019-04-01&adults=1",
+            body: "cabinClass=economy&children=0&infants=0&country=US&currency=USD&locale=en-US&originPlace="+data.From+"-sky&destinationPlace="+data.To+"-sky&outboundDate="+data.Time+"&adults=1",
             headers: Object.assign({}, CONTENT_TYPE, API_KEY),
             method: "POST"
         })
@@ -87,20 +87,29 @@ function fetchPosts(data) {
 //judge whether to fetch data or not
 function shouldFetchPosts(state) {
     const posts = state.items
-    if (!posts) {
-        return true
-    } else if (posts.isFetching) {
-        return false
-    }
+    console.log(!posts)
+    // if (!posts) {
+    //     return true
+    // } else if (posts.isFetching) {
+    //     return false
+    // }
+    if(!posts.isFetching)
+    return true;
+    else
+    return false;
     //   else {
     //     return posts.didInvalidate
     //   }
 }
 
 export function fetchPostsIfNeeded(data) {
+    console.log("ifif")
     return (dispatch, getState) => {
         if (shouldFetchPosts(getState())) {
+            data.Time=getState().timeline[getState().currentindex]
+            console.log("begintofetch");
             return dispatch(fetchPosts(data))
+            
         }
     }
 }

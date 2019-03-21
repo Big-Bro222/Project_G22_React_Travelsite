@@ -26,6 +26,15 @@ class Search extends Component {
 
     render() {
         const {  posts, isFetching, lastUpdated } = this.props
+        console.log(posts.length)
+        let ResultListPlaceHoder;
+        // if(!(posts instanceof Array))
+        // {
+        // ResultListPlaceHoder = (<ResultList posts = {posts} lastTetchTime={lastUpdated}/>)
+        // console.log("come to list")
+        // }
+        // else
+        // ResultListPlaceHoder=(<div></div>)
         return (
             <div>
                 <div className="searchView"
@@ -36,10 +45,11 @@ class Search extends Component {
                         <Searchbar />
                 </div>
                 {isFetching &&  <h2>Loading...</h2>}
-                <div style={{ marginTop: "5%" }}>
-                    <ResultList fetchResult = {posts} lastTetchTime={lastUpdated}/>
-                </div>
-
+                {!(posts instanceof Array)&&(<div style={{ marginTop: "5%" }}>
+                {/* <ResultListPlaceHoder/> */}
+                    <ResultList posts = {posts} lastTetchTime={lastUpdated}/>
+                </div>)
+                }
             </div>
         )
     }
