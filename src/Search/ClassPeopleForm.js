@@ -99,10 +99,10 @@ class ClassPeopleForm extends Component {
                         <Row type="flex" justify="start">
                             <Form.Item>
                                 <b className="typeStyle">Adults(12+)</b>
-                                <Button type="primary" shape="circle" icon="minus" onClick={this.adultsMinusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="minus" onClick={this.adultsMinusChange} />
                                 {getFieldDecorator('adults', { initialValue: 1 })(
                                     <Input style={{ width: "40px" }} />)}
-                                <Button type="primary" shape="circle" icon="plus" onClick={this.adultsPlusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="plus" onClick={this.adultsPlusChange} />
                             </Form.Item>
                         </Row>
                     </Col>
@@ -110,10 +110,10 @@ class ClassPeopleForm extends Component {
                         <Row type="flex" justify="start">
                             <Form.Item>
                                 <b className="typeStyle">Children(2-12)</b>
-                                <Button type="primary" shape="circle" icon="minus" onClick={this.childrenMinusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="minus" onClick={this.childrenMinusChange} />
                                 {getFieldDecorator('children', { initialValue: 0 })(
                                     <Input style={{ width: "40px" }} />)}
-                                <Button type="primary" shape="circle" icon="plus" onClick={this.childrenPlusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="plus" onClick={this.childrenPlusChange} />
                             </Form.Item>
                         </Row>
                     </Col>
@@ -121,21 +121,57 @@ class ClassPeopleForm extends Component {
                         <Row type="flex" justify="start">
                             <Form.Item>
                                 <b className="typeStyle">Infants</b>
-                                <Button type="primary" shape="circle" icon="minus" onClick={this.infantsMinusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="minus" onClick={this.infantsMinusChange} />
                                 {getFieldDecorator('infants', { initialValue: 0 })(
                                     <Input style={{ width: "40px" }} />)}
-                                <Button type="primary" shape="circle" icon="plus" onClick={this.infantsPlusChange} />
+                                <Button size="small" type="primary" shape="circle" icon="plus" onClick={this.infantsPlusChange} />
                             </Form.Item>
                         </Row>
                     </Col>
-
                 </Row>
-
+                <Row justify="start">
+                    <Col xs={21} sm={12} md={17} lg={11} xl={10} >
+                        <Row >
+                            <Form.Item >
+                                <b className="typeStyle">From</b>
+                                {getFieldDecorator('From', { rules: [{ message: 'Please input your starting points', }], })(
+                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "80%" }} />)}
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={2} sm={12} md={2} lg={2} xl={1}>
+                        <Row >
+                            <Form.Item>
+                                <Button shape="round" icon="swap" size="large"></Button>
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={17} lg={11} xl={10} style={{ marginLeft: "-2%" }}>
+                        <Row >
+                            <Form.Item >
+                                <b className="typeStyle">TO</b>
+                                {getFieldDecorator('To', { rules: [{ message: 'Please input your destination', }], })(
+                                    <Input size="large" allowClear placeholder="Country, city or airport" style={{ width: "85%" }} />)}
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={2} lg={23} xl={3} >
+                        <Row >
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit" size="large" icon="right-circle">Submit</Button>
+                            </Form.Item>
+                        </Row>
+                    </Col>
+                </Row>
             </Form>
         );
     }
 }
 const ClassPeople = Form.create({ name: 'ClassPeople' })(ClassPeopleForm);
+
+
+
+
 export default ClassPeople
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlanItemView from "../PlanView/PlanItemView";
 import Search from "../Search/Search";
-import Button from "antd"
+import { Button } from 'antd';
 import DetailItem from "../Details/DetailsItem";
 import { connect } from "react-redux";
 

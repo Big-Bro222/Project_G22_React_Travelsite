@@ -1,6 +1,7 @@
 .searchView {
   width:100%;
   padding-top: 20px;
+  padding-bottom: 1px;
   border: 10px solid #d6e4ff;
   border-radius:15px;
   background:#ffffff; 
