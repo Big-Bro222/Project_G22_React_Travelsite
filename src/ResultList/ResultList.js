@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Avatar, Row, Col, Card, Button, Popover, Icon,Divider, Collapse } from 'antd';
 import "./ResultList.css"
+import { connect } from "react-redux";
 
 
 const Panel = Collapse.Panel;
@@ -91,4 +92,19 @@ class ResultList extends Component {
     }
 }
 
-export default ResultList;
+
+function mapStateToProps(state) {
+    return {
+        children: state.children,
+        infants: state.infants,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ResultList)
+
+
+

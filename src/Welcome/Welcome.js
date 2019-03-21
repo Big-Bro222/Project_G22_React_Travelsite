@@ -45,12 +45,12 @@ class Welcome extends Component {
 
     onStartChange = (value) => {
         this.onChange('startValue', value);
-        this.props.onChangedeparture(value._d.getTime());
+        this.props.changeDepartureDate(value._d.getTime());
     }
 
     onEndChange = (value) => {
         this.onChange('endValue', value);
-        this.props.onChangereturn(value._d.getTime());
+        this.props.changeReturnDate(value._d.getTime());
         console.log(value._d.toISOString())
     }
 
@@ -68,7 +68,8 @@ class Welcome extends Component {
     generateTimeLine = () => {
         var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
         var UI=Array(timeline.length).fill("Startview")
-        this.props.generateTimeLine(timeline,UI);
+        var departureplaces=Array(timeline.length).fill("beijing")
+        this.props.generateTimeLine(timeline,UI,departureplaces);
     }
 
     timeLinearr = (startdate, enddate) => {
@@ -135,28 +136,31 @@ function mapStateToProps(state) {
     return {
         departuredate: state.departuredate,
         returndate: state.returndate,
-        timeline: state.timeline
+        timeline: state.timeline,
+        UI:state.UI,
+        departureplaces:state.departureplaces
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        onChangedeparture: (value) => {
-            const action = { type: "ON_CHANGE_DEPARTURE", payload: value };
+        changeDepartureDate: (value) => {
+            const action = { type: "CHANGE_DEPARTURE_DATE", payload: value };
             dispatch(action);
             (console.log("input"))
         },
-        onChangereturn: (value) => {
-            const action = { type: "ON_CHANGE_RETURN", payload: value };
+        changeReturnDate: (value) => {
+            const action = { type: "CHANGE_RETURN_DATE", payload: value };
             dispatch(action);
             (console.log("input2"))
         },
-        generateTimeLine: (timeline,UI) => {
+        generateTimeLine: (timeline,UI,departureplaces) => {
             console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
                 timeline: timeline,
-                UI: UI
+                UI: UI,
+                departureplaces:departureplaces,
 
                 
             };

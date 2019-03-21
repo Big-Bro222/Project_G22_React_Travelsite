@@ -16,12 +16,10 @@ class ViewSelection extends Component {
         newUI[index]="Search"
         this.props.addPlan(newUI)
         this.setState({UI:this.props.UI})
-        console.log(newUI)
-        console.log(this.props.UI)
     }
     render() {
         console.log()
-        switch (this.state.UI[0]) {
+        switch (this.state.UI[this.props.currentindex]) {
             case "DetailItem": {
                 return (
                     <div>
