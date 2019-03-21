@@ -40,8 +40,10 @@ componentWillMount() {
                     <HorizontalTimeline
                         index={this.state.value}
                         indexClick={(index) => {
-                            this.props.timelineClick(index);
+                            console.log(index)
+                            
                             this.setState({ value: index, previous: this.state.value });
+                            this.props.timelineClick(index);
                         }}
                         values={this.dates}
                         styles={{ background: '#ffffff', foreground: '#40a9ff', outline: '#bae7ff' }} />

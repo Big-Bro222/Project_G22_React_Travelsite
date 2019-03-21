@@ -3,7 +3,7 @@
 const initialstate={departuredate:'yessss',
                     returndate:'nooooo',
                     departureplace:'beijing',
-                    PlanViewUI: ''}
+                    currentindex: 0}
 
 
 

@@ -12,7 +12,7 @@ class PlanView extends Component {
     this.state = { value: 0, previous: 0 };
   }
   giveContent = () => {
-    console.log(this.props.timeline.length);
+    console.log(this.props.currentindex);
     var len=this.props.timeline.length;
     var Content=[];
     for(var i=0;i<=len-1;i++)
@@ -83,7 +83,7 @@ function mapStateToProps(state) {
 
     timeline: state.timeline,
     UI:state.UI,
-    index: state.currentindex
+    currentindex: state.currentindex
   }
 }
 
