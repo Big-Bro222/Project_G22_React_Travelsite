@@ -66,3 +66,29 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### `Project description` 
+Our project is to build a web where users could plan their trip according to their free days. We provide flight search function, hotel search function and car rental search function but no paying function. The choices users have selected will be added to their trip timeline. Eventually, all the information(flights, hotels, car rental and some notes) will be shown in a timeline way.
+
+
+### `Layout` 
+We have already built the main pages' layouts of our website; Pages like My account, Loggin, Trip Plan Printout, Side bar haven't be completed or built, so we will keep perfecting all the pages
+Data: We were using react-redux to transmit data among App and all the components. Next we will use the data that we call through API to set state in the different component.
+
+
+### `Content` 
+src/App.js - root component. We added different routes to it<br>
+src/index.js - where React is started, which is our root component.<br>
+src/index.css - our global styles here<br>
+src/Welcome/Welcome - the initial page where you can set your departure date and return date.<br>
+src/Navbar/Navbar - the fixed header which shows in all pages, which contains buttons "home page" & "my account" by now<br>
+src/PlanView/PlanView - Our main pages, almost all the main functions are realised in this page(component) which contains Navbar, Sidebar, Searchbar, Search Lists etc.<br>
+src/Timeline/Timeline - the component which located at the top of the whole page(below the Navbar). You can select different days to arrange your trip plan seperately<br>
+src/SideView/SideView - Sidebar<br>
+src/PlanView/StartView - Only the "Add your plan" button<br>
+src/SelectionView/SelectionView - once you select different days in the timeline, the views under the timeline will change accordingly<br>
+src/Search/Search - the search component where you can search for the flights(the function will be extended to search for hotel and car reantal in the future.)<br>
+src/Search/Searchbar - the form component which will be called in the Search.js file<br>
+src/ResultList/ResultList - the search results which will show after your search<br>
+src/Details/DetailsItem - (in building! ) the details of the search results<br>
