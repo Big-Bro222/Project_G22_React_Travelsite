@@ -78,7 +78,7 @@ Data: We were using react-redux to transmit data among App and all the component
 
 
 ### `Content` 
-src/App.js - root component. We added different routes to it
+src/App.js - root component. We added different routes to it<br>
 src/index.js - where React is started, which is our root component.
 src/index.css - our global styles here
 src/Welcome/Welcome - the initial page where you can set your departure date and return date.
