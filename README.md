@@ -68,12 +68,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
-### `npm run build` fails to minify
+### `Project description` 
 Our project is to build a web where users could plan their trip according to their free days. We provide flight search function, hotel search function and car rental search function but no paying function. The choices users have selected will be added to their trip timeline. Eventually, all the information(flights, hotels, car rental and some notes) will be shown in a timeline way.
 
-Layout: We have already built the main pages' layouts of our website; Pages like My account, Loggin, Trip Plan Printout, Side bar haven't be completed or built, so we will keep perfecting all the pages
+
+### `Layout` 
+We have already built the main pages' layouts of our website; Pages like My account, Loggin, Trip Plan Printout, Side bar haven't be completed or built, so we will keep perfecting all the pages
 Data: We were using react-redux to transmit data among App and all the components. Next we will use the data that we call through API to set state in the different component.
 
+
+### `Content` 
 src/App.js - root component. We added different routes to it
 src/index.js - where React is started, which is our root component.
 src/index.css - our global styles here
