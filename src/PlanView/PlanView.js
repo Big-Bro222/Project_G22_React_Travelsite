@@ -4,7 +4,7 @@ import SideView from "../Side/SideView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 import { connect } from "react-redux";
-import PlanViewDetails from "../PlanViewDetail/PlanViewDetail"
+import ViewSelection from "../ViewSelection/ViewSelection"
 
 class PlanView extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class PlanView extends Component {
     var Content=[];
     for(var i=0;i<=len-1;i++)
     {
-    Content.push({date:this.props.timeline[i],content:<PlanViewDetails UI={this.props.UI[i]}/>});
+    Content.push({date:this.props.timeline[i],content:<ViewSelection UI={this.props.UI[i]}/>});
     }
     return Content;
     // var Content = [

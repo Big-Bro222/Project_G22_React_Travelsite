@@ -6,7 +6,7 @@ import {
 import './Search.css'
 
 const Option = Select.Option;
-class ClassPeopleForm extends Component {
+class Searchbars extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -167,12 +167,12 @@ class ClassPeopleForm extends Component {
         );
     }
 }
-const ClassPeople = Form.create({ name: 'ClassPeople' })(ClassPeopleForm);
+const Searchbar = Form.create({ name: 'ClassPeople' })(Searchbars);
 
 
 
 
-export default ClassPeople
+export default Searchbar
 
 
 

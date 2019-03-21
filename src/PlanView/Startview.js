@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import "./PlanItemView.css"
+import "./Startview.css"
 import { connect } from "react-redux";
 
 
-class PlanItemView extends Component {
+class Startview extends Component {
     state = {}
     addPlan = () => {
         var index = this.props.currentindex
@@ -41,4 +41,4 @@ function mapDispatchToProps(dispatch) {
         },
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PlanItemView)
+export default connect(mapStateToProps, mapDispatchToProps)(Startview)

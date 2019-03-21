@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PlanItemView from "../PlanView/PlanItemView";
+// import Startview from "../PlanView/Startview";
 import Search from "../Search/Search";
 import { Button } from 'antd';
 import DetailItem from "../Details/DetailsItem";
@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 
 
-class PlanViewDetail extends Component {
+class ViewSelection extends Component {
     state = {UI:["PlanItemView","PlanItemView","PlanItemView"]
     }
     addPlan = () => {
@@ -65,5 +65,5 @@ function mapDispatchToProps(dispatch) {
         },
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(PlanViewDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewSelection)
 

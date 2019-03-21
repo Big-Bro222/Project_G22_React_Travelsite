@@ -67,7 +67,7 @@ class Welcome extends Component {
     }
     generateTimeLine = () => {
         var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
-        var UI=Array(timeline.length).fill("PlanItemView")
+        var UI=Array(timeline.length).fill("Startview")
         this.props.generateTimeLine(timeline,UI);
     }
 

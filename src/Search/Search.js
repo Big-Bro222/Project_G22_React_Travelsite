@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './Search.css'
 import ResultList from "../ResultList/ResultList";
-import ClassPeople from "./ClassPeopleForm"
+import Searchbar from "./Searchbar"
 
 
 
@@ -15,7 +15,7 @@ class Search extends Component {
         return (
             <div>
                 <div className="searchView">
-                        <ClassPeople />
+                        <Searchbar />
                 </div>
                 <div style={{ marginTop: "5%" }}>
                     <ResultList />
