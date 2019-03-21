@@ -79,16 +79,16 @@ Data: We were using react-redux to transmit data among App and all the component
 
 ### `Content` 
 src/App.js - root component. We added different routes to it<br>
-src/index.js - where React is started, which is our root component.
-src/index.css - our global styles here
-src/Welcome/Welcome - the initial page where you can set your departure date and return date.
-src/Navbar/Navbar - the fixed header which shows in all pages, which contains buttons "home page" & "my account" by now
-src/PlanView/PlanView - Our main pages, almost all the main functions are realised in this page(component) which contains Navbar, Sidebar, Searchbar, Search Lists etc.
-src/Timeline/Timeline - the component which located at the top of the whole page(below the Navbar). You can select different days to arrange your trip plan seperately
-src/SideView/SideView - Sidebar
-src/PlanView/StartView - Only the "Add your plan" button
-src/SelectionView/SelectionView - once you select different days in the timeline, the views under the timeline will change accordingly
-src/Search/Search - the search component where you can search for the flights(the function will be extended to search for hotel and car reantal in the future.)
-src/Search/Searchbar - the form component which will be called in the Search.js file
-src/ResultList/ResultList - the search results which will show after your search
-src/Details/DetailsItem - (in building! ) the details of the search results
+src/index.js - where React is started, which is our root component.<br>
+src/index.css - our global styles here<br>
+src/Welcome/Welcome - the initial page where you can set your departure date and return date.<br>
+src/Navbar/Navbar - the fixed header which shows in all pages, which contains buttons "home page" & "my account" by now<br>
+src/PlanView/PlanView - Our main pages, almost all the main functions are realised in this page(component) which contains Navbar, Sidebar, Searchbar, Search Lists etc.<br>
+src/Timeline/Timeline - the component which located at the top of the whole page(below the Navbar). You can select different days to arrange your trip plan seperately<br>
+src/SideView/SideView - Sidebar<br>
+src/PlanView/StartView - Only the "Add your plan" button<br>
+src/SelectionView/SelectionView - once you select different days in the timeline, the views under the timeline will change accordingly<br>
+src/Search/Search - the search component where you can search for the flights(the function will be extended to search for hotel and car reantal in the future.)<br>
+src/Search/Searchbar - the form component which will be called in the Search.js file<br>
+src/ResultList/ResultList - the search results which will show after your search<br>
+src/Details/DetailsItem - (in building! ) the details of the search results<br>
