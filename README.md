@@ -2,9 +2,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Under Master branch is the project for mid-review or tag "mid_term"
 
+Now,begin to use with choosing travel start and end date and then you can search filght information under your timeline. We fetch the api from Skyscanner to get information.
+
+Please enter the IATA code of airport to search flight curently. You can google it to get more information. We will improve it recently.
+
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm install`
+
+and then
 
 ### `npm start`
 
