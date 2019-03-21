@@ -11,13 +11,14 @@ class PlanItemView extends Component {
         var newUI=this.props.UI
         newUI[index]="Search"
         this.props.addPlan(newUI)
+        this.setState({UI:this.props.UI})
         console.log(newUI)
         console.log(this.props.UI)
     }
     render() {
         return (
             <div>
-                <div>{this.props.UI}</div>
+                <div>{this.state.UI}</div>
                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
             </div>
         );
