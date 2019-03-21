@@ -53,7 +53,20 @@ class PlanView extends Component {
       });
     });
   }
-
+  componentWillReceiveProps(nextProps) {
+    if(nextProps!==this.props) {
+      this.data = this.giveContent().map((view, index) => {
+        return ({
+          date: view.date,
+          component: (
+            <div key={index}>
+              {view.content}
+            </div>
+          )
+        });
+      });
+    }
+  }
   render() {
     return (
       <div>

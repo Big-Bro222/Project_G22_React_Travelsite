@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
-import{Button} from 'antd';
+import { Button } from 'antd';
 import "./PlanItemView.css"
+import { connect } from "react-redux";
 
 
 class PlanItemView extends Component {
-    state = {  }
-    render() { 
-        return ( 
+    state = {}
+    addPlan = () => {
+        var index = this.props.currentindex
+        var newUI=this.props.UI
+        newUI[index]="Search"
+        this.props.addPlan(newUI)
+        console.log(newUI)
+        console.log(this.props.UI)
+    }
+    render() {
+        return (
             <div>
-                
-                <Button type="primary" shape="round" icon="edit" size={"large"} >ADD YOUR PLAN</Button>
+                <div>{this.props.UI}</div>
+                <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
             </div>
-         );
+        );
     }
 }
- 
-export default PlanItemView;
+function mapStateToProps(state) {
+    return {
+        timeline: state.timeline,
+        currentindex: state.currentindex,
+        UI:state.UI
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addPlan: (value) => {
+            const action = { type: "ADD_PLAN", payload: value };
+            dispatch(action);
+            (console.log("input"))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PlanItemView)

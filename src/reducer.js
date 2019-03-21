@@ -29,7 +29,7 @@ export default function Datereducer(state=initialstate,action){
         return Object.assign({},state,{timeline:action.timeline,UI:action.UI})
         case "TIMELINE_CLICK":
         return Object.assign({},state,{currentindex:action.payload})
-        case "CHANGE_UI":
+        case "ADD_PLAN":
         return Object.assign({},state,{UI:action.payload})
         default:
         return state;
