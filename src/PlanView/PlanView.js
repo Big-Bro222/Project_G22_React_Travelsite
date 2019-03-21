@@ -28,7 +28,16 @@ class PlanView extends Component {
     //   {
     //     date: '2019-01-05',
     //     content: <PlanViewDetails />
+    //   },
+    //   {
+    //     date: '2019-01-08',
+    //     content: <PlanViewDetails />
+    //   },
+    //   {
+    //     date: '2019-01-10',
+    //     content: <PlanViewDetails />
     //   }
+
     // ];
   }
 
