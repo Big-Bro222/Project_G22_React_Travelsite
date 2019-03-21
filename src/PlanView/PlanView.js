@@ -17,7 +17,7 @@ class PlanView extends Component {
     var Content=[];
     for(var i=0;i<=len-1;i++)
     {
-    Content.push({date:this.props.timeline[i],content:<PlanViewDetails UI="Search"/>});
+    Content.push({date:this.props.timeline[i],content:<PlanViewDetails UI={this.props.UI[i]}/>});
     }
     return Content;
     // var Content = [
@@ -59,6 +59,7 @@ class PlanView extends Component {
       <div>
         <div>{this.props.timeline+"yes"}</div>
         <div>{this.props.UI}</div>
+        <div>{this.props.currentindex}</div>
 
         <Navbar />
 
@@ -80,7 +81,9 @@ class PlanView extends Component {
 function mapStateToProps(state) {
   return {
 
-    timeline: state.timeline
+    timeline: state.timeline,
+    UI:state.UI,
+    index: state.currentindex
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HorizontalTimeline from "react-horizontal-timeline"
 import SwipeableViews from 'react-swipeable-views';
+import { connect } from "react-redux";
 
 
 class Timeline extends Component {
@@ -39,6 +40,7 @@ componentWillMount() {
                     <HorizontalTimeline
                         index={this.state.value}
                         indexClick={(index) => {
+                            this.props.timelineClick(index);
                             this.setState({ value: index, previous: this.state.value });
                         }}
                         values={this.dates}
@@ -63,6 +65,19 @@ componentWillMount() {
         );
     }
 }
+function mapStateToProps(state) {
+    return {
+        currentindex:state.currentindex,
+    }
+}
 
-export default Timeline;
+function mapDispatchToProps(dispatch) {
+    return {
+        timelineClick: (value) => {
+            const action = { type: "TIMELINE_CLICK", payload: value };
+            dispatch(action);
+        }
 
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline)
