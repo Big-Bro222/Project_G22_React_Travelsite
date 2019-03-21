@@ -4,6 +4,10 @@ import {
     Form, Input, Button, Row, Col, Select
 } from 'antd';
 import './Search.css'
+import { connect } from 'react-redux'
+import {
+    fetchPostsIfNeeded
+} from '../actions'
 
 const Option = Select.Option;
 class Searchbars extends Component {
@@ -62,10 +66,31 @@ class Searchbars extends Component {
         })
     }
 
+    getFormValue = () => {
+        var formData = this.props.form.getFieldsValue();
+        return formData;
+
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+                this.props.onSearchSubmit(values.From)
+
+            }
+
+            //   console.log('Received values of form: ',  this.getFormValue());
+
+        });
+    }
+
+
     render() {
+        const { onSearchSubmit } = this.props;
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <Row >
                     <Col xs={10} sm={12} md={7} lg={6} xl={4}>
                         <Row justify="start">
@@ -158,7 +183,7 @@ class Searchbars extends Component {
                     <Col xs={24} sm={12} md={2} lg={23} xl={3} >
                         <Row >
                             <Form.Item >
-                                <Button type="primary" htmlType="submit" size="large" icon="right-circle">Submit</Button>
+                                <Button type="primary" htmlType="submit" size="large" icon="right-circle" >Submit</Button>
                             </Form.Item>
                         </Row>
                     </Col>
@@ -170,9 +195,14 @@ class Searchbars extends Component {
 const Searchbar = Form.create({ name: 'ClassPeople' })(Searchbars);
 
 
+const mapDispatchToProps = (dispatch) => ({
+    onSearchSubmit: (data) => dispatch(fetchPostsIfNeeded(data))
+})
+
+export default connect(mapDispatchToProps)(Searchbar)
 
 
-export default Searchbar
+// export default Searchbar
 
 
 

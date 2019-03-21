@@ -83,6 +83,7 @@ class Welcome extends Component {
 
     render() {
         const { startValue, endValue, endOpen } = this.state;
+        console.log(this.props.departuredate)
 
         return (
             <div >
@@ -132,6 +133,7 @@ class Welcome extends Component {
     }
 }
 function mapStateToProps(state) {
+    
     return {
         departuredate: state.departuredate,
         returndate: state.returndate,

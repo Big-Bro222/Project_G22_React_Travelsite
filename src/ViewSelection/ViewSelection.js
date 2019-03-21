@@ -21,7 +21,7 @@ class ViewSelection extends Component {
     }
     render() {
         console.log()
-        switch (this.state.UI[0]) {
+        switch (this.state.UI[this.props.currentindex]) {
             case "DetailItem": {
                 return (
                     <div>

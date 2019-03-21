@@ -1,9 +1,14 @@
+import { combineReducers } from 'redux'
+
 
 
 const initialstate={departuredate:'yessss',
                     returndate:'nooooo',
                     departureplace:'beijing',
-                    currentindex: 0}
+                    currentindex: 0,
+                    isFetching: false,
+                    //   didInvalidate: false,
+                      items: []}
 
 
 
@@ -31,8 +36,62 @@ export default function Datereducer(state=initialstate,action){
         return Object.assign({},state,{currentindex:action.payload})
         case "ADD_PLAN":
         return Object.assign({},state,{UI:action.payload})
+        case "REQUEST_POSTS":
+        return Object.assign({}, state, {
+          isFetching: true,
+        //   didInvalidate: false
+        })
+      case "RECEIVE_POSTS":
+        return Object.assign({}, state, {
+          isFetching: false,
+        //   didInvalidate: false,
+          items: action.posts,
+          lastUpdated: action.receivedAt
+        })
+    
         default:
         return state;
     }
     
 }
+
+
+
+
+  function flightDataFetch(
+    state = {
+      isFetching: false,
+    //   didInvalidate: false,
+      items: []
+    },
+    action
+  ) {
+    switch (action.type) {
+    //   case INVALIDATE_SUBREDDIT:
+    //     return Object.assign({}, state, {
+    //       didInvalidate: true
+    //     })
+      case "REQUEST_POSTS":
+        return Object.assign({}, state, {
+          isFetching: true,
+        //   didInvalidate: false
+        })
+      case "RECEIVE_POSTS":
+        return Object.assign({}, state, {
+          isFetching: false,
+        //   didInvalidate: false,
+          items: action.posts,
+          lastUpdated: action.receivedAt
+        })
+      default:
+        return state
+    }
+  }
+
+
+//   const rootReducer = combineReducers({
+//    Datereducer,
+//     flightDataFetch
+//   })
+
+//   export default rootReducer;

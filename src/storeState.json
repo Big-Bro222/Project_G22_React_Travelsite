@@ -1,0 +1,27 @@
+{
+    "isFetching": true,
+    "lastUpdated": "2019-03-21",
+    "items": {},
+    "planViews":{
+        "viewsNum":5,
+        "views":[
+            {
+                "id":1,
+                "UI":"addplan"
+                
+
+            },
+            {
+                "id":2,
+                "UI":"search"
+            }
+
+        ]
+
+    
+    }
+
+
+    }
+   
+}
