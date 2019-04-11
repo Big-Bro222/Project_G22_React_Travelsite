@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Avatar, Row, Col, Card, Button, Popover, Icon, Divider, Collapse } from 'antd';
 import "./ResultList.css"
+import {timeConvert} from "../apiUtility/apiUtility"
 
 
 const Panel = Collapse.Panel;
@@ -24,13 +25,16 @@ class ResultList extends Component {
             flightInfomation.push(Object.assign({},
                 {
                     "FlightId": Itinerary.OutboundLegId,
+                    "FlightNumbers":carrier.DisplayCode+leg.FlightNumbers[0].FlightNumber,
                     "OriginStation": OriginStation.Name,
                     "DestinationStation": DestinationStation.Name,
                     "Departure": leg.Departure,
                     "Arrival": leg.Arrival,
                     "CarriersName": carrier.Name,
                     "CarriersImg": carrier.ImageUrl,
-                    "price":price
+                    "price":price,
+                    "BookingLink":Itinerary.PricingOptions[0].DeeplinkUrl,
+                    "Duration":timeConvert(leg.Duration)
                 }
             ))
         }
@@ -72,7 +76,7 @@ class ResultList extends Component {
                                 <h2 className="airLineStyle">{flight.CarriersName}</h2>
                             </Row>
                             <Row type="flex" justify="start" >
-                                Airbus A321-100/200
+                                {flight.FlightNumbers}
 </Row>
                         </Col>
                         <Col xs={24} sm={12} md={4} lg={3} xl={2}>
@@ -85,7 +89,7 @@ class ResultList extends Component {
                         </Col>
                         <Col xs={24} sm={12} md={4} lg={4} xl={2}>
                             <Row type="flex" justify="center">
-                                8h10m
+                                {flight.Duration}
 </Row>
                             <Row type="flex" justify="center">
                                 <Icon type="minus" /><Icon type="minus" /><Icon type="rocket" rotate="90" /><Icon type="minus" /><Icon type="minus" />
@@ -114,7 +118,9 @@ class ResultList extends Component {
                         <Col xs={24} sm={12} md={8} lg={12} xl={2} >
                             <Row type="flex" justify="end">
                                 <Popover style={{ width: 500 }} content={hoverContent}>
+                                <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
                                     <Button size="large" type="primary" shape="circle" icon="plus" />
+                                    </a>
                                 </Popover>
                             </Row>
                         </Col>

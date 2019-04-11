@@ -87,7 +87,7 @@ class Welcome extends Component {
 
         return (
             <div >
-                <div>{this.props.departuredate + "this.props." + this.props.returndate}</div>
+                {/* <div>{this.props.departuredate + "this.props." + this.props.returndate}</div> */}
                 <Navbar />
                 <Carousel autoplay>
                     <div><h3>1</h3></div>

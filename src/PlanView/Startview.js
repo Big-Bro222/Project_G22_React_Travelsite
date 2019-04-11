@@ -18,7 +18,7 @@ class Startview extends Component {
     render() {
         return (
             <div>
-                <div>{this.state.UI}</div>
+                {/* <div>{this.state.UI}</div> */}
                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
             </div>
         );

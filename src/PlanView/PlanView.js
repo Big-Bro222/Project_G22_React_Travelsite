@@ -70,9 +70,9 @@ class PlanView extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.timeline+"yes"}</div>
+        {/* <div>{this.props.timeline+"yes"}</div>
         <div>{this.props.UI}</div>
-        <div>{this.props.currentindex}</div>
+        <div>{this.props.currentindex}</div> */}
 
         <Navbar />
 
