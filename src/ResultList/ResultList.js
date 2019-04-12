@@ -134,10 +134,10 @@ class ResultList extends Component {
 
         return (
 
-            <Collapse >
+            
                 <Panel showArrow={false} header={resultList} key="1" className="customPanelStyle">
                 </Panel>
-            </Collapse>
+            
         )
     }
 }
