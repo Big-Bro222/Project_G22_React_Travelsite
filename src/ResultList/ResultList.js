@@ -66,12 +66,12 @@ class ResultList extends Component {
 
                 <Card key={i} className="listStyle" hoverable bodyStyle={{ padding: "0px", paddingLeft: 20 }} >
                     <Row type="flex" align="middle">
-                        <Col xs={24} sm={12} md={2} lg={2} xl={2}>
+                        <Col xs={13} sm={12} md={2} lg={2} xl={2}>
                             <Row type="flex" justify="start">
                                 <Avatar alt="airline" src={flight.CarriersImg}/>
                             </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={9} lg={6} xl={7}>
+                        <Col xs={11} sm={12} md={5} lg={4} xl={3}>
                             <Row type="flex" justify="start" className="airLineStyle">
                                 <h2 className="airLineStyle">{flight.CarriersName}</h2>
                             </Row>
@@ -79,35 +79,32 @@ class ResultList extends Component {
                                 {flight.FlightNumbers}
 </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={4} lg={3} xl={2}>
+                        <Col xs={24} sm={11} md={6} lg={4} xl={3}>
                             <Row type="flex" justify="start">
                                 <b >{flight.Departure}</b>
                             </Row>
-                            <Row type="flex" justify="start" className="airportStyle">
+                            <Row type="flex" justify="start" >
                                 <b>{flight.OriginStation}</b>
                             </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={4} lg={4} xl={2}>
+                        <Col xs={24} sm={12} md={5} lg={3} xl={5}>
                             <Row type="flex" justify="center">
                                 {flight.Duration}
 </Row>
                             <Row type="flex" justify="center">
-                                <Icon type="minus" /><Icon type="minus" /><Icon type="rocket" rotate="90" /><Icon type="minus" /><Icon type="minus" />
-                            </Row>
-                            <Row type="flex" justify="center">
-                                <b className="priceStyle">1 stop STD</b>
+                                <Icon type="minus" /><Icon type="minus" /><Icon theme="twoTone" type="rocket" rotate="90" /><Icon type="minus" /><Icon type="minus" />
                             </Row>
                         </Col>
 
-                        <Col xs={24} sm={12} md={4} lg={4} xl={5}>
+                        <Col xs={24} sm={12} md={6} lg={5} xl={5}>
                             <Row type="flex" justify="start">
                                 <b >{flight.Arrival}</b>
                             </Row>
-                            <Row type="flex" justify="start" className="airportStyle">
+                            <Row type="flex" justify="start">
                                 <b>{flight.DestinationStation}</b>
                             </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={8} lg={5} xl={3}>
+                        <Col xs={24} sm={12} md={20} lg={4} xl={3}>
                             <Row type="flex" justify="start" className="airLineStyle">
                                 <h2 className="airLineStyle"> Economy</h2>
                             </Row>
@@ -115,7 +112,7 @@ class ResultList extends Component {
                                 Lowest Price: <b className="priceStyle"> ${flight.price} </b>
                             </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={8} lg={12} xl={2} >
+                        <Col xs={24} sm={12} md={4} lg={2} xl={2} >
                             <Row type="flex" justify="end">
                                 <Popover style={{ width: 500 }} content={hoverContent}>
                                 <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
