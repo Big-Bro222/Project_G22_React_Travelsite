@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Affix, Divider } from 'antd';
 import "./SideView.css"
+import { connect } from "react-redux";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -46,4 +47,21 @@ class SideView extends Component {
     }
 }
 
-export default SideView;
+function mapStateToProps(state) {
+    return {
+        timeline: state.timeline,
+        currentindex: state.currentindex,
+        UI: state.UI
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        changePlan: (value) => {
+            const action = { type: "CHANGE_PLAN", payload: value };
+            dispatch(action);
+            (console.log(value))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SideView)

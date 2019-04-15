@@ -65,6 +65,9 @@ class Welcome extends Component {
     handleEndOpenChange = (open) => {
         this.setState({ endOpen: open });
     }
+
+    // Use generateTimeLine to creat a default timeline and give the store state UI default values ["Startview",...]
+    
     generateTimeLine = () => {
         var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
         var UI=Array(timeline.length).fill("Startview")

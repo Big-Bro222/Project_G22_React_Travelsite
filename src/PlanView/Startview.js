@@ -8,10 +8,11 @@ class Startview extends Component {
     state = {}
     addPlan = () => {
         var index = this.props.currentindex
-        var newUI=this.props.UI
+        var [...newUI]=this.props.UI
         newUI[index]="Search"
+        
         this.props.addPlan(newUI)
-        this.setState({UI:this.props.UI})
+        //this.setState({UI:this.props.UI})
         console.log(newUI)
         console.log(this.props.UI)
     }

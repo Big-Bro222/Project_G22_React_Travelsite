@@ -35,6 +35,9 @@ export default function Datereducer(state=initialstate,action){
         case "TIMELINE_CLICK":
         return Object.assign({},state,{currentindex:action.payload})
         case "ADD_PLAN":
+        
+        return Object.assign({},state,{UI:action.payload})
+        case "CHANGE_PLAN":
         return Object.assign({},state,{UI:action.payload})
         case "REQUEST_POSTS":
         return Object.assign({}, state, {
