@@ -50,19 +50,7 @@ class ResultList extends Component {
 
 
         resultList = flightInfomation.map((flight, i) => (
-            <div>
-
-                {/* <div key={i} className="card mx-2" style={{ width: "18rem", float: "left" }}>
-                    <img src={flight.CarriersImg} className="card-img-top" alt="" />
-                    <div className="card-body">
-                        <h4 className="card-text text-center">{flight.CarriersName}</h4>
-                        <p className="card-text" >{flight.OriginStation}</p>
-                        <p className="card-text" >{"  ======>  "}</p>
-                        <p className="card-text" >{flight.DestinationStation}</p>
-                        <p className="card-text" >{"Departure time: " + flight.Departure}</p>
-                        <p className="card-text" >{"Arrival time: " + flight.Arrival}</p>
-                    </div>
-                </div> */}
+      
 
                 <Card key={i} className="listStyle" hoverable bodyStyle={{ padding: "0px", paddingLeft: 20 }} >
                     <Row type="flex" align="middle">
@@ -126,7 +114,7 @@ class ResultList extends Component {
                         <Divider style={{ margin: 0 }}><Icon type="double-right" rotate="90" /></Divider>
                     </Row>
                 </Card>
-            </div>
+         
 
         ))
 
