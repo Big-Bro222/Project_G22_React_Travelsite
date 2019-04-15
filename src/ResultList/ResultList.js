@@ -39,9 +39,14 @@ class ResultList extends Component {
             ))
         }
 
-        const hoverContent = (
+        const addHoverContent = (
             <div>
                 Add to your plan
+            </div>
+        );
+        const shopHoverContent = (
+            <div>
+                Go To The Flight Website
             </div>
         );
 
@@ -79,7 +84,7 @@ class ResultList extends Component {
                                 {flight.FlightNumbers}
 </Row>
                         </Col>
-                        <Col xs={24} sm={11} md={6} lg={4} xl={3}>
+                        <Col xs={24} sm={12} md={6} lg={5} xl={5}>
                             <Row type="flex" justify="start">
                                 <b >{flight.Departure}</b>
                             </Row>
@@ -88,11 +93,11 @@ class ResultList extends Component {
                             </Row>
                         </Col>
                         <Col xs={24} sm={12} md={5} lg={3} xl={5}>
-                            <Row type="flex" justify="center">
+                            <Row type="flex" justify="start">
                                 {flight.Duration}
 </Row>
-                            <Row type="flex" justify="center">
-                                <Icon type="minus" /><Icon type="minus" /><Icon theme="twoTone" type="rocket" rotate="90" /><Icon type="minus" /><Icon type="minus" />
+                            <Row type="flex" justify="start">
+                                <Icon type="minus" /><Icon type="minus" /><Icon type="minus" /><Icon theme="twoTone" type="rocket" rotate="90" />
                             </Row>
                         </Col>
 
@@ -104,26 +109,25 @@ class ResultList extends Component {
                                 <b>{flight.DestinationStation}</b>
                             </Row>
                         </Col>
-                        <Col xs={24} sm={12} md={20} lg={4} xl={3}>
-                            <Row type="flex" justify="start" className="airLineStyle">
-                                <h2 className="airLineStyle"> Economy</h2>
-                            </Row>
+                        <Col xs={24} sm={12} md={20} lg={3} xl={2}>
                             <Row type="flex" justify="start">
-                                Lowest Price: <b className="priceStyle"> ${flight.price} </b>
+                                <b className="priceStyle"> ${flight.price} </b>
                             </Row>
                         </Col>
                         <Col xs={24} sm={12} md={4} lg={2} xl={2} >
-                            <Row type="flex" justify="end">
-                                <Popover style={{ width: 500 }} content={hoverContent}>
+                            <Row type="flex" justify="center">
+                                <Popover style={{ width: 500 }} content={addHoverContent}>
                                 <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
                                     <Button size="large" type="primary" shape="circle" icon="plus" />
                                     </a>
                                 </Popover>
+                                <Popover style={{ width: 500 }} content={shopHoverContent}>
+                                <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
+                                    <Icon type="shopping" /><Icon type="double-right" size="big"/>
+                                    </a>
+                                </Popover>
                             </Row>
                         </Col>
-                    </Row>
-                    <Row type="flex" justify="center" style={{ marginTop: "10px" }}>
-                        <Divider style={{ margin: 0 }}><Icon type="double-right" rotate="90" /></Divider>
                     </Row>
                 </Card>
             </div>

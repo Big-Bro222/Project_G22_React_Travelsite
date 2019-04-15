@@ -31,7 +31,6 @@ class ViewSelection extends Component {
             case "Search": {
                 return (
                     <div>
-
                         <Search />
                     </div>)
             }

@@ -3,9 +3,11 @@ import './Search.css'
 import ResultList from "../ResultList/ResultList";
 import Searchbar from "./Searchbar"
 import { connect } from 'react-redux'
+import {Row, Col} from 'antd'
 import {
   fetchPostsIfNeeded
 } from '../actions'
+import SideView from "../Side/SideView";
 
 
 
@@ -37,19 +39,27 @@ class Search extends Component {
         // ResultListPlaceHoder=(<div></div>)
         return (
             <div>
+              <Row>
+                <Col span={5}>
+                <SideView/>
+                </Col>
+                <Col span={19}>
                 <div className="searchView"
 
-                // onSearchSubmit={this.handleSubmit}
+// onSearchSubmit={this.handleSubmit}
 
-                >
-                        <Searchbar />
-                </div>
-                {isFetching &&  <h2>Loading...</h2>}
-                {!(posts instanceof Array)&&(<div style={{ marginTop: "5%" }}>
-                {/* <ResultListPlaceHoder/> */}
-                    <ResultList posts = {posts} lastTetchTime={lastUpdated}/>
-                </div>)
-                }
+>
+        <Searchbar />
+</div>
+{isFetching &&  <h2>Loading...</h2>}
+{!(posts instanceof Array)&&(<div>
+{/* <ResultListPlaceHoder/> */}
+    <ResultList posts = {posts} lastTetchTime={lastUpdated}/>
+</div>)
+}
+                </Col>
+              </Row>
+               
             </div>
         )
     }

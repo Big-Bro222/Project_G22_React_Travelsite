@@ -90,13 +90,11 @@ class Welcome extends Component {
                 {/* <div>{this.props.departuredate + "this.props." + this.props.returndate}</div> */}
                 <Navbar />
                 <Carousel autoplay>
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
+                    <div style><img alt="1" src="http://cache.house.sina.com.cn/citylifehouse/citylife/9e/9d/20090606_21955_1.jpg"></img></div>
+                    <div><img alt="2" src="http://cache.house.sina.com.cn/citylifehouse/citylife/9e/9d/20090606_21955_1.jpg"></img></div>
                 </Carousel>
 
-                <div className="searchView">
+                <div className="welcomeView">
                     <Row type="flex" justify="start" align="middle">
                         <Col span={3} className="typeCol"><b className="typeStyle">DEPART</b></Col>
                         <Col span={8}>
@@ -124,7 +122,7 @@ class Welcome extends Component {
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
                         <Link to="/Planview">
-                            <Button size="large" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Get Your Plan</Button>
+                            <Button size="large" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start Your Plan</Button>
                         </Link>
                     </Row>
                 </div>

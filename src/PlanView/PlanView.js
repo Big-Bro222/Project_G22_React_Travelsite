@@ -78,15 +78,13 @@ class PlanView extends Component {
 
 
         <Row>
-          <Col span={2} />
-          <Col span={21}>
+          <Col span={23}>
             <Timeline content={this.data} />
           </Col>
-          <Col span={1}/>
+          <Col span={1}>
+          </Col>
         </Row>
-        <Affix style={{ position: 'absolute', top: "50%" }}>
-          <SideView />
-        </Affix>
+        
       </div>
     );
   }

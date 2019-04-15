@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import {
-    Form, Input, Button, Row, Col, Select
+    Form, Input, Button, Row, Col, Select, Affix
 } from 'antd';
 import './Search.css'
 import { connect } from 'react-redux'
@@ -41,55 +41,8 @@ class Searchbars extends Component {
         const { onSearchSubmit } = this.props;
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <Row >
-                    <Col xs={11} sm={12} md={9} lg={6} xl={4}>
-                        <Row type="flex" justify="start">
-                            <Form.Item>
-                                <b className="typeStyle">Route</b>
-                                {getFieldDecorator('route', { initialValue: 'One Way' })(
-                                    <Select style={{ width: 110 }} >
-                                        <Option value="One Way">One Way</Option>
-                                        <Option value="Return">Return</Option>
-                                    </Select>
-                                )}
-                            </Form.Item>
-                        </Row>
-                    </Col>
-                    <Col xs={12} sm={12} md={8} lg={6} xl={5}>
-                        <Row type="flex" justify="start">
-                            <Form.Item>
-                                <b className="typeStyle">Class</b>
-                                {getFieldDecorator('class', { initialValue: 'Economy' })(
-                                    <Select style={{ width: 150 }} >
-                                        <Option value="Economy">Economy</Option>
-                                        <Option value="Premium Economy">Premium Economy</Option>
-                                        <Option value="Business Class">Business Class</Option>
-                                        <Option value="First Class">First Class</Option>
-                                    </Select>
-                                )}
-                            </Form.Item>
-                        </Row>
-                    </Col>
-                    <Col xs={12} sm={12} md={9} lg={5} xl={4}>
-                        <Row type="flex" justify="start">
-                            <Form.Item>
-                                <b className="typeStyle">Adults(12+)</b>
-                                {getFieldDecorator('adults', { initialValue: 1 })(
-                                    <Input style={{ width: "40px" }} />)}
-                            </Form.Item>
-                        </Row>
-                    </Col>
-                    <Col xs={12} sm={12} md={8} lg={5} xl={5}>
-                        <Row type="flex" justify="start">
-                            <Form.Item>
-                                <b className="typeStyle">Children(2-12)</b>                     
-                                {getFieldDecorator('children', { initialValue: 0 })(
-                                    <Input style={{ width: "40px" }} />)}
-                            </Form.Item>
-                        </Row>
-                    </Col>
-                </Row>
+            <Affix offsetTop={20}>
+                <Form onSubmit={this.handleSubmit}>
                 <Row >
                     <Col xs={21} sm={18} md={17} lg={9} xl={10} >
                         <Row >
@@ -125,6 +78,7 @@ class Searchbars extends Component {
                     </Col>
                 </Row>
             </Form>
+            </Affix>
         );
     }
 }
