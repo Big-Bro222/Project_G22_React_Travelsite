@@ -81,12 +81,13 @@ class ResultList extends Component {
                             </Row>
                         </Col>
                         <Col xs={24} sm={12} md={5} lg={3} xl={5}>
+                            <br></br>
                             <Row type="flex" justify="start">
-                                {flight.Duration}
-</Row>
-                            <Row type="flex" justify="start">
-                                <Icon type="minus" /><Icon type="minus" /><Icon type="minus" /><Icon theme="twoTone" type="rocket" rotate="90" />
+                            {flight.Duration}
                             </Row>
+                            <br></br>
+
+                            
                         </Col>
 
                         <Col xs={24} sm={12} md={6} lg={5} xl={5}>

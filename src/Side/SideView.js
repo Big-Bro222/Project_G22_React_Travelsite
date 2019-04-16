@@ -8,6 +8,7 @@ const MenuItemGroup = Menu.ItemGroup;
 class SideView extends Component {
     state = {
         openKeys: ['sub1'],
+        
     }
 
     rootSubmenuKeys = ['sub1', 'sub2'];
@@ -23,7 +24,7 @@ class SideView extends Component {
       }
     render() {
         return (
-            <Affix>
+           
                 <Menu 
                  className="menu"
                  defaultSelectedKeys={['1']}
@@ -42,7 +43,7 @@ class SideView extends Component {
             <Menu.Item key="2">Edit Your Trip<Icon type="edit" /></Menu.Item>    
         </SubMenu>
       </Menu>
-            </Affix>
+           
         );
     }
 }
