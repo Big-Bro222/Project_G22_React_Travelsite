@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./Signup.css";
 import { Link } from 'react-router-dom';
+import firebase from 'firebase';
+import { Button } from 'antd';
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -42,14 +45,17 @@ class SignIn extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    e.preventDefault();
+    const email=this.state.email;
+    const password=this.state.password;
+    const auth =firebase.auth();
+    const promise= auth.createUserWithEmailAndPassword(email,password);
+
+    promise.catch(e=>console.log(e.message));
 
     if (formValid(this.state)) {
       console.log(`
-        --SUBMITTING--
-        First Name: ${this.state.firstName}
-        Last Name: ${this.state.lastName}
-        Email: ${this.state.email}
-        Password: ${this.state.password}
+        --SUBMIT--
       `);
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");

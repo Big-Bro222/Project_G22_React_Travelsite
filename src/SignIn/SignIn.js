@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./SignIn.css";
 import { Link } from 'react-router-dom';
+import firebase from 'firebase'
+import { connect } from "react-redux";
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -31,12 +34,34 @@ class SignIn extends Component {
       formErrors: {
         email: "",
         password: ""
-      }
+      },
+      authenticated:false
     };
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    const email=this.state.email;
+    const password=this.state.password;
+    const auth =firebase.auth();
+    const promise= auth.signInWithEmailAndPassword(email,password);
+    promise.catch(e=>console.log(e.message));
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user)
+        this.setState({
+          authenticated: true,
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+        });
+        console.log('not logged in')
+      }
+    });
+    this.props.handleSubmit(this.state.authenticated)
+    console.log(this.state.authenticated)
+
 
     if (formValid(this.state)) {
       console.log(`
@@ -73,7 +98,6 @@ class SignIn extends Component {
 
   render() {
     const { formErrors } = this.state;
-
     return (
       <div className="wrapper">
         <div className="form-wrapper">
@@ -108,7 +132,7 @@ class SignIn extends Component {
               )}
             </div>
             <div className="createAccount">
-              <button type="submit">Sign In</button>
+              <button type="submit"><Link to='/'>Sign In</Link></button>
               <Link to="/SignUp" className="FormField__Link">Create an account</Link>
             </div>
           </form>
@@ -118,4 +142,21 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+function mapStateToProps(state) {
+  return {
+    authenticated: state.authenticated,
+  }
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleSubmit: (value) => {
+          const action = { type: "SUBMIT_SIGNIN", payload: value };
+          dispatch(action);
+          (console.log(value))
+      },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+
