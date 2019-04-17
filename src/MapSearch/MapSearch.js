@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Button, Row, Col } from 'antd';
 import "./MapSearch.css";
+import MapInfo from "./MapInfo"
 
 /* global google */
 class MapSearch extends Component {
@@ -46,7 +47,14 @@ class MapSearch extends Component {
                     <Button type="primary" htmlType="submit" size="large" icon="search" >Search</Button>
                     </Col>
                 </Row>
-                <div id="map"></div>
+                <Row >
+                    <Col xs={24} sm={6} md={24} lg={18} xl={18} >
+                       <div id="map"></div>
+                    </Col>
+                    <Col xs={24} sm={6} md={24} lg={6} xl={6} >
+                       <MapInfo/>
+                    </Col>
+                </Row>
             </div>
         )
     }

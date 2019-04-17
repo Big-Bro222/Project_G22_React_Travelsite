@@ -81,6 +81,7 @@
 
       var markers = [];
       var currentMarker = null;
+      var selectedMarker = [];
       var infoWindow = new google.maps.InfoWindow({
           content: "testing",
           maxWidth: 600
@@ -88,6 +89,7 @@
 
         //place service
         var service = new google.maps.places.PlacesService(map);
+        var geocoder = new google.maps.Geocoder();
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
       searchBox.addListener('places_changed', function () {
@@ -184,35 +186,59 @@
             }else{
             place.photos[0].height = 200;
             place.photos[0].width = 200;}
-              infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place Rating: ' + place.rating + '<br>'+'<img src='+place.photos[0].getUrl()+'></img>'+'<br>'+ 'place url: ' +place.url +'<br>' +
-                place.formatted_address + '</div>');
+              infoWindow.setContent(
+                '<div id="iw-container">' + 
+                  '<div class="iw-title">'+place.name + '</div>'+
+                  'Place Rating: ' + place.rating + '<br>'+
+
+                  '<div class="iw-content">'+
+                    '<img src='+place.photos[0].getUrl()+'></img>'+'<br>'+
+                    '<div class="iw-subTitle">'+ 'Contacts' + '</div>' +
+                    'place url: ' +place.url +'<br>' +place.formatted_address + 
+                  '</div>'+
+
+                  '<div class="iw-bottom-gradient"></div>'+
+                
+                '</div>');
           }
         });
 
     }
 //     //click add marker
-//     map.addListener('click', function(e) {
-//     placeMarkerAndPanTo(e.latLng, map);
-//   });
+    map.addListener('click', function(e) {
+    placeMarkerAndPanTo(e.latLng, map);
+  });
 
 
-// function placeMarkerAndPanTo(latLng, map) {
-//   markers.forEach(function (marker) {
-//           marker.setMap(null);
-//         });
-//         markers = [];
+function placeMarkerAndPanTo(latLng, map) {
+  markers.forEach(function (marker) {
+          marker.setMap(null);
+        });
+        markers = [];
 
-//   markers.push(new google.maps.Marker({
-//             map: map,
-//             title: place.name,
-//             id: place.place_id,
-//             draggable: true,
-//             animation: google.maps.Animation.DROP,
-//             position: latLng
-//           }));
-//   map.panTo(latLng);
-// }
+  markers.push(new google.maps.Marker({
+  map: map,
+          position: latLng,
+          draggable: true,
+            animation: google.maps.Animation.BOUNCE,
+        }));
+        map.panTo(latLng);
+        getMarkerPlaceId(map, markers[0]);
+      }
+  function getMarkerPlaceId(map, marker) {
+        var latlng = marker.getPosition();
+
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+              marker.id = results[1].place_id + "<br />";
+              // console.log(marker.id);
+            }
+          } else {
+            alert("Geocoder failed due to: " + status);
+          }
+        });
+      }
 
     }
   </script>
