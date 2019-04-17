@@ -35,7 +35,7 @@ componentWillMount() {
         return (
             <div>
                 {/* Bounding box for the Timeline */}
-                <div>issisisi</div>
+                {/* <div>issisisi</div> */}
                 <div style={{ width: '80%', height: '100px', margin: '0 auto' }}>
                     <HorizontalTimeline
                         index={this.state.value}
@@ -50,7 +50,7 @@ componentWillMount() {
                 </div>
                 <div className='text-center'>
                     {/* any arbitrary component can go here */}
-                    {this.state.value}
+                    {/* {this.state.value} */}
                     <SwipeableViews
                         index={this.state.value}
                         onChangeIndex={(value, previous) => {

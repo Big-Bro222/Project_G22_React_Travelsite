@@ -2,12 +2,20 @@
   width:100%;
   padding-top: 20px;
   padding-bottom: 1px;
-  border: 10px solid #d6e4ff;
+  border: 2px solid #bae7ff;
   border-radius:15px;
-  background:#ffffff; 
+  background:#e6f7ff; 
+  margin-bottom: 10px
   }
   .typeStyle{
   color:#002329;
   padding-left:0px;
   margin: 10px
   }
+  .typeToStyle{
+    color:#002329;
+  padding-left:0px;
+  margin-right: 10px;
+  margin-left: 18px
+  }
+  

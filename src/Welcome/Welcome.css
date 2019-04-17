@@ -3,22 +3,21 @@
     padding 10
 }
 
-.searchView {
+.welcomeView {
     width:80%;
     padding-top: 40px;
     padding-bottom:30px;
-    border: 1px solid #bfbfbf;
+    border: 5px solid #bae7ff;
     border-radius:15px;
     margin: auto;
     margin-top: 20px;
-    background:#bfbfbf; 
+    background:#e6f7ff; 
 
   }
 
 .ant-carousel .slick-slide {
     text-align: center;
-    height: 100%;
-    line-height: 250px;
+    height: 250px;
     background: #364d79;
     overflow: hidden;
   }

@@ -70,23 +70,19 @@ class PlanView extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.timeline+"yes"}</div>
+        {/* <div>{this.props.timeline+"yes"}</div>
         <div>{this.props.UI}</div>
-        <div>{this.props.currentindex}</div>
+        <div>{this.props.currentindex}</div> */}
 
         <Navbar />
 
 
         <Row>
-          <Col span={2} />
-          <Col span={21}>
+          <Col xs={24} sm={24} md={24} lg={23} xl={23} >
             <Timeline content={this.data} />
           </Col>
-          <Col span={1}/>
         </Row>
-        <Affix style={{ position: 'absolute', top: "50%" }}>
-          <SideView />
-        </Affix>
+        
       </div>
     );
   }

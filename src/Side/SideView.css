@@ -1,6 +1,5 @@
 .menu{
-     width: 64px;
-     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    border-top: solid 1px #d6e4ff;
+    border-radius:10px;
+    border-bottom: solid 1px #d6e4ff;
 }

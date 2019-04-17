@@ -8,20 +8,22 @@ import { connect } from "react-redux";
 
 
 class ViewSelection extends Component {
-    state = {UI:["PlanItemView","PlanItemView","PlanItemView"]
-    }
+    // state = {UI:["PlanItemView","PlanItemView","PlanItemView"]
+    // }
+
+    // change the timeline view status to control the view display
     addPlan = () => {
         var index = this.props.currentindex
-        var newUI=this.props.UI
+        var [...newUI]=this.props.UI
         newUI[index]="Search"
         this.props.addPlan(newUI)
-        this.setState({UI:this.props.UI})
+        //this.setState({UI:this.props.UI})
         console.log(newUI)
         console.log(this.props.UI)
     }
     render() {
-        console.log()
-        switch (this.state.UI[this.props.currentindex]) {
+    
+        switch (this.props.UI[this.props.currentindex]) {
             case "DetailItem": {
                 return (
                     <div>
@@ -31,7 +33,6 @@ class ViewSelection extends Component {
             case "Search": {
                 return (
                     <div>
-
                         <Search />
                     </div>)
             }
@@ -40,7 +41,7 @@ class ViewSelection extends Component {
                     return (
                         <div>
                             <div>
-                                <div>{this.state.UI}</div>
+                                {/* <div>{this.state.UI}</div> */}
                                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
                             </div>
                         </div>)
@@ -49,10 +50,11 @@ class ViewSelection extends Component {
     }
 }
 function mapStateToProps(state) {
+    const{timeline,currentindex,UI}=state;
     return {
-        timeline: state.timeline,
-        currentindex: state.currentindex,
-        UI:state.UI
+        timeline,
+        currentindex,
+        UI
     }
 }
 
@@ -61,7 +63,7 @@ function mapDispatchToProps(dispatch) {
         addPlan: (value) => {
             const action = { type: "ADD_PLAN", payload: value };
             dispatch(action);
-            (console.log("input"))
+            (console.log(value))
         },
     }
 }
