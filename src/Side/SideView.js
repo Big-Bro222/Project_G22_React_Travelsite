@@ -1,49 +1,39 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Affix, Divider } from 'antd';
+import { Menu, Icon, Button, Divider, } from 'antd';
 import "./SideView.css"
 import { connect } from "react-redux";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+
 class SideView extends Component {
     state = {
-        openKeys: ['sub1'],
-        
+      
     }
-
-    rootSubmenuKeys = ['sub1', 'sub2'];
-    onOpenChange = (openKeys) => {
-        const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-          this.setState({ openKeys });
-        } else {
-          this.setState({
-            openKeys: latestOpenKey ? [latestOpenKey] : [],
-          });
-        }
-      }
+    handleClick = (e) => {
+      console.log('click ', e);
+    }
     render() {
         return (
-           
-                <Menu 
-                 className="menu"
-                 defaultSelectedKeys={['1']}
-                 defaultOpenKeys={['sub1']}
-                 mode="inline"
-                 openKeys={this.state.openKeys}
-                 onOpenChange={this.onOpenChange}
-      >
-        <SubMenu key="sub1" title={<h3><Icon type="rocket" /><span>Flight</span></h3>}>
-            <Divider style={{margin:0}}></Divider>
-            <Menu.Item key="1">Add Your Flight<Icon type="edit" /></Menu.Item>
-        </SubMenu>
-        <Divider style={{margin:0}}></Divider>
-        <SubMenu key="sub2" title={<h3><Icon type="branches" /><span>Routes</span></h3>}>
-            <Divider style={{margin:0}}></Divider>
-            <Menu.Item key="2">Edit Your Trip<Icon type="edit" /></Menu.Item>    
-        </SubMenu>
-      </Menu>
-           
+          <Menu
+          className="menu"
+          onClick={this.handleClick}
+          // defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          mode="inline"
+        >
+          <SubMenu key="sub1" title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
+          <Divider style={{margin:"0"}}></Divider>     
+              {/* <Menu.Item key="1">Option 1</Menu.Item>
+              <Menu.Item key="2">Option 2</Menu.Item>    */}
+          </SubMenu>
+          
+          <SubMenu key="sub2" title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
+          <Divider  style={{margin:"0"}}></Divider>
+            <Menu.Item key="3">Option 5</Menu.Item>
+            <Menu.Item key="4">Option 6</Menu.Item>         
+          </SubMenu>
+        </Menu>
         );
     }
 }

@@ -7,13 +7,11 @@
   border-radius:15px;
   background:#e6f7ff; 
   margin-bottom: 10px;
-  
 }
 
-
-
 #map {
-    height: 100%;
+    width: 1200px;
+    height: 500px
   }
 
   /* Optional: Makes the sample page fill the window. */
@@ -59,7 +57,7 @@
   }
 
   .pac-controls {
-    display: inline-block;
+    display: flex;
     padding: 5px 11px;
   }
 

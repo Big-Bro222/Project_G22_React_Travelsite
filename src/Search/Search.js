@@ -42,10 +42,12 @@ class Search extends Component {
     return (
       <div>
         <Row>
-          <Col xs={24} sm={24} md={9} lg={6} xl={5}>
+          <Col xs={24} sm={24} md={8} lg={5} xl={4}>
               <div >
                 <SideView />
               </div>
+          </Col>
+          <Col xs={24} sm={24} md={1} lg={1} xl={1}>
           </Col>
           <Col xs={24} sm={24} md={15} lg={18} xl={19}>
               {/* <div className="searchView">

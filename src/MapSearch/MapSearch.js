@@ -2,13 +2,32 @@ import React, { Component } from 'react';
 import { Input, Button, Row, Col } from 'antd';
 import "./MapSearch.css";
 
-
+/* global google */
 class MapSearch extends Component {
     state = {
     }
+    getGoogleMaps() {
+        if (!this.googleMapsPromise) {
+          this.googleMapsPromise = new Promise((resolve) => {
+            window.resolveGoogleMapsPromise = () => {
+            resolve(google);
+            delete window.resolveGoogleMapsPromise;
+            };
+           const script = document.createElement("script");  
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA40IKC5vzBQA1HUNW1Y1OnfMQZZZ8gbpA&libraries=places&callback=initAutocomplete`;
+            script.async = true;
+            script.defer = true;
+            document.body.appendChild(script);
+          });
+        }
+        return this.googleMapsPromise;
+      }
 
+      componentWillMount() {
+        this.getGoogleMaps();
+      }
     
-    
+      
     render() {
         
         return (

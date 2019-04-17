@@ -16,10 +16,10 @@ class Navbar extends Component {
                                 <Icon type="smile" style={{color:"#ffffff"}} theme="filled" />
                             </Menu.Item>
                             <Menu.Item key="alipay">
-                            <a href="https://ant.design" target="_blank" rel="noopener noreferrer"><h1 style={{color:"#ffffff"}}><Icon type="rocket" theme="filled"/>TRIP PLANNER <Icon type="rocket" theme="filled" /></h1></a>
+                            <h1 style={{color:"#ffffff", marginBottom:"0px"}}><Icon type="rocket" theme="filled"/>TRAVEL &nbsp; PLANNER <Icon type="rocket" theme="filled" /></h1>
                             </Menu.Item>
                             <Menu.Item style={{ float: "right" }}>
-                                <Icon type="dashboard" style={{color:"#ffffff"}} theme="filled" />
+                            <a href="https://ant.design" target="_blank" rel="noopener noreferrer"><Icon type="dashboard" style={{color:"#ffffff"}} theme="filled" /></a>
                             </Menu.Item>
                         </Menu>
                     </Affix>
