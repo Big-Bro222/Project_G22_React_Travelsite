@@ -29,12 +29,12 @@ class MapApi extends Component {
     //     return this.googleMapsPromise;
     //   }
 
-      componentWillMount() {
+      componentDidMount() {
       
       
 
       }
-      componentDidMount(){
+      componentWillMount(){
         this.initAutocomplete();
       }
     
