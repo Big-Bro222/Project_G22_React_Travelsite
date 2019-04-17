@@ -9,6 +9,7 @@ import {
 } from '../actions'
 import SideView from "../Side/SideView";
 import MapSearch from "../MapSearch/MapSearch"
+import MapApi from "../MapSearch/MapApi"
 
 
 
@@ -60,7 +61,7 @@ class Search extends Component {
               </div>
             )} */}
             <div>
-              <MapSearch/>
+              <MapApi/>
             </div>
           </Col>
         </Row>
