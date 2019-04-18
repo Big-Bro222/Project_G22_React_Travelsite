@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Input, Card, Row, Col } from 'antd';
+import { Input, Card, Row, Col,Button,Avatar } from 'antd';
 import "./MapSearch.css";
-import MapInfo from "./MapInfo";
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import ClickEventHandler from "./ClickEventHandler"
 
@@ -80,7 +78,55 @@ class MapApi extends Component {
 
           </Col>
           <Col xs={24} sm={6} md={24} lg={6} xl={6}>
-            <MapInfo />
+          <div className="infoView" ref="infowindowcontent" display ="none" >
+                        <Card
+                            bordered = {false}
+                            extra={<Button type="primary">Add</Button>}
+                            //Place Name
+                            title={<span ref="placename"></span>}
+                            headStyle={{ padding: "0px", fontSize: "25px", position:"sticky"}}
+                            bodyStyle={{ padding: "0px" }}
+                            size="small"
+                            className="cardStyle"
+                            //Place Image
+                            cover={<img ref="placeicon" src="" />}
+                        >
+
+                            <div className="colorDiv" >
+                                <h5 className="h4Style" ref = "placetype"> </h5>
+                                {/* <Rate id= "place-rate" disabled allowHalf value={3.5} /> */}
+                            </div>
+                            <div className="div2Style" >
+                            <Row className="rowStyle">
+                                <Col span={4}>
+                                <Avatar size="small" icon="environment" className="avatarStyle" />  </Col>
+                                <Col span = {20}>
+                                <div ref="placeaddress"></div>
+                                </Col>
+                                </Row>
+                                <Row className="rowStyle">
+                                <Col span={4}>
+                                <Avatar size="small" icon="phone" className="avatarStyle" />  </Col>
+                                <Col span = {20}>
+                                <div ref="placetel"></div>
+                                </Col>
+                                </Row>
+                                <Row className="rowStyle">
+                                <Col span={4}>
+                                <Avatar size="small" icon="schedule" className="avatarStyle" />  </Col>
+                                <Col span = {20}>
+                                <div ref="placeopeningHour"></div>
+                                </Col>
+                               
+                                
+                            </Row>
+                               
+                            </div>
+                            
+
+                        </Card>
+
+            </div>
           </Col>
         </Row>
         <span id="place-noPlace"></span>
@@ -101,6 +147,16 @@ class MapApi extends Component {
     });
     console.log(map);
     var clickHandler = new ClickEventHandler(map, { lat: 59.325, lng: 18.070 });
+    
+    clickHandler.infowindowContent = this.refs.infowindowcontent;
+    clickHandler.infowindowContent.style.display ="none";
+    clickHandler.place_icon = this.refs.placeicon;
+    clickHandler.place_name = this.refs.placename;
+    clickHandler.place_address = this.refs.placeaddress;
+    clickHandler.place_type = this.refs.placetype;
+    clickHandler.place_tel = this.refs.placetel;
+    clickHandler.place_openHour = this.refs.placeopeningHour;
+    clickHandler.place_noPlace = this.refs.placenoPlace;
 
     // Create the search box and link it to the UI element.
     var input = this.searchInput.current.input;
