@@ -53,7 +53,7 @@ class Signup extends Component {
 
     promise.then(() => {
       auth.login(() => {
-        this.props.history.push("/SignIn");
+        this.props.history.push("/");
       });
     }).catch(e =>this.setState({ errormessage: e.message })
     );
@@ -187,7 +187,7 @@ class Signup extends Component {
             <div className="createAccount">
               <button type="submit">Create Account</button>
               <div>{this.state.errormessage}</div>
-              <Link to="/SignIn" className="FormField__Link">Already Have an Account?</Link>
+              <Link to="/" className="FormField__Link">Already Have an Account?</Link>
             </div>
 
           </form>

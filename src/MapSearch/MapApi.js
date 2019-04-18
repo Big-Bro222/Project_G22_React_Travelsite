@@ -33,6 +33,7 @@ class MapApi extends Component {
 
 
     this.props.savePoint(newSavePoint)
+    console.log(newSavePoint)
     //this.setState({UI:this.props.UI})
 
   }
