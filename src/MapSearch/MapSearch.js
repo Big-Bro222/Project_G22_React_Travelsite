@@ -41,20 +41,6 @@ class MapSearch extends Component {
         
         return (
             <div>
-                <Row className="mapSearch">
-                    <Col xs={24} sm={6} md={24} lg={10} xl={10} >
-                    <Input id="pac-input" 
-                           className="controls" 
-                           size="large"
-                           type="text" 
-                           addonBefore="I want to find"  
-                           placeholder="Input keywords like 'hotel'" 
-                    />
-                    </Col>
-                    <Col xs={24} sm={6} md={24} lg={5} xl={5} >
-                    <Button type="primary" htmlType="submit" size="large" icon="search" >Search</Button>
-                    </Col>
-                </Row>
                 <Row >
                     <Col xs={24} sm={6} md={24} lg={18} xl={18} >
                        <div ref="map"></div>
@@ -100,7 +86,7 @@ class MapSearch extends Component {
       searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
+        if (places.length === 0) {
           return;
         }
 

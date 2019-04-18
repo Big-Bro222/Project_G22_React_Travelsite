@@ -10,6 +10,8 @@ import './Welcome.css'
 import Navbar from "../Navbar/Navbar"
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import img01 from "../imgs/01.jpg"
+import img02 from "../imgs/02.jpg"
 
 
 
@@ -95,8 +97,8 @@ class Welcome extends Component {
                 {/* <div>{this.props.departuredate + "this.props." + this.props.returndate}</div> */}
                 <Navbar />
                 <Carousel autoplay>
-                    <div style><img alt="1" src="http://cache.house.sina.com.cn/citylifehouse/citylife/9e/9d/20090606_21955_1.jpg"></img></div>
-                    <div><img alt="2" src="http://cache.house.sina.com.cn/citylifehouse/citylife/9e/9d/20090606_21955_1.jpg"></img></div>
+                <div><img alt="1" style={{maxWidth:"100%"}} src= {img01}></img></div>
+                    <div><img alt="2" style={{maxWidth:"100%"}} src= {img02}></img></div>
                 </Carousel>
 
                 <div className="welcomeView">

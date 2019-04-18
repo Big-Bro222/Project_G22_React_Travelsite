@@ -48,19 +48,17 @@ newSavePoint[index]=this.savedPoint;
 
     return (
       <div>
-        <Row className="mapSearch">
+        <Row>
           <Col xs={24} sm={6} md={24} lg={10} xl={10} >
             <Input ref={this.searchInput}
-              id="searchInput"
+              id="pac-input"
               className="controls"
               size="large"
               type="text"
-              addonBefore="I want to find"
-              placeholder="Input keywords like 'hotel'"
+              placeholder='Try to search "attractions"'
             />
           </Col>
-          <Col xs={24} sm={6} md={24} lg={5} xl={5} >
-            <Button type="primary" htmlType="submit" size="large" icon="search" >Search</Button>
+          <Col >
             <button ref="addButton" type="button" onClick={this.savePoint}>Add to my plan</button>
           </Col>
         </Row>

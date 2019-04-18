@@ -15,9 +15,6 @@ class Navbar extends Component {
                             <Menu.Item style={{ float: "left" }}>
                                 <Icon type="smile" style={{color:"#ffffff"}} theme="filled" />
                             </Menu.Item>
-                            <Menu.Item key="alipay">
-                            <h1 style={{color:"#ffffff", marginBottom:"0px"}}><Icon type="rocket" theme="filled"/>TRAVEL &nbsp; PLANNER <Icon type="rocket" theme="filled" /></h1>
-                            </Menu.Item>
                             <Menu.Item style={{ float: "right" }}>
                             <a href="https://ant.design" target="_blank" rel="noopener noreferrer"><Icon type="dashboard" style={{color:"#ffffff"}} theme="filled" /></a>
                             </Menu.Item>
