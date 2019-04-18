@@ -6,13 +6,13 @@ import App from './App';
 import firebase from 'firebase'
 
 var config = {
-    apiKey: "AIzaSyDqUSmuPb3zOwJTgDBKVPWa2ZvIvpiXr4I",
-    authDomain: "labfirebase-1c557.firebaseapp.com",
-    databaseURL: "https://labfirebase-1c557.firebaseio.com",
-    projectId: "labfirebase-1c557",
-    storageBucket: "labfirebase-1c557.appspot.com",
-    messagingSenderId: "222914135542"
-  };
+  apiKey: "AIzaSyBhzhhGWi1TLDQyl8dyDOhR6WIG-BRcYKc",
+  authDomain: "travelplanner-web.firebaseapp.com",
+  databaseURL: "https://travelplanner-web.firebaseio.com",
+  projectId: "travelplanner-web",
+  storageBucket: "travelplanner-web.appspot.com",
+  messagingSenderId: "148373620558"
+};
   firebase.initializeApp(config);
 
 
