@@ -78,7 +78,7 @@ class PlanView extends Component {
 
 
         <Row>
-          <Col xs={24} sm={24} md={24} lg={23} xl={23} >
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} >
             <Timeline content={this.data} />
           </Col>
         </Row>
