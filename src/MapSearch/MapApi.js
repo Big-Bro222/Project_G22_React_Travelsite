@@ -18,7 +18,7 @@ class MapApi extends Component {
 
   }
 
-  savePoint = () => {
+  savePoint = (e) => {
     var trigger = true;
     console.log(this.savedPoint.length)
     if (this.savedPoint.length <= 1) { trigger = true; }
@@ -62,9 +62,9 @@ class MapApi extends Component {
               placeholder='Try to search "attractions"'
             />
           </Col>
-          <Col >
+          {/* <Col >
             <button ref="addButton" type="button" onClick={this.savePoint}>Add to my plan</button>
-          </Col>
+          </Col> */}
         </Row>
         <Row >
           <Col xs={24} sm={6} md={24} lg={18} xl={18} >
@@ -81,7 +81,7 @@ class MapApi extends Component {
           <div className="infoView" ref="infowindowcontent" display ="none" >
                         <Card
                             bordered = {false}
-                            extra={<Button type="primary">Add</Button>}
+                            extra={<button type="primary" ref="addButton" onClick={this.savePoint} >Add</button>}
                             //Place Name
                             title={<span ref="placename"></span>}
                             headStyle={{ padding: "0px", fontSize: "25px", position:"sticky"}}
@@ -145,7 +145,7 @@ class MapApi extends Component {
       mapTypeId: 'roadmap',
       // clickableIcons: false
     });
-    console.log(map);
+
     var clickHandler = new ClickEventHandler(map, { lat: 59.325, lng: 18.070 });
     
     clickHandler.infowindowContent = this.refs.infowindowcontent;
@@ -156,7 +156,7 @@ class MapApi extends Component {
     clickHandler.place_type = this.refs.placetype;
     clickHandler.place_tel = this.refs.placetel;
     clickHandler.place_openHour = this.refs.placeopeningHour;
-    clickHandler.place_noPlace = this.refs.placenoPlace;
+    // clickHandler.place_noPlace = this.refs.placenoPlace;
 
     // Create the search box and link it to the UI element.
     var input = this.searchInput.current.input;
@@ -206,7 +206,7 @@ class MapApi extends Component {
     searchBox.addListener('places_changed', function () {
       var places = searchBox.getPlaces();
 
-      if (places.length == 0) {
+      if (places.length === 0) {
         return;
       }
 

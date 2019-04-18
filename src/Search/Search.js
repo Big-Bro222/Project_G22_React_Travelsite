@@ -3,7 +3,7 @@ import './Search.css'
 import ResultList from "../ResultList/ResultList";
 import Searchbar from "./Searchbar"
 import { connect } from 'react-redux'
-import { Row, Col, Affix } from 'antd'
+import { Row, Col } from 'antd'
 import {
   fetchPostsIfNeeded
 } from '../actions'
@@ -50,8 +50,10 @@ class Search extends Component {
           </Col>
           <Col xs={24} sm={24} md={1} lg={1} xl={1}>
           </Col>
-          <Col xs={24} sm={24} md={15} lg={18} xl={19}>
+          <Col xs={24} sm={24} md={15} lg={18} xl={18}>
+          
               <div className="searchView">
+
                 <Searchbar />
               </div>
             {isFetching && <h2>Loading...</h2>}
