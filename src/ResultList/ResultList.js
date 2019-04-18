@@ -2,13 +2,33 @@ import React, { Component } from 'react';
 import { Avatar, Row, Col, Card, Button, Popover, Icon, Divider, Collapse } from 'antd';
 import "./ResultList.css"
 import {timeConvert} from "../apiUtility/apiUtility"
+import { connect } from 'react-redux'
 
 
 const Panel = Collapse.Panel;
 class ResultList extends Component {
     state = {
     }
-
+    constructor(props) {
+        super(props);
+       
+        this.savedFlight=[];
+    
+      }
+    saveFlight = (e,flight) => {
+        e.preventDefault();
+        this.savedFlight.push(flight);
+        var index = this.props.currentindex
+        var [...newSaveFlight]=this.props.savedFlight;
+      
+    
+    newSaveFlight[index]=this.savedFlight;
+    
+     
+        this.props.saveFlight(newSaveFlight)
+        //this.setState({UI:this.props.UI})
+    
+    }
     render() {
         console.log("list")
 
@@ -106,9 +126,9 @@ class ResultList extends Component {
                         <Col xs={24} sm={12} md={4} lg={2} xl={2} >
                             <Row type="flex" justify="center">
                                 <Popover style={{ width: 500 }} content={addHoverContent}>
-                                <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
-                                    <Button size="large" type="primary" shape="circle" icon="plus" />
-                                    </a>
+                              
+                                    <Button  onClick={(e)=>this.saveFlight(e,flight)} size="large" type="primary" shape="circle" icon="plus" />
+                                    
                                 </Popover>
                                 <Popover style={{ width: 500 }} content={shopHoverContent}>
                                 <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
@@ -134,5 +154,23 @@ class ResultList extends Component {
         )
     }
 }
-
-export default ResultList;
+function mapStateToProps(state) {
+    const { savedFlight,currentindex } = state
+  
+    return {
+      savedFlight,
+      currentindex
+    }
+  }
+  
+  function mapDispatchToProps(dispatch) {
+    return {
+        saveFlight: (value) => {
+            const action = { type: "SAVE_FLIGHT", payload: value };
+            dispatch(action);
+           // (console.log(value))
+        },
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ResultList);

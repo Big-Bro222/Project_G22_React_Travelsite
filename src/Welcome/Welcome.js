@@ -71,7 +71,9 @@ class Welcome extends Component {
     generateTimeLine = () => {
         var timeline=this.timeLinearr(this.props.departuredate,this.props.returndate)
         var UI=Array(timeline.length).fill("Startview")
-        this.props.generateTimeLine(timeline,UI);
+        var savedPoint=Array(timeline.length).fill([])
+        var savedFlight=Array(timeline.length).fill([])
+        this.props.generateTimeLine(timeline,UI,savedPoint,savedFlight);
     }
 
     timeLinearr = (startdate, enddate) => {
@@ -154,12 +156,14 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
             (console.log("input2"))
         },
-        generateTimeLine: (timeline,UI) => {
+        generateTimeLine: (timeline,UI,savedPoint,savedFlight) => {
             console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
                 timeline: timeline,
-                UI: UI
+                UI: UI,
+                savedPoint:savedPoint,
+                savedFlight:savedFlight
 
                 
             };

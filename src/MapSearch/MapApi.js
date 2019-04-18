@@ -23,15 +23,19 @@ class MapApi extends Component {
   savePoint = () => {
     var index = this.props.currentindex
     var [...newSavePoint]=this.props.savedPoint;
-    newSavePoint[index].push(this.savedPoint);
+  
+
+newSavePoint[index]=this.savedPoint;
+
+ 
     this.props.savePoint(newSavePoint)
     //this.setState({UI:this.props.UI})
 
 }
 
-setSavedPoint=(value)=>{
-  this.savedPoint.push(value);
-}
+// setSavedPoint=(value)=>{
+//   this.savedPoint.push(value);
+// }
   // getGoogleMaps() {
   //     if (!this.googleMapsPromise) {
   //       this.googleMapsPromise = new Promise((resolve) => {
@@ -109,6 +113,7 @@ setSavedPoint=(value)=>{
 
 
   initAutocomplete() {
+    var thisRef = this;
     var map = new google.maps.Map(this.map.current, {
       center: { lat: 59.325, lng: 18.070 },
       zoom: 12,
@@ -254,7 +259,9 @@ console.log(map);
     }
 
     function addSeletedMarkers() {
-      this.setSavedPoint(currentMarker.id);
+      // console.log(this)
+      // console.log(this.savedPoint)
+      thisRef.savedPoint.push(currentMarker.id);
       var marker = new google.maps.Marker({
         id: currentMarker.id,
         position: currentMarker.position,
@@ -271,13 +278,20 @@ console.log(map);
         clickHandler.getPlaceInformation(marker.id);
       });
 
-      console.log(this.savedPoint);
+      console.log(thisRef.savedPoint);
       
     }
   }
 }
 
+function mapStateToProps(state) {
+  const { savedPoint,currentindex } = state
 
+  return {
+    savedPoint,
+    currentindex
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -289,4 +303,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapDispatchToProps)(MapApi);
+export default connect(mapStateToProps, mapDispatchToProps)(MapApi);
