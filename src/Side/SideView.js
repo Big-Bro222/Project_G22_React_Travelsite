@@ -55,11 +55,11 @@ class SideView extends Component {
     }
     render() {
         var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) =>{
-           return (<Menu.Item key={i}>{point.title}</Menu.Item>)
+           return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
         });
 
         var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight,i) => {
-            return(<Menu.Item key={i}>{flight.CarriersName+"  "+flight.FlightNumbers}</Menu.Item>)
+            return(<Menu.Item disabled key={i}>{flight.CarriersName+"  "+flight.FlightNumbers}</Menu.Item>)
         });
 
         return (
