@@ -241,12 +241,21 @@ console.log(map);
     function addSeletedMarkers() {
       // console.log(this)
       // console.log(this.savedPoint)
-   
-      thisRef.savedPoint.push({
-        id:currentMarker.id,
-        title:clickHandler.infowindowContent.children['place-name'].textContent,
-        address:clickHandler.infowindowContent.children['place-address'].textContent
-      });
+   var currentSave = {
+    id:currentMarker.id,
+    title:clickHandler.infowindowContent.children['place-name'].textContent,
+    address:clickHandler.infowindowContent.children['place-address'].textContent
+
+   }
+      if(thisRef.savedPoint.find(item=>item.id===currentSave.id))
+      {
+      
+      }
+      else
+      {
+        thisRef.savedPoint.push(currentSave);
+      }
+      
       var marker = new google.maps.Marker({
         id: currentMarker.id,
         position: currentMarker.position,

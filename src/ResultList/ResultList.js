@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Avatar, Row, Col, Card, Button, Popover, Icon, Divider, Collapse } from 'antd';
 import "./ResultList.css"
-import {timeConvert} from "../apiUtility/apiUtility"
+import { timeConvert } from "../apiUtility/apiUtility"
 import { connect } from 'react-redux'
 
 
@@ -11,23 +11,32 @@ class ResultList extends Component {
     }
     constructor(props) {
         super(props);
-       
-        this.savedFlight=[];
-    
-      }
-    saveFlight = (e,flight) => {
+
+        this.savedFlight = [];
+
+    }
+    saveFlight = (e, flight) => {
         e.preventDefault();
-        this.savedFlight.push(flight);
+        // this.savedFlight.push(flight);
+
+        if (this.savedFlight.find(item => item.FlightId === flight.FlightId)) {
+
+        }
+        else {
+            this.savedFlight.push(flight);
+        }
+
+
         var index = this.props.currentindex
-        var [...newSaveFlight]=this.props.savedFlight;
-      
-    
-    newSaveFlight[index]=this.savedFlight;
-    
-     
+        var [...newSaveFlight] = this.props.savedFlight;
+
+
+        newSaveFlight[index] = this.savedFlight;
+
+
         this.props.saveFlight(newSaveFlight)
         //this.setState({UI:this.props.UI})
-    
+
     }
     render() {
         console.log("list")
@@ -45,16 +54,16 @@ class ResultList extends Component {
             flightInfomation.push(Object.assign({},
                 {
                     "FlightId": Itinerary.OutboundLegId,
-                    "FlightNumbers":carrier.DisplayCode+leg.FlightNumbers[0].FlightNumber,
+                    "FlightNumbers": carrier.DisplayCode + leg.FlightNumbers[0].FlightNumber,
                     "OriginStation": OriginStation.Name,
                     "DestinationStation": DestinationStation.Name,
                     "Departure": leg.Departure,
                     "Arrival": leg.Arrival,
                     "CarriersName": carrier.Name,
                     "CarriersImg": carrier.ImageUrl,
-                    "price":price,
-                    "BookingLink":Itinerary.PricingOptions[0].DeeplinkUrl,
-                    "Duration":timeConvert(leg.Duration)
+                    "price": price,
+                    "BookingLink": Itinerary.PricingOptions[0].DeeplinkUrl,
+                    "Duration": timeConvert(leg.Duration)
                 }
             ))
         }
@@ -75,71 +84,71 @@ class ResultList extends Component {
 
 
         resultList = flightInfomation.map((flight, i) => (
-      
 
-                <Card key={i} className="listStyle" hoverable bodyStyle={{ padding: "0px", paddingLeft: 20 }} >
-                    <Row type="flex" align="middle">
-                        <Col xs={13} sm={12} md={2} lg={2} xl={2}>
-                            <Row type="flex" justify="start">
-                                <Avatar alt="airline" src={flight.CarriersImg}/>
-                            </Row>
-                        </Col>
-                        <Col xs={11} sm={12} md={5} lg={4} xl={3}>
-                            <Row type="flex" justify="start" className="airLineStyle">
-                                <h2 className="airLineStyle">{flight.CarriersName}</h2>
-                            </Row>
-                            <Row type="flex" justify="start" >
-                                {flight.FlightNumbers}
-</Row>
-                        </Col>
-                        <Col xs={24} sm={12} md={6} lg={5} xl={5}>
-                            <Row type="flex" justify="start">
-                                <b >{flight.Departure}</b>
-                            </Row>
-                            <Row type="flex" justify="start" >
-                                <b>{flight.OriginStation}</b>
-                            </Row>
-                        </Col>
-                        <Col xs={24} sm={12} md={5} lg={3} xl={5}>
-                            <br></br>
-                            <Row type="flex" justify="start">
+
+            <Card key={i} className="listStyle" hoverable bodyStyle={{ padding: "0px", paddingLeft: 20 }} >
+                <Row type="flex" align="middle">
+                    <Col xs={13} sm={12} md={2} lg={2} xl={2}>
+                        <Row type="flex" justify="start">
+                            <Avatar alt="airline" src={flight.CarriersImg} />
+                        </Row>
+                    </Col>
+                    <Col xs={11} sm={12} md={5} lg={4} xl={3}>
+                        <Row type="flex" justify="start" className="airLineStyle">
+                            <h2 className="airLineStyle">{flight.CarriersName}</h2>
+                        </Row>
+                        <Row type="flex" justify="start" >
+                            {flight.FlightNumbers}
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={6} lg={5} xl={5}>
+                        <Row type="flex" justify="start">
+                            <b >{flight.Departure}</b>
+                        </Row>
+                        <Row type="flex" justify="start" >
+                            <b>{flight.OriginStation}</b>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={5} lg={3} xl={5}>
+                        <br></br>
+                        <Row type="flex" justify="start">
                             {flight.Duration}
-                            </Row>
-                            <br></br>
+                        </Row>
+                        <br></br>
 
-                            
-                        </Col>
 
-                        <Col xs={24} sm={12} md={6} lg={5} xl={5}>
-                            <Row type="flex" justify="start">
-                                <b >{flight.Arrival}</b>
-                            </Row>
-                            <Row type="flex" justify="start">
-                                <b>{flight.DestinationStation}</b>
-                            </Row>
-                        </Col>
-                        <Col xs={24} sm={12} md={20} lg={3} xl={2}>
-                            <Row type="flex" justify="start">
-                                <b className="priceStyle"> ${flight.price} </b>
-                            </Row>
-                        </Col>
-                        <Col xs={24} sm={12} md={4} lg={2} xl={2} >
-                            <Row type="flex" justify="center">
-                                <Popover style={{ width: 500 }} content={addHoverContent}>
-                              
-                                    <Button  onClick={(e)=>this.saveFlight(e,flight)} size="large" type="primary" shape="circle" icon="plus" />
-                                    
-                                </Popover>
-                                <Popover style={{ width: 500 }} content={shopHoverContent}>
+                    </Col>
+
+                    <Col xs={24} sm={12} md={6} lg={5} xl={5}>
+                        <Row type="flex" justify="start">
+                            <b >{flight.Arrival}</b>
+                        </Row>
+                        <Row type="flex" justify="start">
+                            <b>{flight.DestinationStation}</b>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={20} lg={3} xl={2}>
+                        <Row type="flex" justify="start">
+                            <b className="priceStyle"> ${flight.price} </b>
+                        </Row>
+                    </Col>
+                    <Col xs={24} sm={12} md={4} lg={2} xl={2} >
+                        <Row type="flex" justify="center">
+                            <Popover style={{ width: 500 }} content={addHoverContent}>
+
+                                <Button onClick={(e) => this.saveFlight(e, flight)} size="large" type="primary" shape="circle" icon="plus" />
+
+                            </Popover>
+                            <Popover style={{ width: 500 }} content={shopHoverContent}>
                                 <a href={flight.BookingLink} target="_blank" rel="noopener noreferrer">
-                                    <Icon type="shopping" /><Icon type="double-right" size="big"/>
-                                    </a>
-                                </Popover>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Card>
-         
+                                    <Icon type="shopping" /><Icon type="double-right" size="big" />
+                                </a>
+                            </Popover>
+                        </Row>
+                    </Col>
+                </Row>
+            </Card>
+
 
         ))
 
@@ -147,30 +156,30 @@ class ResultList extends Component {
 
         return (
 
-            
-                <Panel showArrow={false} header={resultList} key="1" className="customPanelStyle">
-                </Panel>
-            
+
+            <Panel showArrow={false} header={resultList} key="1" className="customPanelStyle">
+            </Panel>
+
         )
     }
 }
 function mapStateToProps(state) {
-    const { savedFlight,currentindex } = state
-  
+    const { savedFlight, currentindex } = state
+
     return {
-      savedFlight,
-      currentindex
+        savedFlight,
+        currentindex
     }
-  }
-  
-  function mapDispatchToProps(dispatch) {
+}
+
+function mapDispatchToProps(dispatch) {
     return {
         saveFlight: (value) => {
             const action = { type: "SAVE_FLIGHT", payload: value };
             dispatch(action);
-           // (console.log(value))
+            // (console.log(value))
         },
     }
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(ResultList);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultList);

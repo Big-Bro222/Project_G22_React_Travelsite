@@ -7,9 +7,22 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class SideView extends Component {
+    rootSubmenuKeys = ['sub1', 'sub2'];
     state = {
-      
+        openKeys: ['sub1'],
     }
+
+    onOpenChange = (openKeys) => {
+        const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+          this.setState({ openKeys });
+        } else {
+          this.setState({
+            openKeys: latestOpenKey ? [latestOpenKey] : [],
+          });
+        }
+      }
+
     handleClick = (e) => {
     
         var index = this.props.currentindex
@@ -46,16 +59,23 @@ class SideView extends Component {
            return (<Menu.Item key={i}>{point.title}</Menu.Item>)
         });
 
+        var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight,i) => {
+            return(<Menu.Item key={i}>{flight.CarriersName+"  "+flight.FlightNumbers}</Menu.Item>)
+        });
+
         return (
           <Menu
-          className="menu"
-          onClick={this.handleClick}
+        //   className="menu"
+          openKeys={this.state.openKeys}
+          onOpenChange={this.onOpenChange}
+        //   onClick={this.handleClick}
           // defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+        //   defaultOpenKeys={['sub1']}
           mode="inline"
         >
           <SubMenu key="sub1" onTitleClick= {this.handleClick} title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
-          <Divider style={{margin:"0"}}></Divider>     
+          <Divider style={{margin:"0"}}></Divider>    
+          {sideFlightList} 
               {/* <Menu.Item key="1">Option 1</Menu.Item>
               <Menu.Item key="2">Option 2</Menu.Item>    */}
           </SubMenu>
@@ -77,7 +97,8 @@ function mapStateToProps(state) {
         timeline: state.timeline,
         currentindex: state.currentindex,
         UI: state.UI,
-        savedPoint:state.savedPoint
+        savedPoint:state.savedPoint,
+        savedFlight:state.savedFlight
     }
 }
 
