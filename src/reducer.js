@@ -40,6 +40,8 @@ export default function Datereducer(state=initialstate,action){
         return Object.assign({},state,{UI:action.payload})
         case "CHANGE_PLAN":
         return Object.assign({},state,{UI:action.payload})
+        case "SAVE_POINT":
+        return Object.assign({},state,{savedPoint:action.payload})
         case "REQUEST_POSTS":
         return Object.assign({}, state, {
           isFetching: true,
