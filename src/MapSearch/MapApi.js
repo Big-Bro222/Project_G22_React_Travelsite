@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, Row, Col } from 'antd';
+import { Input, Card, Row, Col } from 'antd';
 import "./MapSearch.css";
 import MapInfo from "./MapInfo";
 import ReactDOM from 'react-dom';
@@ -16,22 +16,28 @@ class MapApi extends Component {
     super(props);
     this.map = React.createRef();
     this.searchInput = React.createRef();
-    this.savedPoint=[];
+    this.savedPoint = [];
 
   }
 
   savePoint = () => {
+    var trigger = true;
+    console.log(this.savedPoint.length)
+    if (this.savedPoint.length <= 1) { trigger = true; }
+    else {
+      trigger = false;
+    }
     var index = this.props.currentindex
-    var [...newSavePoint]=this.props.savedPoint;
-  
+    var [...newSavePoint] = this.props.savedPoint;
 
-newSavePoint[index]=this.savedPoint;
+    if (trigger) { newSavePoint[index] = newSavePoint[index].concat(this.savedPoint); }
+    else { newSavePoint[index] = this.savedPoint; }
 
- 
+
     this.props.savePoint(newSavePoint)
     //this.setState({UI:this.props.UI})
 
-}
+  }
 
 
   componentDidMount() {
@@ -65,20 +71,19 @@ newSavePoint[index]=this.savedPoint;
         <Row >
           <Col xs={24} sm={6} md={24} lg={18} xl={18} >
             <div ref={this.map} id="map"></div>
-
-            <div id="infowindow-content">
-              <img id="place-icon" src="" height="16" width="16" display="inline" />
+            {/* <div id="infowindow-content">
+              < img id="place-icon" src="" height="16" width="16" display="inline" />
               <span id="place-name" className="title"></span>
               Place ID <span id="place-id"></span>
               <span id="place-address"></span>
-            </div>
-
+            </div> */}
 
           </Col>
-          <Col xs={24} sm={6} md={24} lg={6} xl={6} >
+          <Col xs={24} sm={6} md={24} lg={6} xl={6}>
             <MapInfo />
           </Col>
         </Row>
+        <span id="place-noPlace"></span>
       </div>
     )
   }
@@ -94,7 +99,7 @@ newSavePoint[index]=this.savedPoint;
       mapTypeId: 'roadmap',
       // clickableIcons: false
     });
-console.log(map);
+    console.log(map);
     var clickHandler = new ClickEventHandler(map, { lat: 59.325, lng: 18.070 });
 
     // Create the search box and link it to the UI element.
@@ -103,9 +108,7 @@ console.log(map);
     var addButton = this.refs.addButton;
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-    var test1 = document.getElementById("searchInput");
-    var test2 = this.searchInput.current;
-    var test3 = ReactDOM.findDOMNode(this.searchInput.current);
+
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function () {
@@ -113,10 +116,11 @@ console.log(map);
     });
 
     var markers = [];
-    var currentMarker = {         
+    var currentMarker = {
       id: 0,
       title: 'unknow01',
-      address: 'unkown Places01' };
+      address: 'unkown Places01'
+    };
     // var infoWindow = new google.maps.InfoWindow({
     //   content: "testing",
     //   maxWidth: 600
@@ -125,7 +129,7 @@ console.log(map);
 
     //place service
     var service = new google.maps.places.PlacesService(map);
-    var geocoder = new google.maps.Geocoder();
+    // var geocoder = new google.maps.Geocoder();
     addButton.addEventListener('click', function (e) {
       addSeletedMarkers();
       e.preventDefault();
@@ -168,8 +172,8 @@ console.log(map);
         markers.push(new google.maps.Marker({
           map: map,
           id: place.place_id,
-          title:place.name,
-          address:place.formatted_address,
+          title: place.name,
+          address: place.formatted_address,
           animation: google.maps.Animation.DROP,
           position: place.geometry.location
         }));
@@ -239,21 +243,19 @@ console.log(map);
     function addSeletedMarkers() {
       // console.log(this)
       // console.log(this.savedPoint)
-   var currentSave = {
-    id:currentMarker.id,
-    title:clickHandler.infowindowContent.children['place-name'].textContent,
-    address:clickHandler.infowindowContent.children['place-address'].textContent
+      var currentSave = {
+        id: currentMarker.id,
+        title: clickHandler.place_name.textContent,
+        address: clickHandler.place_address.textContent
 
-   }
-      if(thisRef.savedPoint.find(item=>item.id===currentSave.id))
-      {
-      
       }
-      else
-      {
+      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
+
+      }
+      else {
         thisRef.savedPoint.push(currentSave);
       }
-      
+
       var marker = new google.maps.Marker({
         id: currentMarker.id,
         position: currentMarker.position,
@@ -271,13 +273,13 @@ console.log(map);
       });
 
       console.log(thisRef.savedPoint);
-      
+
     }
   }
 }
 
 function mapStateToProps(state) {
-  const { savedPoint,currentindex } = state
+  const { savedPoint, currentindex } = state
 
   return {
     savedPoint,
@@ -287,11 +289,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      savePoint: (value) => {
-          const action = { type: "SAVE_POINT", payload: value };
-          dispatch(action);
-         // (console.log(value))
-      },
+    savePoint: (value) => {
+      const action = { type: "SAVE_POINT", payload: value };
+      dispatch(action);
+      // (console.log(value))
+    },
   }
 }
 

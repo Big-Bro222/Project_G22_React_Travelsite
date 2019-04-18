@@ -93,6 +93,8 @@ body {
 }
 
 .infoView {
+  padding: 0%;
+  margin: 0;
   width:100%;
   background:#ffffff; 
   overflow-y: auto;
@@ -110,7 +112,9 @@ body {
   }
   
   .h4Style{
-    padding-left: 5px ;
+
+    padding: 5px;
+    word-break:break-all;
     color:#ffffff;
     margin-bottom: 0px
   }
@@ -122,10 +126,6 @@ body {
    color:#ffffff;
   }
 
-  .divStyle{
-    text-align:left
-  }
-
   .para2Style{
     margin:0px;
     padding-left:5px;
@@ -134,11 +134,16 @@ body {
   }
 
   .div2Style{
-    text-align:left;
-    padding-left:5px;
+    margin-top: 10px;
+    text-align:center;
+    padding:5px;
     margin-bottom:5px;
   }
 
   .avatarStyle{
     margin-right:5px
+  }
+
+  .rowStyle{
+    padding:5px;
   }

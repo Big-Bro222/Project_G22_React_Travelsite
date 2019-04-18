@@ -10,7 +10,16 @@ class ClickEventHandler {
         pixelOffset: new google.maps.Size(0, -40)
       });
       this.infowindowContent = document.getElementById('infowindow-content');
-      this.infowindow.setContent(this.infowindowContent);
+      this.place_icon = document.getElementById('place-icon');
+      this.place_name = document.getElementById('place-name');
+      this.place_address = document.getElementById('place-address');
+      this.place_type = document.getElementById('place-type');
+      this.place_tel = document.getElementById('place-tel');
+      this.place_openHour = document.getElementById('place-openingHour');
+      this.place_noPlace = document.getElementById('place-noPlace');
+      // this.place_rate = document.getElementById('place-rate');
+      this.infowindow.setContent(this.place_noPlace);
+
     
       this.currentId = 0;
 
@@ -20,30 +29,25 @@ class ClickEventHandler {
     }
   
     handleClick = function (event) {
-      this.infowindow.close();
       console.log('You clicked on: ' + event.latLng);
       // If the event has a placeId, use it.
       if (event.placeId) {
         console.log('You clicked on place:' + event.placeId);
-    
+        this.infowindow.close();
         // Calling e.stop() on the event prevents the default info window from
         // showing.
         // If you call stop here when there is no placeId you will prevent some
         // other map click event handlers from receiving the event.
         event.stop();
         this.currentId = event.placeId;
-        console.log(this.currentId);
         this.getPlaceInformation(event.placeId);
         
       } else {
-        this.infowindow.setPosition(event.latLng);
-        this.infowindowContent.children['place-icon'].style.display = 'none';
-        this.infowindowContent.children['place-name'].textContent = '';
-        this.infowindowContent.children['place-id'].textContent = '';
-        this.infowindowContent.children['place-address'].textContent =
-          event.latLng;
+        this.infowindowContent.style.display = 'none';
+        this.place_noPlace.textContent = "Not a point of Interest " + "\n"+ event.latLng;
         this.infowindow.open(this.map);
         this.currentId = 0;
+        this.infowindow.setPosition(event.latLng);
       }
     }
   
@@ -53,13 +57,24 @@ class ClickEventHandler {
         if (status === 'OK') {
           me.infowindow.close();
           me.infowindow.setPosition(place.geometry.location);
-          me.infowindowContent.children['place-icon'].display = 'inline';
-          me.infowindowContent.children['place-icon'].src = place.icon;
-          me.infowindowContent.children['place-name'].textContent = place.name;
-          me.infowindowContent.children['place-id'].textContent = place.place_id;
-          me.infowindowContent.children['place-address'].textContent =
-            place.formatted_address;
-          me.infowindow.open(me.map);
+          me.infowindowContent.style.display = 'inline';
+          me.place_icon.style.display = 'inline';
+          me.place_icon.src = place.photos[0].getUrl();
+          me.place_name.textContent = place.name;
+          me.place_type.textContent = place.types;
+          me.place_tel.textContent = place.international_phone_number;
+          me.place_openHour.textContent = place.opening_hours.weekday_text;
+          // if (place.rating === null) {
+          //   me.place_rate.value = 0;
+          // }else{
+          //   me.place_rate.value = place.rating;
+          // }
+          // console.log(me.place_rate);
+          // console.log(place.rating);
+          // me.place_rate.value = place.rating;
+          
+          
+          me.place_address.textContent = place.formatted_address;
         }
         
       });

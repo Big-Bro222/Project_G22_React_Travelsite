@@ -19,7 +19,13 @@ class ResultList extends Component {
         e.preventDefault();
         // this.savedFlight.push(flight);
 
-        if (this.savedFlight.find(item => item.FlightId === flight.FlightId)) {
+        var trigger = true;
+        console.log(this.savedFlight.length)
+        if (this.savedFlight.length <= 0) { trigger = true; }
+        else {
+            trigger = false;
+        }
+        if (this.props.savedFlight[this.props.currentindex].find(item => item.FlightId === flight.FlightId)) {
 
         }
         else {
@@ -31,12 +37,12 @@ class ResultList extends Component {
         var [...newSaveFlight] = this.props.savedFlight;
 
 
-        newSaveFlight[index] = this.savedFlight;
+        if (trigger) { newSaveFlight[index] = newSaveFlight[index].concat(this.savedFlight); }
+        else { newSaveFlight[index] = this.savedFlight; }
 
 
         this.props.saveFlight(newSaveFlight)
         //this.setState({UI:this.props.UI})
-
     }
     render() {
         console.log("list")
