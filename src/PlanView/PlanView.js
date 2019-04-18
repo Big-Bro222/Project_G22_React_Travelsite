@@ -5,7 +5,8 @@ import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 import { connect } from "react-redux";
 import ViewSelection from "../ViewSelection/ViewSelection"
-
+import auth from "../auth";
+import firebase from 'firebase'
 class PlanView extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +68,14 @@ class PlanView extends Component {
       });
     }
   }
+  signout = e => {
+    e.preventDefault();
+    auth.logout(() => {
+      this.props.history.push("/SignIn");
+    });
+    firebase.auth().signOut().then(console.log('signout')
+    ).catch(function (error) { console.log(error) });
+  }
   render() {
     return (
       <div>
@@ -75,6 +84,7 @@ class PlanView extends Component {
         <div>{this.props.currentindex}</div> */}
 
         <Navbar />
+        <button onClick={this.signout}>signout</button>
 
 
         <Row>
