@@ -13,11 +13,7 @@ class ClickEventHandler {
       this.infowindow.setContent(this.infowindowContent);
     
       this.currentId = 0;
-      this.currentMarker = {
-        id: 0,
-        title: 'unknow',
-        address: 'unkown Places'
-      };
+
     
       // Listen for clicks on the map.
       this.map.addListener('click', this.handleClick.bind(this));
@@ -53,12 +49,8 @@ class ClickEventHandler {
   
     getPlaceInformation = function (placeId) {
       var me = this;
-      let pointId,pointTitle,pointAdress;
       this.placesService.getDetails({ placeId: placeId }, function (place, status) {
         if (status === 'OK') {
-          pointId=place.place_id;
-          pointTitle=place.name;
-          pointAdress=place.formatted_address;
           me.infowindow.close();
           me.infowindow.setPosition(place.geometry.location);
           me.infowindowContent.children['place-icon'].display = 'inline';
@@ -68,29 +60,15 @@ class ClickEventHandler {
           me.infowindowContent.children['place-address'].textContent =
             place.formatted_address;
           me.infowindow.open(me.map);
-          // console.log(me.currentMarker.title);
         }
         
       });
-      // this.setCurrentMarker(this.infowindowContent.children['place-id'].textContent,this.infowindowContent.children['place-name'].textContent
-      // ,this.infowindowContent.children['place-address'].textContent);
-      // console.log(this.currentMarker.title);
     }
   
     getCurrentId = function () {
       return this.currentId;
     }
 
-    // setCurrentMarker = function (id,name,address){
-    //   this.currentMarker.id = id;
-    //   this.currentMarker.title = name;
-    //   this.currentMarker.address = address;
-    // }
-
-    // getCurrentMarker = function () {
-    //   console.log(this.currentMarker.title);
-    //   return this.currentMarker;
-    // }
   }
 
   export default ClickEventHandler;

@@ -33,30 +33,6 @@ newSavePoint[index]=this.savedPoint;
 
 }
 
-// setSavedPoint=(value)=>{
-//   this.savedPoint.push(value);
-// }
-  // getGoogleMaps() {
-  //     if (!this.googleMapsPromise) {
-  //       this.googleMapsPromise = new Promise((resolve) => {
-  //         window.resolveGoogleMapsPromise = () => {
-  //         resolve(google);
-  //         delete window.resolveGoogleMapsPromise;
-  //         };
-  //       const script = document.getElementById("mapApi");
-
-  //        if (!script) {
-  //         const script = document.createElement("script");  
-  //         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA40IKC5vzBQA1HUNW1Y1OnfMQZZZ8gbpA&libraries=places&callback=initAutocomplete`;
-  //         script.async = true;
-  //         script.defer = true;
-  //         script.id = "mapApi";
-  //         document.body.appendChild(script);
-  //        }
-  //       });
-  //     }
-  //     return this.googleMapsPromise;
-  //   }
 
   componentDidMount() {
     this.initAutocomplete();
@@ -143,7 +119,6 @@ console.log(map);
       id: 0,
       title: 'unknow01',
       address: 'unkown Places01' };
-    var selectedMarkers = [];
     // var infoWindow = new google.maps.InfoWindow({
     //   content: "testing",
     //   maxWidth: 600
@@ -255,14 +230,11 @@ console.log(map);
 
       markers.push(new google.maps.Marker({
         id: clickHandler.getCurrentId(),
-        title: clickHandler.infowindowContent.children['place-name'].textContent,
-        address: clickHandler.infowindowContent.children['place-address'].textContent,
         map: map,
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
       }));
-      console.log(clickHandler.infowindowContent.children['place-name'].textContent);
-      console.log(markers[0].title);
+      console.log(markers[0].id);
       setCurrentMarker(markers[0]);
     }
 
@@ -272,13 +244,11 @@ console.log(map);
    
       thisRef.savedPoint.push({
         id:currentMarker.id,
-        title:currentMarker.title,
-        address:currentMarker.address
+        title:clickHandler.infowindowContent.children['place-name'].textContent,
+        address:clickHandler.infowindowContent.children['place-address'].textContent
       });
       var marker = new google.maps.Marker({
         id: currentMarker.id,
-        title: currentMarker.title,
-        address: currentMarker.address,
         position: currentMarker.position,
         icon: goldStar,
         map: map,
