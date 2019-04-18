@@ -1,6 +1,8 @@
+import auth from "../auth";
 import React, { Component } from "react";
-import "./SignIn.css";
+import './SignIn.css'
 import { Link } from 'react-router-dom';
+import firebase from 'firebase'
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -20,35 +22,40 @@ const formValid = ({ formErrors, ...rest }) => {
 
   return valid;
 };
-
 class SignIn extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: null,
       password: null,
       formErrors: {
         email: "",
         password: ""
-      }
+      },
+      errormessage:""
     };
   }
-
+  
   handleSubmit = e => {
     e.preventDefault();
+    const email=this.state.email;
+    const password=this.state.password;
+    const auths =firebase.auth();
+    const promise= auths.signInWithEmailAndPassword(email,password);
 
+    promise.then(()=>{auth.login(() => {
+      this.props.history.push("/app");
+    });}).catch(e =>this.setState({ errormessage: e.message }));
+    
     if (formValid(this.state)) {
       console.log(`
         --SUBMITTING--
-        Email: ${this.state.email}
-        Password: ${this.state.password}
-      `);
+      `
+      );
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
   };
-
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -70,52 +77,59 @@ class SignIn extends Component {
 
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
-
+  // handleClick = () => {
+  //   auth.login(() => {
+  //     this.props.history.push("/app");
+  //   });
+  // }
   render() {
     const { formErrors } = this.state;
 
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <h1>SignIn</h1>
-          <form onSubmit={this.handleSubmit} noValidate>
-            <div className="email">
-              <label htmlFor="email">Email</label>
-              <input
-                className={formErrors.email.length > 0 ? "error" : null}
-                placeholder="Email"
-                type="email"
-                name="email"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.email.length > 0 && (
-                <span className="errorMessage">{formErrors.email}</span>
-              )}
-            </div>
-            <div className="password">
-              <label htmlFor="password">Password</label>
-              <input
-                className={formErrors.password.length > 0 ? "error" : null}
-                placeholder="Password"
-                type="password"
-                name="password"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.password.length > 0 && (
-                <span className="errorMessage">{formErrors.password}</span>
-              )}
-            </div>
-            <div className="createAccount">
-              <button type="submit">Sign In</button>
-              <Link to="/SignUp" className="FormField__Link">Create an account</Link>
-            </div>
-          </form>
+
+      <div>
+        <div className="wrapper">
+          <div className="form-wrapper">
+            <h1>SignIn</h1>
+            <form onSubmit={this.handleSubmit} noValidate>
+              <div className="email">
+                <label htmlFor="email">Email</label>
+                <input
+                  className={formErrors.email.length > 0 ? "error" : null}
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  noValidate
+                  onChange={this.handleChange}
+                />
+                {formErrors.email.length > 0 && (
+                  <span className="errorMessage">{formErrors.email}</span>
+                )}
+              </div>
+              <div className="password">
+                <label htmlFor="password">Password</label>
+                <input
+                  className={formErrors.password.length > 0 ? "error" : null}
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  noValidate
+                  onChange={this.handleChange}
+                />
+                {formErrors.password.length > 0 && (
+                  <span className="errorMessage">{formErrors.password}</span>
+                )}
+              </div>
+              <div className="createAccount">
+                <button type="submit" >Sign In</button>
+                <div>{this.state.errormessage}</div>
+                <Link to="/SignUp" className="FormField__Link">Create an account</Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
   }
 }
-
 export default SignIn;
