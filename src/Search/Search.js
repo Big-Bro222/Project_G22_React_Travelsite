@@ -51,7 +51,7 @@ class Search extends Component {
           <Col xs={24} sm={24} md={1} lg={1} xl={1}>
           </Col>
           <Col xs={24} sm={24} md={15} lg={18} xl={19}>
-              {/* <div className="searchView">
+              <div className="searchView">
                 <Searchbar />
               </div>
             {isFetching && <h2>Loading...</h2>}
@@ -59,10 +59,10 @@ class Search extends Component {
               <div>
                 <ResultList posts={posts} lastTetchTime={lastUpdated} />
               </div>
-            )} */}
-            <div>
+            )}
+            {/* <div>
               <MapApi/>
-            </div>
+            </div> */}
           </Col>
         </Row>
         

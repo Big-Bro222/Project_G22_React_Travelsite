@@ -520,5 +520,18 @@ class ClickEventHandler {
 
 // }
 
+// function mapStateToProps(state) {
+//   const { isFetching, lastUpdated, items: posts } = state || {
+//       isFetching: true,
+//       items: []
+//   }
 
+//   return {
+//       posts,
+//       isFetching,
+//       lastUpdated
+//   }
+// }
+
+// export default connect(mapStateToProps)(mapView)
 export default MapApi;

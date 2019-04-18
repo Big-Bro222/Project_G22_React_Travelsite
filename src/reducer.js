@@ -8,7 +8,8 @@ const initialstate={departuredate:'yessss',
                     currentindex: 0,
                     isFetching: false,
                     //   didInvalidate: false,
-                      items: []}
+                      items: [],
+                    savedPoint:[]}
 
 
 

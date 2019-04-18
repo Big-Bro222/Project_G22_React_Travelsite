@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import Startview from "../PlanView/Startview";
 import Search from "../Search/Search";
+import MapView from "../MapSearch/MapView";
 import { Button } from 'antd';
 import DetailItem from "../Details/DetailsItem";
 import { connect } from "react-redux";
@@ -33,7 +34,13 @@ class ViewSelection extends Component {
             case "Search": {
                 return (
                     <div>
-                        <Search />
+                       <Search />
+                    </div>)
+            }
+            case "Map": {
+                return (
+                    <div>
+                        <MapView />
                     </div>)
             }
             default:

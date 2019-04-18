@@ -11,7 +11,35 @@ class SideView extends Component {
       
     }
     handleClick = (e) => {
-      console.log('click ', e);
+    
+        var index = this.props.currentindex
+        //Notice: here to use [...] to deep copy the array;
+        var [...newUI] = this.props.UI
+        if (newUI[index] !== "Startview") {
+
+            switch (e.key) {
+                case "sub1":
+
+                    newUI[index] = "Search"
+                    this.props.changePlan(newUI)
+                    //this.setState({ UI: this.props.UI })
+                    // console.log(newUI)
+                    // console.log(this.props.UI)
+                    break;
+                case "sub2":
+                    newUI[index] = "Map"
+                    this.props.changePlan(newUI)
+                    //this.setState({ UI: this.props.UI })
+                    // console.log(newUI)
+                    // console.log(this.props.UI)
+                    break;
+                default:
+                    console.log(newUI)
+                    console.log(this.props.UI)
+
+            }
+
+        }
     }
     render() {
         return (
@@ -22,13 +50,13 @@ class SideView extends Component {
           defaultOpenKeys={['sub1']}
           mode="inline"
         >
-          <SubMenu key="sub1" title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
+          <SubMenu key="sub1" onTitleClick= {this.handleClick} title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
           <Divider style={{margin:"0"}}></Divider>     
               {/* <Menu.Item key="1">Option 1</Menu.Item>
               <Menu.Item key="2">Option 2</Menu.Item>    */}
           </SubMenu>
           
-          <SubMenu key="sub2" title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
+          <SubMenu key="sub2" onTitleClick= {this.handleClick} title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
           <Divider  style={{margin:"0"}}></Divider>
             <Menu.Item key="3">Option 5</Menu.Item>
             <Menu.Item key="4">Option 6</Menu.Item>         
