@@ -139,7 +139,10 @@ console.log(map);
     });
 
     var markers = [];
-    var currentMarker = { id: 0 };
+    var currentMarker = {         
+      id: 0,
+      title: 'unknow01',
+      address: 'unkown Places01' };
     var selectedMarkers = [];
     // var infoWindow = new google.maps.InfoWindow({
     //   content: "testing",
@@ -192,6 +195,8 @@ console.log(map);
         markers.push(new google.maps.Marker({
           map: map,
           id: place.place_id,
+          title:place.name,
+          address:place.formatted_address,
           animation: google.maps.Animation.DROP,
           position: place.geometry.location
         }));
@@ -250,20 +255,30 @@ console.log(map);
 
       markers.push(new google.maps.Marker({
         id: clickHandler.getCurrentId(),
+        title: clickHandler.infowindowContent.children['place-name'].textContent,
+        address: clickHandler.infowindowContent.children['place-address'].textContent,
         map: map,
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
       }));
-      console.log(markers[0].id);
+      console.log(clickHandler.infowindowContent.children['place-name'].textContent);
+      console.log(markers[0].title);
       setCurrentMarker(markers[0]);
     }
 
     function addSeletedMarkers() {
       // console.log(this)
       // console.log(this.savedPoint)
-      thisRef.savedPoint.push(currentMarker.id);
+   
+      thisRef.savedPoint.push({
+        id:currentMarker.id,
+        title:currentMarker.title,
+        address:currentMarker.address
+      });
       var marker = new google.maps.Marker({
         id: currentMarker.id,
+        title: currentMarker.title,
+        address: currentMarker.address,
         position: currentMarker.position,
         icon: goldStar,
         map: map,

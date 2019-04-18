@@ -42,6 +42,10 @@ class SideView extends Component {
         }
     }
     render() {
+        var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) =>{
+           return (<Menu.Item key={i}>{point.title}</Menu.Item>)
+        });
+
         return (
           <Menu
           className="menu"
@@ -58,8 +62,10 @@ class SideView extends Component {
           
           <SubMenu key="sub2" onTitleClick= {this.handleClick} title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
           <Divider  style={{margin:"0"}}></Divider>
+          {sidePointList}
+{/*           
             <Menu.Item key="3">Option 5</Menu.Item>
-            <Menu.Item key="4">Option 6</Menu.Item>         
+            <Menu.Item key="4">Option 6</Menu.Item>          */}
           </SubMenu>
         </Menu>
         );
@@ -70,7 +76,8 @@ function mapStateToProps(state) {
     return {
         timeline: state.timeline,
         currentindex: state.currentindex,
-        UI: state.UI
+        UI: state.UI,
+        savedPoint:state.savedPoint
     }
 }
 
