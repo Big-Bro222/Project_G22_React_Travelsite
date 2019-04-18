@@ -5,7 +5,7 @@ import MapView from "../MapSearch/MapView";
 import { Button } from 'antd';
 import DetailItem from "../Details/DetailsItem";
 import { connect } from "react-redux";
-
+import firebase from "firebase"
 
 
 class ViewSelection extends Component {
@@ -21,6 +21,13 @@ class ViewSelection extends Component {
         //this.setState({UI:this.props.UI})
         console.log(newUI)
         console.log(this.props.UI)
+        const firestore = firebase.firestore()
+        const user = firebase.auth().currentUser;
+        const userID = user.email
+        const docRef = firestore.doc(userID + "/UIState")
+        docRef.set({
+          uistate: newUI
+        }).then(console.log('setupinput')).catch(function (error) { console.log(error) })
     }
     render() {
     

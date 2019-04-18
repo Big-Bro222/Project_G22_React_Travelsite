@@ -76,15 +76,32 @@ class PlanView extends Component {
     firebase.auth().signOut().then(console.log('signout')
     ).catch(function (error) { console.log(error) });
   }
+  showdata =e =>{
+    let currentComponent = this;
+    const firestore = firebase.firestore()
+    const user = firebase.auth().currentUser;
+    const userID = user.email
+    const docRef = firestore.doc(userID + "/UIState")
+    docRef.get().then(function (doc) {
+      if (doc && doc.exists) {
+        var mydata = doc.data();
+        console.log(mydata.uistate)
+      }
+
+    }).catch(function (error) { console.log(error) })
+
+
+  }
   render() {
     return (
       <div>
-        {/* <div>{this.props.timeline+"yes"}</div>
+        <div>{this.props.timeline+"yes"}</div>
         <div>{this.props.UI}</div>
-        <div>{this.props.currentindex}</div> */}
+        <div>{this.props.currentindex}</div>
 
         <Navbar />
         <button onClick={this.signout}>signout</button>
+        <button onClick={this.showdata}>signout</button>
 
 
         <Row>
