@@ -19,7 +19,7 @@ class App extends Component {
         </header>
      
         <Switch>
-            <Route exact path="/SignIn" component={SignIn} />
+            <Route exact path="/" component={SignIn} />
             <Route exact path="/SignUp" component={SignUp} />
             <ProtectedRoute exact path="/app" component={Welcome} />
             <Route exact path = "/PlanView" component={PlanView} /> 
