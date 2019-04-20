@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./Signup.css";
 import { Link } from 'react-router-dom';
+import firebase from 'firebase';
+import auth from "../auth";
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -21,7 +24,7 @@ const formValid = ({ formErrors, ...rest }) => {
   return valid;
 };
 
-class SignIn extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -35,22 +38,34 @@ class SignIn extends Component {
         lastName: "",
         email: "",
         password: "",
-        validpassword:"",
-      }
+        validpassword: "",
+      },
+      errormessage:"",
     };
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    const email = this.state.email;
+    const password = this.state.password;
+    const auths = firebase.auth();
+    const promise = auths.createUserWithEmailAndPassword(email, password);
 
+    promise.then(() => {
+      auth.login(() => {
+        this.props.history.push("/");
+      });
+    }).catch(e =>this.setState({ errormessage: e.message })
+    );
+
+    firebase.auth().onAuthStateChanged(firebaseuser => {
+      if (firebaseuser) { console.log(firebaseuser) }
+      else (console.log("No logged in"))
+    })
     if (formValid(this.state)) {
       console.log(`
         --SUBMITTING--
-        First Name: ${this.state.firstName}
-        Last Name: ${this.state.lastName}
-        Email: ${this.state.email}
-        Password: ${this.state.password}
-      `);
+   `);
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
@@ -78,17 +93,17 @@ class SignIn extends Component {
       case "password":
         formErrors.password =
           value.length < 6 ? "minimum 6 characaters required" : "";
-        this.setState({thepassword:value})
+        this.setState({ thepassword: value })
         break;
       case "validpassword":
         formErrors.validpassword =
-          value!==this.state.thepassword ? "please enter the same password" : "";
+          value !== this.state.thepassword ? "please enter the same password" : "";
         break;
       default:
         break;
     }
 
-    this.setState({ formErrors, [name]: value },);
+    this.setState({ formErrors, [name]: value });
   };
 
   render() {
@@ -171,9 +186,10 @@ class SignIn extends Component {
             </div>
             <div className="createAccount">
               <button type="submit">Create Account</button>
-              <Link to="/SignIn" className="FormField__Link">Already Have an Account?</Link>
-
+              <div>{this.state.errormessage}</div>
+              <Link to="/" className="FormField__Link">Already Have an Account?</Link>
             </div>
+
           </form>
         </div>
       </div>
@@ -181,4 +197,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Signup;

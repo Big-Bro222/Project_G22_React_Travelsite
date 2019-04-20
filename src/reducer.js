@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import firebase from 'firebase'
+import {updateState,currentUID} from "./Firebase/FirebaseTool"
 
 
 
@@ -34,19 +36,23 @@ export default function Datereducer(state=initialstate,action){
         case "ON_CHANGE_RETURN":
         return Object.assign({},state,{returndate:action.payload})
         case "GENERATE_TIME_LINE":
+       updateState(currentUID,Object.assign({},state,{timeline:action.timeline,UI:action.UI,savedPoint:action.savedPoint,savedFlight:action.savedFlight}))
+
         return Object.assign({},state,{timeline:action.timeline,UI:action.UI,savedPoint:action.savedPoint,savedFlight:action.savedFlight})
         case "TIMELINE_CLICK":
         return Object.assign({},state,{currentindex:action.payload})
         case "ADD_PLAN":
-        
         return Object.assign({},state,{UI:action.payload})
         case "CHANGE_PLAN":
         return Object.assign({},state,{UI:action.payload})
         case "CHANGE_VIEW":
         return Object.assign({},state,{currentView:action.payload})
         case "SAVE_POINT":
+        updateState(currentUID,Object.assign({},state,{savedPoint:action.payload}))
+
         return Object.assign({},state,{savedPoint:action.payload})
         case "SAVE_FLIGHT":
+        updateState(currentUID,Object.assign({},state,{savedFlight:action.payload}))
         return Object.assign({},state,{savedFlight:action.payload})
         case "REQUEST_POSTS":
         return Object.assign({}, state, {
