@@ -9,7 +9,7 @@ import {
     fetchPostsIfNeeded
 } from '../actions'
 
-const Option = Select.Option;
+// const Option = Select.Option;
 class Searchbars extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ class Searchbars extends Component {
 
 
     render() {
-        const { onSearchSubmit } = this.props;
+        // const { onSearchSubmit } = this.props;
         const { getFieldDecorator } = this.props.form;
         return (
                 <Form   onSubmit={this.handleSubmit}>

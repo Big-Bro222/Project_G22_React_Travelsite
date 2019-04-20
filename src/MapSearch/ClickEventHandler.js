@@ -17,7 +17,7 @@ class ClickEventHandler {
     this.place_type = '';
     this.place_tel ='';
     this.place_openHour = '';
-    this.place_noPlace = '';
+    this.place_noPlace = document.getElementById("place-noPlace");
     this.place_rate = '';
     this.infowindow.setContent(this.place_noPlace);
 

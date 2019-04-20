@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux'
-import firebase from 'firebase'
+// import { combineReducers } from 'redux'
+// import firebase from 'firebase'
 import {updateState,currentUID} from "./Firebase/FirebaseTool"
 
 
@@ -85,35 +85,35 @@ export default function Datereducer(state=initialstate,action){
 
 
 
-  function flightDataFetch(
-    state = {
-      isFetching: false,
-    //   didInvalidate: false,
-      items: []
-    },
-    action
-  ) {
-    switch (action.type) {
-    //   case INVALIDATE_SUBREDDIT:
-    //     return Object.assign({}, state, {
-    //       didInvalidate: true
-    //     })
-      case "REQUEST_POSTS":
-        return Object.assign({}, state, {
-          isFetching: true,
-        //   didInvalidate: false
-        })
-      case "RECEIVE_POSTS":
-        return Object.assign({}, state, {
-          isFetching: false,
-        //   didInvalidate: false,
-          items: action.posts,
-          lastUpdated: action.receivedAt
-        })
-      default:
-        return state
-    }
-  }
+  // function flightDataFetch(
+  //   state = {
+  //     isFetching: false,
+  //   //   didInvalidate: false,
+  //     items: []
+  //   },
+  //   action
+  // ) {
+  //   switch (action.type) {
+  //   //   case INVALIDATE_SUBREDDIT:
+  //   //     return Object.assign({}, state, {
+  //   //       didInvalidate: true
+  //   //     })
+  //     case "REQUEST_POSTS":
+  //       return Object.assign({}, state, {
+  //         isFetching: true,
+  //       //   didInvalidate: false
+  //       })
+  //     case "RECEIVE_POSTS":
+  //       return Object.assign({}, state, {
+  //         isFetching: false,
+  //       //   didInvalidate: false,
+  //         items: action.posts,
+  //         lastUpdated: action.receivedAt
+  //       })
+  //     default:
+  //       return state
+  //   }
+  // }
 
 
 //   const rootReducer = combineReducers({

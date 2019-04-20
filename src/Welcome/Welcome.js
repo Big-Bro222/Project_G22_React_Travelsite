@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import img01 from "../imgs/01.jpg"
 import img02 from "../imgs/02.jpg"
 import firebase from 'firebase'
-import {updateState,currentUID} from "../Firebase/FirebaseTool"
+// import {updateState,currentUID} from "../Firebase/FirebaseTool"
 
 
 
@@ -78,9 +78,9 @@ class Welcome extends Component {
     getData=()=>
     {
         var myUserId = firebase.auth().currentUser.uid;
-        var savedFlight=[];
-        var savedPoint=[];
-        var timeline=[];
+        var savedFlight;
+        var savedPoint;
+        var timeline;
         var thisRef = this;
         firebase.database().ref('user-state/' + myUserId+'/state').once('value').then(function(snapshot) 
         {
@@ -165,10 +165,10 @@ class Welcome extends Component {
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
                         <Col span={6}></Col>
                         <Col span={12} ><Link to="/Planview">
-                            <Button size="Default" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start New Plan</Button>
+                            <Button size="default" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start New Plan</Button>
                         </Link></Col>
                         <Col span={6} align="left">
-                            <Link to="/Planview"><Button size="Large" onClick={() => { this.getData() }} type="primary" ghost>My Previous Plan</Button></Link></Col>
+                            <Link to="/Planview"><Button size="large" onClick={() => { this.getData() }} type="primary" ghost>My Previous Plan</Button></Link></Col>
 
                     </Row>
                 </div>

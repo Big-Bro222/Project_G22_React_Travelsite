@@ -127,9 +127,6 @@ class MapApi extends Component {
     )
   }
 
-
-
-
   initAutocomplete() {
     var thisRef = this;
     var map = new google.maps.Map(this.map.current, {
@@ -149,7 +146,8 @@ class MapApi extends Component {
     clickHandler.place_type = this.refs.placetype;
     clickHandler.place_tel = this.refs.placetel;
     clickHandler.place_openHour = this.refs.placeopeningHour;
-    clickHandler.place_rate = this.refs.placerate;  
+    clickHandler.place_rate = this.refs.placerate;
+ 
 
     // Create the search box and link it to the UI element.
     var input = this.searchInput.current.input;
@@ -298,7 +296,8 @@ class MapApi extends Component {
       var currentSave = {
         id: currentMarker.id,
         title: clickHandler.place_name.textContent,
-        address: clickHandler.place_address.textContent
+        address: clickHandler.place_address.textContent,
+        marker: currentMarker,
 
       }
       if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
@@ -328,6 +327,15 @@ class MapApi extends Component {
 
       // console.log(thisRef.savedPoint);
 
+    }
+
+    function checkSavedPoint(marker){
+      map.panTo(marker.position);
+      clickHandler.getPlaceInformation(marker.id);
+    }
+
+    function deleteSavedPoint(marker){
+      marker.setMap(null);
     }
   }
 }

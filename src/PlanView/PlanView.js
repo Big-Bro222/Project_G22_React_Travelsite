@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Affix,Alert } from 'antd';
-import SideView from "../Side/SideView";
+import { Row, Col,Alert } from 'antd';
+// import SideView from "../Side/SideView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 import { connect } from "react-redux";

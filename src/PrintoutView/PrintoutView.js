@@ -7,7 +7,7 @@ import "../ResultList/ResultList.css"
 class PrintoutView extends Component {
     state = {}
     render() {
-        const { timeline, currentindex, UI, savedFlight, savedPoint } = this.props;
+        const { timeline, savedFlight, savedPoint } = this.props;
 
         var timeLinePrint = timeline.map((day, i) => {
             if(savedFlight[i])
@@ -56,7 +56,7 @@ class PrintoutView extends Component {
                 if(savedPoint[i])
             var pointsPerDay = savedPoint[i].map((point,i)=> 
             (
-                <Row>
+                <Row key={i}>
                     <Col xs={24} sm={12} md={8} lg={8} xl={8}>
                     <b>{point.title}</b>
                     </Col>
