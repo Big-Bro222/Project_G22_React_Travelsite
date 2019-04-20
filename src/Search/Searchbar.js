@@ -36,13 +36,29 @@ class Searchbars extends Component {
         });
     }
 
+    handleSwap=(e)=>
+    {
+        e.preventDefault();
+        var departure = this.getFormValue('From').From;
+        var arrvie = this.getFormValue('To').To;
+        if(departure&&arrvie)
+        this.props.form.setFieldsValue({To:departure,});
+        this.props.form.setFieldsValue({From:arrvie, });
+
+        // this.props.form.setFieldsValue({
+        //     note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+        //   });
+
+      
+    }
+
 
     render() {
         // const { onSearchSubmit } = this.props;
         const { getFieldDecorator } = this.props.form;
         return (
                 <Form   onSubmit={this.handleSubmit}>
-                <Row >
+                <Row style={{width:"100%"}}>
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
                         <Row >
                             <Form.Item >
@@ -54,7 +70,7 @@ class Searchbars extends Component {
                     <Col xs={2} sm={4} md={2} lg={4} xl={1}>
                         <Row type="flex" justify="start">
                             <Form.Item>
-                                <Button shape="round" icon="swap" size="large"></Button>
+                                <Button shape="round" icon="swap" size="large" onClick={(e)=>this.handleSwap(e)}></Button>
                             </Form.Item>
                         </Row>
                     </Col>
