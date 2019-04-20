@@ -14,7 +14,9 @@ class Navbar extends Component {
                     <Affix offsetTop={this.state.top}>
                         <Menu mode="horizontal" className="background">
                             <Menu.Item style={{ float: "left" }}>
+                            <Tooltip placement="bottomRight" title={"Made by ZY ZXY QZ LRZ with Love"}>
                                 <Icon type="smile" style={{ color: "#ffffff" }} theme="filled" />
+                                </Tooltip>
                             </Menu.Item>
                             <Menu.Item style={{ float: "right" }}>
                                 <Tooltip placement="bottomLeft" title={"Click to sign out"}>
