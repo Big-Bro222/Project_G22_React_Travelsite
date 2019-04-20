@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import './SignIn.css'
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
+import {onAuthStateChanged} from "../Firebase/FirebaseTool"
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -52,6 +53,7 @@ class SignIn extends Component {
         --SUBMITTING--
       `
       );
+      firebase.auth().onAuthStateChanged(onAuthStateChanged);
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
