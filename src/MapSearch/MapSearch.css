@@ -147,3 +147,7 @@ body {
   .rowStyle{
     padding:5px;
   }
+
+  .openHours{
+    word-break: keep-all
+  }

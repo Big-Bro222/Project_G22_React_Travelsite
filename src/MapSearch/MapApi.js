@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Card, Row, Col,Button,Avatar } from 'antd';
+import { Input, Card, Row, Col,Avatar } from 'antd';
 import "./MapSearch.css";
 import { connect } from 'react-redux'
 import ClickEventHandler from "./ClickEventHandler"
@@ -49,7 +49,6 @@ class MapApi extends Component {
 
 
   render() {
-
     return (
       <div>
         <Row>
@@ -69,19 +68,13 @@ class MapApi extends Component {
         <Row >
           <Col xs={24} sm={6} md={24} lg={18} xl={18} >
             <div ref={this.map} id="map"></div>
-            {/* <div id="infowindow-content">
-              < img id="place-icon" src="" height="16" width="16" display="inline" />
-              <span id="place-name" className="title"></span>
-              Place ID <span id="place-id"></span>
-              <span id="place-address"></span>
-            </div> */}
 
           </Col>
           <Col xs={24} sm={6} md={24} lg={6} xl={6}>
           <div className="infoView" ref="infowindowcontent" display ="none" >
                         <Card
-                            bordered = {false}
-                            extra={<button type="primary" ref="addButton" onClick={this.savePoint} >Add</button>}
+                            bordered = {true}
+                            extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" ref="addButton" onClick={this.savePoint} >Add</button>}
                             //Place Name
                             title={<span ref="placename"></span>}
                             headStyle={{ padding: "0px", fontSize: "25px", position:"sticky"}}
@@ -89,12 +82,12 @@ class MapApi extends Component {
                             size="small"
                             className="cardStyle"
                             //Place Image
-                            cover={<img ref="placeicon" src="" />}
+                            cover={<img ref="placeicon" src="" style ={{maxHeight:'270px'}} />}
                         >
 
                             <div className="colorDiv" >
+                            <p className="h4Style" ref = "placerate"></p>
                                 <h5 className="h4Style" ref = "placetype"> </h5>
-                                {/* <Rate id= "place-rate" disabled allowHalf value={3.5} /> */}
                             </div>
                             <div className="div2Style" >
                             <Row className="rowStyle">
@@ -113,9 +106,9 @@ class MapApi extends Component {
                                 </Row>
                                 <Row className="rowStyle">
                                 <Col span={4}>
-                                <Avatar size="small" icon="schedule" className="avatarStyle" />  </Col>
+                                <Avatar size="small" icon="calendar" className="avatarStyle" />  </Col>
                                 <Col span = {20}>
-                                <div ref="placeopeningHour"></div>
+                                <div ref="placeopeningHour" className="openHours"></div>
                                 </Col>
                                
                                 
@@ -156,12 +149,13 @@ class MapApi extends Component {
     clickHandler.place_type = this.refs.placetype;
     clickHandler.place_tel = this.refs.placetel;
     clickHandler.place_openHour = this.refs.placeopeningHour;
-    // clickHandler.place_noPlace = this.refs.placenoPlace;
+    clickHandler.place_rate = this.refs.placerate;  
 
     // Create the search box and link it to the UI element.
     var input = this.searchInput.current.input;
     var searchBox = new google.maps.places.SearchBox(input);
     var addButton = this.refs.addButton;
+  
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -248,6 +242,8 @@ class MapApi extends Component {
           // openInfowindow(lastMarker);
           clickHandler.getPlaceInformation(lastMarker.id);
 
+          // thisRef.setState(clickHandler.place_rate);
+
         });
 
       });
@@ -326,9 +322,11 @@ class MapApi extends Component {
         markers = [];
         // openInfowindow(marker);
         clickHandler.getPlaceInformation(marker.id);
+        // thisRef.setState(clickHandler.place_rate);
+
       });
 
-      console.log(thisRef.savedPoint);
+      // console.log(thisRef.savedPoint);
 
     }
   }

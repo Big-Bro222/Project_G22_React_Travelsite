@@ -8,7 +8,6 @@ import {
   fetchPostsIfNeeded
 } from '../actions'
 import SideView from "../Side/SideView";
-import MapSearch from "../MapSearch/MapSearch"
 import MapApi from "../MapSearch/MapApi"
 
 

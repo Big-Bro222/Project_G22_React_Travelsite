@@ -16,7 +16,7 @@ class Navbar extends Component {
                                 <Icon type="smile" style={{color:"#ffffff"}} theme="filled" />
                             </Menu.Item>
                             <Menu.Item style={{ float: "right" }}>
-                            <a href="https://ant.design" target="_blank" rel="noopener noreferrer"><Icon type="dashboard" style={{color:"#ffffff"}} theme="filled" /></a>
+                            <a href="" target="_blank" rel="noopener noreferrer"><Icon type="dashboard" style={{color:"#ffffff"}} theme="filled" /></a>
                             </Menu.Item>
                         </Menu>
                     </Affix>

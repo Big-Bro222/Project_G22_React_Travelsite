@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 import Welcome from "./Welcome/Welcome";
 import PlanView from "./PlanView/PlanView";
+import PrintTimeline from "./PrintoutView/PrintoutView"
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./Signup/Signup";
 import './App.css';
@@ -20,6 +21,7 @@ class App extends Component {
       {/* Router */}
       <Route exact path = "/" component={Welcome} /> 
       <Route exact path = "/PlanView" component={PlanView} /> 
+      <Route exact path = "/PrintTimeline" component={PrintTimeline} /> 
       <Route path = "/SignIn" component={SignIn} /> 
       <Route path = "/SignUp" component={SignUp} /> 
       </div>

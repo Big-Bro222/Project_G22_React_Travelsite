@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import "./SideView.css"
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+    Button
+} from 'antd';
 
 const SubMenu = Menu.SubMenu;
 
@@ -23,7 +27,7 @@ class SideView extends Component {
     //   }
 
     handleClick = (e) => {
-    
+
         var index = this.props.currentindex
         //Notice: here to use [...] to deep copy the array;
         var [...newUI] = this.props.UI
@@ -45,6 +49,9 @@ class SideView extends Component {
                     // console.log(newUI)
                     // console.log(this.props.UI)
                     break;
+                case "sub3":
+                    this.props.changeView("printoutView")
+                    break;
                 default:
                     console.log(newUI)
                     console.log(this.props.UI)
@@ -54,32 +61,44 @@ class SideView extends Component {
         }
     }
     render() {
-        var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) =>{
-           return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
+        var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) => {
+            return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
         });
 
-        var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight,i) => {
-            return(<Menu.Item disabled key={i}>{flight.CarriersName+"  "+flight.FlightNumbers}</Menu.Item>)
+        var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight, i) => {
+            return (<Menu.Item disabled key={i}>{flight.CarriersName + "  " + flight.FlightNumbers}</Menu.Item>)
         });
 
         return (
-          <Menu
-          // openKeys={['sub1','sub2']}
-          selectedKeys={['sub1']}
-          defaultOpenKeys={['sub2']}
-          selectable = {true}
-          mode="inline"
-        >
-          <SubMenu key="sub1" onTitleClick= {this.handleClick} title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
-          <Menu.Divider style={{margin:"0"}}></Menu.Divider>    
-          {sideFlightList} 
-          </SubMenu>
-          
-          <SubMenu key="sub2" onTitleClick= {this.handleClick} title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
-          <Menu.Divider  style={{margin:"0"}}></Menu.Divider>
-          {sidePointList}
-          </SubMenu>
-        </Menu>
+            <Menu
+                // openKeys={['sub1','sub2']}
+                selectedKeys={['sub1']}
+                defaultOpenKeys={['sub1']}
+                selectable={true}
+                mode="inline"
+            >
+                <SubMenu key="sub1" onTitleClick={this.handleClick} title={<span><Icon type="rocket" /><span>Add Flight Tickets</span></span>}>
+                    <Menu.Divider style={{ margin: "0" }}></Menu.Divider>
+                    {sideFlightList}
+                </SubMenu>
+
+                <SubMenu key="sub2" onTitleClick={this.handleClick} title={<span><Icon type="environment" /><span>Mark Spot in Map</span></span>}>
+                    <Menu.Divider style={{ margin: "0" }}></Menu.Divider>
+                    {sidePointList}
+                </SubMenu>
+
+                <SubMenu key="sub3" onTitleClick={this.handleClick} title={<span><Icon type="export" /><span>Save my plan</span></span>}>
+                    <Menu.Divider style={{ margin: "0" }}></Menu.Divider>
+                </SubMenu>
+
+
+
+
+
+
+            </Menu>
+
+
         );
     }
 }
@@ -89,8 +108,8 @@ function mapStateToProps(state) {
         timeline: state.timeline,
         currentindex: state.currentindex,
         UI: state.UI,
-        savedPoint:state.savedPoint,
-        savedFlight:state.savedFlight
+        savedPoint: state.savedPoint,
+        savedFlight: state.savedFlight
     }
 }
 
@@ -101,6 +120,11 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
             (console.log(value))
         },
+        changeView: (value) => {
+            const action = { type: "CHANGE_VIEW", payload: value };
+            dispatch(action);
+            (console.log(value))
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SideView)

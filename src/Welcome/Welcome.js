@@ -67,6 +67,10 @@ class Welcome extends Component {
     handleEndOpenChange = (open) => {
         this.setState({ endOpen: open });
     }
+    changeView=(value)=>{
+        // e.preventDefault();
+        this.props.changeView(value);
+    }
 
     // Use generateTimeLine to creat a default timeline and give the store state UI default values ["Startview",...]
     
@@ -76,6 +80,7 @@ class Welcome extends Component {
         var savedPoint=Array(timeline.length).fill([])
         var savedFlight=Array(timeline.length).fill([])
         this.props.generateTimeLine(timeline,UI,savedPoint,savedFlight);
+        this.props.changeView("timeline");
     }
 
     timeLinearr = (startdate, enddate) => {
@@ -128,9 +133,13 @@ class Welcome extends Component {
                         </Col>
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
-                        <Link to="/Planview">
-                            <Button size="large" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start Your Plan</Button>
-                        </Link>
+                    <Col span={6}></Col>
+                        <Col span={12} ><Link to="/Planview">
+                            <Button size="Default" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start New Plan</Button>
+                        </Link></Col>
+                        <Col span={6} align="left">
+                        <Link to="/Planview"><Button size="Large" onClick={()=>{this.changeView("printoutView")}} type="primary" ghost>My Previous Plan</Button></Link></Col>
+                        
                     </Row>
                 </div>
             </div>
@@ -170,6 +179,11 @@ function mapDispatchToProps(dispatch) {
                 
             };
             dispatch(action);
+        },
+        changeView: (value) => {
+            const action = { type: "CHANGE_VIEW", payload: value };
+            dispatch(action);
+            (console.log(value))
         }
 
     }

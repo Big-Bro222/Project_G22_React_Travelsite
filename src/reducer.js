@@ -9,6 +9,7 @@ const initialstate={departuredate:'yessss',
                     isFetching: false,
                     //   didInvalidate: false,
                       items: [],
+                      currentView:"timeline",
                     savedPoint:[],
                   savedFlight:[]}
 
@@ -41,6 +42,8 @@ export default function Datereducer(state=initialstate,action){
         return Object.assign({},state,{UI:action.payload})
         case "CHANGE_PLAN":
         return Object.assign({},state,{UI:action.payload})
+        case "CHANGE_VIEW":
+        return Object.assign({},state,{currentView:action.payload})
         case "SAVE_POINT":
         return Object.assign({},state,{savedPoint:action.payload})
         case "SAVE_FLIGHT":
