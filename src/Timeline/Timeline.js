@@ -17,19 +17,24 @@ class Timeline extends Component {
 }
 
 componentWillMount() {
+if(this.props.content)
     this.dates = this.props.content.map((entry) => entry.date);
   }
    
     
 
     render() {
-        const views = this.props.content.map((entry, index) => {
+        if(this.props.content){
+        var views = this.props.content.map((entry, index) => {
             return (
               <div key={index}>
                 { entry.component }
               </div>
             );
           });
+      
+          
+          
         
 
         return (
@@ -65,6 +70,9 @@ componentWillMount() {
                 </div>
             </div>
         );
+                    }
+                    else
+                    return(<div></div>)
     }
 }
 function mapStateToProps(state) {

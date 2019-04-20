@@ -13,7 +13,9 @@ const initialstate={departuredate:'yessss',
                       items: [],
                       currentView:"timeline",
                     savedPoint:[],
-                  savedFlight:[]}
+                  savedFlight:[],
+                  timeline:[]
+                }
 
 
 
@@ -66,6 +68,13 @@ export default function Datereducer(state=initialstate,action){
           items: action.posts,
           lastUpdated: action.receivedAt
         })
+
+
+        case "GET_DATA":
+ 
+        // return Object.assign({},state,{timeline:action.payload.timeline,savedPoint:action.payload.savedPoint,savedFlight:action.payload.savedFlight
+        // })
+        return Object.assign({},action.payload)
     
         default:
         return state;

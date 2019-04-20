@@ -54,6 +54,7 @@ class SignIn extends Component {
       `
       );
       firebase.auth().onAuthStateChanged(onAuthStateChanged);
+      
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }

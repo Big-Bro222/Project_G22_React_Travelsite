@@ -75,7 +75,7 @@ class PlanView extends Component {
   }
   render() {
     var mainView;
-    if(this.props.timeline&&this.props.timeline.length>0)
+    if(this.props.timeline.length>0)
     {
     switch (this.props.currentView) {
       case "timeline": {

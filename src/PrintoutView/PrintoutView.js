@@ -10,6 +10,7 @@ class PrintoutView extends Component {
         const { timeline, currentindex, UI, savedFlight, savedPoint } = this.props;
 
         var timeLinePrint = timeline.map((day, i) => {
+            if(savedFlight[i])
             var flightsPerDay = savedFlight[i].map((flight, i) =>
                 (
                         <Row key = {i} type="flex" align="middle">
@@ -52,7 +53,7 @@ class PrintoutView extends Component {
                         </Row>
 
                 ))
-            
+                if(savedPoint[i])
             var pointsPerDay = savedPoint[i].map((point,i)=> 
             (
                 <Row>
