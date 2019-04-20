@@ -297,7 +297,7 @@ class MapApi extends Component {
         id: currentMarker.id,
         title: clickHandler.place_name.textContent,
         address: clickHandler.place_address.textContent,
-        marker: currentMarker,
+        // marker: currentMarker,
 
       }
       if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
@@ -329,14 +329,14 @@ class MapApi extends Component {
 
     }
 
-    function checkSavedPoint(marker){
-      map.panTo(marker.position);
-      clickHandler.getPlaceInformation(marker.id);
-    }
+    // function checkSavedPoint(marker){
+    //   map.panTo(marker.position);
+    //   clickHandler.getPlaceInformation(marker.id);
+    // }
 
-    function deleteSavedPoint(marker){
-      marker.setMap(null);
-    }
+    // function deleteSavedPoint(marker){
+    //   marker.setMap(null);
+    // }
   }
 }
 
