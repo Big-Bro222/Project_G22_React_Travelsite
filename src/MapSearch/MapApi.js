@@ -20,12 +20,11 @@ class MapApi extends Component {
 
   savePoint = (e) => {
     var trigger = true;
-    console.log(this.savedPoint.length)
-    if (this.savedPoint.length <= 1) { trigger = true; }
+    if (this.savedPoint.length < 1) { trigger = true; }
     else {
       trigger = false;
     }
-    var index = this.props.currentindex
+    var index = this.props.currentindex;
     var [...newSavePoint] = this.props.savedPoint;
 
     if (trigger) { newSavePoint[index] = newSavePoint[index].concat(this.savedPoint); }
@@ -33,8 +32,19 @@ class MapApi extends Component {
 
 
     this.props.savePoint(newSavePoint)
+    console.log(this.savedPoint)
     //this.setState({UI:this.props.UI})
 
+  }
+
+  deletePoint = () =>{
+
+    console.log("delete")
+    var [...currentSavedPoint] = this.props.savedPoint;
+    var index = this.props.currentindex;
+
+    currentSavedPoint[index]= this.savedPoint;
+    this.props.deletePoint(currentSavedPoint);
   }
 
 
@@ -74,7 +84,7 @@ class MapApi extends Component {
           <div className="infoView" ref="infowindowcontent" display ="none" >
                         <Card
                             bordered = {true}
-                            extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" ref="addButton" onClick={this.savePoint} >Add</button>}
+                            extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" disabled={false} ref="addButton" onClick={this.savePoint} >Add</button>}
                             //Place Name
                             title={<span ref="placename"></span>}
                             headStyle={{ padding: "0px", fontSize: "25px", position:"sticky"}}
@@ -115,8 +125,7 @@ class MapApi extends Component {
                             </Row>
                                
                             </div>
-                            
-
+                          <button className="ant-btn ant-btn-block" disabled={true} ref="deleteButton" > Delete from my plan </button>
                         </Card>
 
             </div>
@@ -153,6 +162,7 @@ class MapApi extends Component {
     var input = this.searchInput.current.input;
     var searchBox = new google.maps.places.SearchBox(input);
     var addButton = this.refs.addButton;
+    var deleteButton = this.refs.deleteButton;
   
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -181,7 +191,14 @@ class MapApi extends Component {
     addButton.addEventListener('click', function (e) {
       addSeletedMarkers();
       e.preventDefault();
+
     });
+
+    deleteButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      deleteSavedPoint(currentMarker);
+      
+    })
 
     //style for saved marker  use as icon:goldstar
     var goldStar = {
@@ -239,6 +256,8 @@ class MapApi extends Component {
           setCurrentMarker(lastMarker);
           // openInfowindow(lastMarker);
           clickHandler.getPlaceInformation(lastMarker.id);
+          
+          
 
           // thisRef.setState(clickHandler.place_rate);
 
@@ -266,6 +285,14 @@ class MapApi extends Component {
       currentMarker = marker;
       currentMarker.position = marker.position;
       map.panTo(marker.getPosition());
+      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
+        addButton.disabled = true;
+    deleteButton.disabled = false;
+      }
+      else {
+        addButton.disabled = false;
+        deleteButton.disabled = true;
+      }
     }
 
     //     //click add marker
@@ -301,7 +328,7 @@ class MapApi extends Component {
 
       }
       if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
-
+        
       }
       else {
         thisRef.savedPoint.push(currentSave);
@@ -326,6 +353,10 @@ class MapApi extends Component {
       });
 
       // console.log(thisRef.savedPoint);
+      currentMarker.setMap(null);
+      setCurrentMarker(marker);
+      addButton.disabled = true;
+      deleteButton.disabled = false;
 
     }
 
@@ -334,9 +365,31 @@ class MapApi extends Component {
     //   clickHandler.getPlaceInformation(marker.id);
     // }
 
-    // function deleteSavedPoint(marker){
-    //   marker.setMap(null);
-    // }
+    function deleteSavedPoint(marker){
+
+      function checkPoint(element) {
+        return element.id === marker.id;
+      }
+      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
+         
+        var currentArray = thisRef.props.savedPoint[thisRef.props.currentindex];
+        let i = currentArray.findIndex(checkPoint);
+        thisRef.savedPoint.splice(i,1);
+        marker.setMap(null);
+        addButton.disabled = false;
+        deleteButton.disabled = true;
+        console.log(thisRef.props.savedPoint[thisRef.props.currentindex]);
+      }
+        // marker.setMap(null);
+        console.log("delete")
+        var [...currentSavedPoint] = thisRef.props.savedPoint;
+        var index = thisRef.props.currentindex;
+    
+        currentSavedPoint[index]= thisRef.savedPoint;
+        thisRef.props.deletePoint(currentSavedPoint);
+        console.log(thisRef.savedPoint)
+        
+    }
   }
 }
 
@@ -354,7 +407,12 @@ function mapDispatchToProps(dispatch) {
     savePoint: (value) => {
       const action = { type: "SAVE_POINT", payload: value };
       dispatch(action);
-      // (console.log(value))
+      
+    },
+    deletePoint:(value) => {
+      const action ={ type:"DELETE_POINT", payload:value};
+      dispatch(action);
+      (console.log(value));
     },
   }
 }

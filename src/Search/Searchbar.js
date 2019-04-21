@@ -42,7 +42,7 @@ class Searchbars extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
                 <Form   onSubmit={this.handleSubmit}>
-                <Row >
+                <Row style={{width:"100%"}}>
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
                         <Row >
                             <Form.Item >
