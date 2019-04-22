@@ -122,7 +122,7 @@ function mapDispatchToProps(dispatch) {
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            (console.log(value))
+            // (console.log(value))
         }
     }
 }

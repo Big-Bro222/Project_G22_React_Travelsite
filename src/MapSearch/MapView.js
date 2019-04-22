@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Row, Col, Affix } from 'antd'
-import {
-    fetchPostsIfNeeded
-} from '../actions'
+import { Row, Col } from 'antd'
+// import {
+//     fetchPostsIfNeeded
+// } from '../actions'
 import SideView from "../Side/SideView";
 import MapApi from "./MapApi"
 
@@ -21,21 +21,11 @@ class mapView extends Component {
         // e.preventDefault()
 
         // const { dispatch } = this.props
-        console.log("formData" + formData)
+        // console.log("formData" + formData)
         // dispatch(fetchPostsIfNeeded(formData))
     }
 
     render() {
-        const { posts, isFetching, lastUpdated } = this.props
-        console.log(posts.length)
-        let ResultListPlaceHoder;
-        // if(!(posts instanceof Array))
-        // {
-        // ResultListPlaceHoder = (<ResultList posts = {posts} lastTetchTime={lastUpdated}/>)
-        // console.log("come to list")
-        // }
-        // else
-        // ResultListPlaceHoder=(<div></div>)
         return (
             <div>
                 <Row>
@@ -73,5 +63,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(mapView)
 
-/*******************************ClassPeople--&&--SearchLocation*************************************/
 

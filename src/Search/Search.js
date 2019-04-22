@@ -4,11 +4,11 @@ import ResultList from "../ResultList/ResultList";
 import Searchbar from "./Searchbar"
 import { connect } from 'react-redux'
 import { Row, Col } from 'antd'
-import {
-  fetchPostsIfNeeded
-} from '../actions'
+// import {
+//   fetchPostsIfNeeded
+// } from '../actions'
 import SideView from "../Side/SideView";
-import MapApi from "../MapSearch/MapApi"
+// import MapApi from "../MapSearch/MapApi"
 
 
 
@@ -24,14 +24,14 @@ class Search extends Component {
     // e.preventDefault()
 
     // const { dispatch } = this.props
-    console.log("formData" + formData)
+    // console.log("formData" + formData)
     // dispatch(fetchPostsIfNeeded(formData))
   }
 
   render() {
     const { posts, isFetching, lastUpdated } = this.props
-    console.log(posts.length)
-    let ResultListPlaceHoder;
+    // console.log(posts.length)
+
     // if(!(posts instanceof Array))
     // {
     // ResultListPlaceHoder = (<ResultList posts = {posts} lastTetchTime={lastUpdated}/>)

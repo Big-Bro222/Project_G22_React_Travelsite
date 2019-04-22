@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 import Welcome from "./Welcome/Welcome";
 import PlanView from "./PlanView/PlanView";
-import PrintTimeline from "./PrintoutView/PrintoutView"
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./Signup/Signup";
 import { ProtectedRoute } from "./protected.route";

@@ -79,7 +79,7 @@ class ClickEventHandler {
         } else {
           me.place_tel.textContent = place.international_phone_number;
         }
-        console.log(place.opening_hours);
+        // console.log(place.opening_hours);
         if (place.opening_hours == null) {
           me.place_openHour.textContent = 'No information available';
         } else {

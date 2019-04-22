@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Signup.css";
 import { Link } from 'react-router-dom';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import auth from "../auth";
 
 const emailRegex = RegExp(
@@ -59,13 +59,13 @@ class Signup extends Component {
     );
 
     firebase.auth().onAuthStateChanged(firebaseuser => {
-      if (firebaseuser) { console.log(firebaseuser) }
-      else (console.log("No logged in"))
+      // if (firebaseuser) { console.log(firebaseuser) }
+      // else (console.log("No logged in"))
     })
     if (formValid(this.state)) {
-      console.log(`
-        --SUBMITTING--
-   `);
+  //     console.log(`
+  //       --SUBMITTING--
+  //  `);
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
@@ -108,7 +108,7 @@ class Signup extends Component {
 
   render() {
     const { formErrors } = this.state;
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className="wrapper">
         <div className="form-wrapper">

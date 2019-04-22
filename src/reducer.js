@@ -31,7 +31,7 @@ const initialstate={departuredate:'yessss',
 // }
 
 export default function Datereducer(state=initialstate,action){
-    console.log("reducer running");
+    // console.log("reducer running");
     switch(action.type){
         case "ON_CHANGE_DEPARTURE":
         return Object.assign({},state,{departuredate:action.payload})

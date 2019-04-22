@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import {
-    Form, Input, Button, Row, Col, Select,
+    Form, Input, Button, Row, Col, 
 } from 'antd';
 import './Search.css'
 import { connect } from 'react-redux'
@@ -26,7 +26,7 @@ class Searchbars extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
                 this.props.onSearchSubmit(values)
 
             }
@@ -104,8 +104,6 @@ const mapStateToProps=()=>({});
 
 export default connect(mapStateToProps,mapDispatchToProps)(Searchbar)
 
-
-// export default Searchbar
 
 
 

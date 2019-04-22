@@ -45,7 +45,7 @@ if(this.props.content)
                     <HorizontalTimeline
                         index={this.state.value}
                         indexClick={(index) => {
-                            console.log(index)
+                            // console.log(index)
                             
                             this.setState({ value: index, previous: this.state.value });
                             this.props.timelineClick(index);

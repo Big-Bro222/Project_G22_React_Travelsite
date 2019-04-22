@@ -13,8 +13,8 @@ class Startview extends Component {
         
         this.props.addPlan(newUI)
         //this.setState({UI:this.props.UI})
-        console.log(newUI)
-        console.log(this.props.UI)
+        // console.log(newUI)
+        // console.log(this.props.UI)
     }
     render() {
         return (
@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
         addPlan: (value) => {
             const action = { type: "ADD_PLAN", payload: value };
             dispatch(action);
-            (console.log("input"))
+            // (console.log("input"))
         },
     }
 }

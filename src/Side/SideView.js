@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import "./SideView.css"
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import {
-    Button
-} from 'antd';
+
+// import {
+//     Button
+// } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 
@@ -53,8 +53,8 @@ class SideView extends Component {
                     this.props.changeView("printoutView")
                     break;
                 default:
-                    console.log(newUI)
-                    console.log(this.props.UI)
+                    // console.log(newUI)
+                    // console.log(this.props.UI)
 
             }
 
@@ -118,12 +118,12 @@ function mapDispatchToProps(dispatch) {
         changePlan: (value) => {
             const action = { type: "CHANGE_PLAN", payload: value };
             dispatch(action);
-            (console.log(value))
+            // (console.log(value))
         },
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            (console.log(value))
+            // (console.log(value))
         }
     }
 }

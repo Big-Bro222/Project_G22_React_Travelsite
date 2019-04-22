@@ -2,7 +2,7 @@ import auth from "../auth";
 import React, { Component } from "react";
 import './SignIn.css'
 import { Link } from 'react-router-dom';
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import {onAuthStateChanged} from "../Firebase/FirebaseTool"
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -49,10 +49,10 @@ class SignIn extends Component {
     });}).catch(e =>this.setState({ errormessage: e.message }));
     
     if (formValid(this.state)) {
-      console.log(`
-        --SUBMITTING--
-      `
-      );
+      // console.log(`
+      //   --SUBMITTING--
+      // `
+      // );
       firebase.auth().onAuthStateChanged(onAuthStateChanged);
       
     } else {
@@ -78,7 +78,7 @@ class SignIn extends Component {
         break;
     }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value }, () => {});
   };
   // handleClick = () => {
   //   auth.login(() => {

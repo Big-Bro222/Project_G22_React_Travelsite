@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Row, Col, Card, Button, Popover, Icon, Divider, Collapse } from 'antd';
+import { Avatar, Row, Col, Card, Button, Popover, Icon, Collapse } from 'antd';
 import "./ResultList.css"
 import { timeConvert } from "../apiUtility/apiUtility"
 import { connect } from 'react-redux'
@@ -20,7 +20,7 @@ class ResultList extends Component {
         // this.savedFlight.push(flight);
 
         var trigger = true;
-        console.log(this.savedFlight.length)
+        // console.log(this.savedFlight.length)
         if (this.savedFlight.length <= 0) { trigger = true; }
         else {
             trigger = false;
@@ -45,16 +45,20 @@ class ResultList extends Component {
         //this.setState({UI:this.props.UI})
     }
     render() {
-        console.log("list")
+        // console.log("list")
 
         const { Itineraries, Legs, Places, Carriers } = this.props.posts;
         var flightInfomation = [];
         let Itinerary;
         for (Itinerary of Itineraries) {
-            var leg = Legs.find(leg => leg.Id == Itinerary.OutboundLegId);
-            var OriginStation = Places.find(place => place.Id == leg.OriginStation);
-            var DestinationStation = Places.find(place => place.Id == leg.DestinationStation);
-            var carrier = Carriers.find(carrier => carrier.Id == leg.Carriers[0]);
+            // eslint-disable-next-line no-loop-func
+            var leg = Legs.find(leg => leg.Id === Itinerary.OutboundLegId);
+            // eslint-disable-next-line no-loop-func
+            var OriginStation = Places.find(place => place.Id === leg.OriginStation);
+            // eslint-disable-next-line no-loop-func
+            var DestinationStation = Places.find(place => place.Id === leg.DestinationStation);
+            // eslint-disable-next-line no-loop-func
+            var carrier = Carriers.find(carrier => carrier.Id === leg.Carriers[0]);
             var price = Itinerary.PricingOptions[0].Price;
 
             flightInfomation.push(Object.assign({},

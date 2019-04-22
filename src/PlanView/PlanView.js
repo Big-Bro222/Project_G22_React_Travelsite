@@ -13,7 +13,7 @@ class PlanView extends Component {
     this.state = { value: 0, previous: 0 };
   }
   giveContent = () => {
-    console.log(this.props.currentindex);
+    // console.log(this.props.currentindex);
     var len = this.props.timeline.length;
     var Content = [];
     for (var i = 0; i <= len - 1; i++) {
@@ -89,7 +89,7 @@ class PlanView extends Component {
         break;
       }
       case "printoutView": {
-        console.log("test pint")
+        // console.log("test pint")
         mainView = (
           <Row>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} >

@@ -12,7 +12,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import img01 from "../imgs/01.jpg"
 import img02 from "../imgs/02.jpg"
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+// import'firebase/firebase-database'
+// import'firebase/firebase-auth'
 // import {updateState,currentUID} from "../Firebase/FirebaseTool"
 
 
@@ -55,7 +57,7 @@ class Welcome extends Component {
     onEndChange = (value) => {
         this.onChange('endValue', value);
         this.props.onChangereturn(value._d.getTime());
-        console.log(value._d.toISOString())
+        // console.log(value._d.toISOString())
     }
 
     handleStartOpenChange = (open) => {
@@ -70,35 +72,35 @@ class Welcome extends Component {
         this.setState({ endOpen: open });
     }
 
-    updateData(value)
-    {
+    updateData(value) {
         this.props.getData(value);
         this.props.changeView("printoutView");
     }
-    getData=()=>
-    {
+    getData = () => {
         var myUserId = firebase.auth().currentUser.uid;
+        // eslint-disable-next-line no-unused-vars
         var savedFlight;
+        // eslint-disable-next-line no-unused-vars
         var savedPoint;
+        // eslint-disable-next-line no-unused-vars
         var timeline;
         var thisRef = this;
-        firebase.database().ref('user-state/' + myUserId+'/state').once('value').then(function(snapshot) 
-        {
-            if(snapshot.val().savedFlight)
-            savedFlight=snapshot.val().savedFlight;
-            if(snapshot.val().savedPoint)
-            savedPoint=snapshot.val().savedPoint;
-            if(snapshot.val().timeline)
-            timeline=snapshot.val().timeline;
-            console.log(snapshot.val())
-            return thisRef.updateData(timeline=snapshot.val())
+        firebase.database().ref('user-state/' + myUserId + '/state').once('value').then(function (snapshot) {
+            if (snapshot.val().savedFlight)
+                savedFlight = snapshot.val().savedFlight;
+            if (snapshot.val().savedPoint)
+                savedPoint = snapshot.val().savedPoint;
+            if (snapshot.val().timeline)
+                timeline = snapshot.val().timeline;
+            // console.log(snapshot.val())
+            return thisRef.updateData(timeline = snapshot.val())
 
         })
     }
 
     // changeView = (value) => {
     //     // e.preventDefault();
-    
+
     // this.props.changeView(value)
     // }
 
@@ -125,7 +127,7 @@ class Welcome extends Component {
 
     render() {
         const { startValue, endValue, endOpen } = this.state;
-        console.log(this.props.departuredate)
+        // console.log(this.props.departuredate)
 
         return (
             <div >
@@ -190,15 +192,15 @@ function mapDispatchToProps(dispatch) {
         onChangedeparture: (value) => {
             const action = { type: "ON_CHANGE_DEPARTURE", payload: value };
             dispatch(action);
-            (console.log("input"))
+            // (console.log("input"))
         },
         onChangereturn: (value) => {
             const action = { type: "ON_CHANGE_RETURN", payload: value };
             dispatch(action);
-            (console.log("input2"))
+            // (console.log("input2"))
         },
         generateTimeLine: (timeline, UI, savedPoint, savedFlight) => {
-            console.log(this.props)
+            // console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
                 timeline: timeline,
@@ -213,12 +215,12 @@ function mapDispatchToProps(dispatch) {
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            (console.log(value))
+            // (console.log(value))
         },
         getData: (value) => {
             const action = {
-                type: "GET_DATA",payload:value
-                
+                type: "GET_DATA", payload: value
+
             };
             dispatch(action);
 

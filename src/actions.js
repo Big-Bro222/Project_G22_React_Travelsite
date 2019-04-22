@@ -49,9 +49,9 @@ function receivePosts(json) {
 // Use fetchCreatSession to get a session link to browser the live flight price data.
 
 function fetchPosts(data) {
-    console.log("fetch begin");
+    // console.log("fetch begin");
     return dispatch => {
-        console.log("fetch begin");
+        // console.log("fetch begin");
         dispatch(requestPosts())
         return fetch(BASE_URL, {
             body: "cabinClass=economy&children=0&infants=0&country=US&currency=USD&locale=en-US&originPlace="+data.From+"-sky&destinationPlace="+data.To+"-sky&outboundDate="+data.Time+"&adults=1",
@@ -67,7 +67,7 @@ function fetchPosts(data) {
             .then(location => location.match(sessionKeyRegex)[1])
 
             .then(sessionLink => {
-                console.log("sessionLink" + sessionLink);
+                // console.log("sessionLink" + sessionLink);
                 return fetch(`${BASE_URLGET}${sessionLink}?sortType=price&sortOrder=asc&pageIndex=0&pageSize=10`,
                     {
                         headers: Object.assign({}, API_KEY)
@@ -78,7 +78,7 @@ function fetchPosts(data) {
             )
 
             .then(json => {
-                console.log(json);
+                // console.log(json);
                 dispatch(receivePosts(json));
             })
     }
@@ -87,7 +87,7 @@ function fetchPosts(data) {
 //judge whether to fetch data or not
 function shouldFetchPosts(state) {
     const posts = state.items
-    console.log(!posts)
+    // console.log(!posts)
     // if (!posts) {
     //     return true
     // } else if (posts.isFetching) {
@@ -103,11 +103,11 @@ function shouldFetchPosts(state) {
 }
 
 export function fetchPostsIfNeeded(data) {
-    console.log("ifif")
+    // console.log("ifif")
     return (dispatch, getState) => {
         if (shouldFetchPosts(getState())) {
             data.Time=getState().timeline[getState().currentindex]
-            console.log("begintofetch");
+            // console.log("begintofetch");
             return dispatch(fetchPosts(data))
             
         }
