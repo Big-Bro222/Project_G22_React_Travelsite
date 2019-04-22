@@ -45,7 +45,12 @@ export default function Datereducer(state=initialstate,action){
 
         return Object.assign({},state,{savedPoint:action.payload})
         case "DELETE_POINT":
+        updateState(currentUID,Object.assign({},state,{savedPoint:action.payload}))
         return Object.assign({},state,{savedPoint:action.payload})
+
+        case "DELETE_FLIGHT":
+        updateState(currentUID,Object.assign({},state,{savedFlight:action.payload}))
+        return Object.assign({},state,{savedFlight:action.payload})
         
         case "SAVE_FLIGHT":
         updateState(currentUID,Object.assign({},state,{savedFlight:action.payload}))

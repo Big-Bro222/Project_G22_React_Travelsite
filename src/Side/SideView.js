@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Button, Col } from 'antd';
 import "./SideView.css"
 import { connect } from "react-redux";
 
@@ -11,6 +11,10 @@ const SubMenu = Menu.SubMenu;
 
 class SideView extends Component {
     // rootSubmenuKeys = ['sub1', 'sub2'];
+    constructor(props){
+        super(props);
+        this.deleteFlight = this.deleteFlight.bind(this);
+     }
     state = {
         // openKeys: ['sub1'],
     }
@@ -26,6 +30,25 @@ class SideView extends Component {
     //     }
     //   }
 
+    deleteFlight = ( e,flightNumber) => {
+       e.preventDefault();  
+        console.log("click")
+        function checkPoint(element) {
+            return element.FlightNumbers ===flightNumber;
+          }
+          var [...currentSavedFlight] = this.props.savedFlight;
+          var index = this.props.currentindex;
+    
+          if (this.props.savedFlight[this.props.currentindex].find(item => item.FlightNumbers === flightNumber)) {
+    
+            var currentArray = this.props.savedFlight[this.props.currentindex];
+            let i = currentArray.findIndex(checkPoint);
+            currentSavedFlight[index].splice(i, 1);
+          }
+    
+          this.props.deleteFlight(currentSavedFlight);
+
+    }
     handleClick = (e) => {
 
         var index = this.props.currentindex
@@ -53,28 +76,38 @@ class SideView extends Component {
                     this.props.changeView("printoutView")
                     break;
                 default:
-                    // console.log(newUI)
-                    // console.log(this.props.UI)
+                // console.log(newUI)
+                // console.log(this.props.UI)
 
             }
 
         }
     }
     render() {
-        if(this.props.savedPoint){
-            if(this.props.savedFlight[this.props.currentindex]&&this.props.savedFlight[this.props.currentindex].length>0)
-        var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) => {
-            if(i===0){return null;}
-            return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
-        });
-    }
-        if(this.props.savedFlight){
-            if(this.props.savedFlight[this.props.currentindex])
-        var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight, i) => {
-            if(i===0){return null;}
-            return (<Menu.Item disabled key={i}>{flight.CarriersName + "  " + flight.FlightNumbers}</Menu.Item>)
-        });
-    }
+        if (this.props.savedPoint) {
+            if (this.props.savedFlight[this.props.currentindex] && this.props.savedFlight[this.props.currentindex].length > 0)
+                var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) => {
+                    if (i === 0) { return null; }
+                    return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
+                });
+        }
+        if (this.props.savedFlight) {
+            if (this.props.savedFlight[this.props.currentindex])
+                var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight, i) => {
+                    if (i === 0) { return null; }
+                    return (<Menu.Item disabled key={i}>
+                        <Col span={20}>
+                            {flight.CarriersName + "  " + flight.FlightNumbers}
+                        </Col>
+                        <Col span={4}>
+                            <Button shape="circle"onClick={e=>  this.deleteFlight(e, flight.FlightNumbers) } > <Icon type="minus" style={{ textAlign: "center" }} /></Button>
+                        </Col>
+
+
+                        {/* <Icon type="close-circle" /> */}
+                    </Menu.Item>)
+                });
+        }
 
         return (
             <Menu
@@ -125,7 +158,12 @@ function mapDispatchToProps(dispatch) {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
             // (console.log(value))
+        },
+        deleteFlight: (value) => {
+            const action = { type: "DELETE_FLIGHT", payload: value };
+            dispatch(action);
         }
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SideView)
