@@ -3,7 +3,7 @@ import './Search.css'
 import ResultList from "../ResultList/ResultList";
 import Searchbar from "./Searchbar"
 import { connect } from 'react-redux'
-import { Row, Col } from 'antd'
+import { Row, Col,Spin } from 'antd'
 // import {
 //   fetchPostsIfNeeded
 // } from '../actions'
@@ -56,6 +56,7 @@ class Search extends Component {
                 <Searchbar />
               </div>
             {isFetching && <h2>Loading...</h2>}
+            {isFetching && <Spin size="large" />}
             {!(posts instanceof Array) && (
               <div>
                 <ResultList posts={posts} lastTetchTime={lastUpdated} />

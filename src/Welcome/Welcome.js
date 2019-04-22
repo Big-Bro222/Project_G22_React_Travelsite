@@ -73,27 +73,32 @@ class Welcome extends Component {
     }
 
     updateData(value) {
+        if(value.savedFlight){
+         
+        }
+        else{
+            value.savedFlight=Array(value.timeline.length).fill([]);
+        }
+        if(value.savedPoint){
+           
+        }
+        else{
+            value.savedPoint=Array(value.timeline.length).fill([]);
+        }
+        if(value.items)
+        {}
+        else{
+            value.items=[];
+        }
         this.props.getData(value);
         this.props.changeView("printoutView");
     }
     getData = () => {
         var myUserId = firebase.auth().currentUser.uid;
-        // eslint-disable-next-line no-unused-vars
-        var savedFlight;
-        // eslint-disable-next-line no-unused-vars
-        var savedPoint;
-        // eslint-disable-next-line no-unused-vars
-        var timeline;
         var thisRef = this;
         firebase.database().ref('user-state/' + myUserId + '/state').once('value').then(function (snapshot) {
-            if (snapshot.val().savedFlight)
-                savedFlight = snapshot.val().savedFlight;
-            if (snapshot.val().savedPoint)
-                savedPoint = snapshot.val().savedPoint;
-            if (snapshot.val().timeline)
-                timeline = snapshot.val().timeline;
-            // console.log(snapshot.val())
-            return thisRef.updateData(timeline = snapshot.val())
+    
+            return thisRef.updateData(snapshot.val())
 
         })
     }

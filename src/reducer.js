@@ -19,16 +19,7 @@ const initialstate={departuredate:'yessss',
 
 
 
-// export default function reducer(state=initialstate,action){
-//     console.log("reducer running");
-//     switch(action.type){
-        // case "SEARCH":
-        // return Object.assign({},state,{PlanViewUI:action.payload})
-//         default:
-//         return state;
-//     }
-    
-// }
+
 
 export default function Datereducer(state=initialstate,action){
     // console.log("reducer running");
@@ -75,8 +66,7 @@ export default function Datereducer(state=initialstate,action){
 
         case "GET_DATA":
  
-        // return Object.assign({},state,{timeline:action.payload.timeline,savedPoint:action.payload.savedPoint,savedFlight:action.payload.savedFlight
-        // })
+
         return Object.assign({},action.payload)
     
         default:
@@ -86,42 +76,3 @@ export default function Datereducer(state=initialstate,action){
 }
 
 
-
-
-  // function flightDataFetch(
-  //   state = {
-  //     isFetching: false,
-  //   //   didInvalidate: false,
-  //     items: []
-  //   },
-  //   action
-  // ) {
-  //   switch (action.type) {
-  //   //   case INVALIDATE_SUBREDDIT:
-  //   //     return Object.assign({}, state, {
-  //   //       didInvalidate: true
-  //   //     })
-  //     case "REQUEST_POSTS":
-  //       return Object.assign({}, state, {
-  //         isFetching: true,
-  //       //   didInvalidate: false
-  //       })
-  //     case "RECEIVE_POSTS":
-  //       return Object.assign({}, state, {
-  //         isFetching: false,
-  //       //   didInvalidate: false,
-  //         items: action.posts,
-  //         lastUpdated: action.receivedAt
-  //       })
-  //     default:
-  //       return state
-  //   }
-  // }
-
-
-//   const rootReducer = combineReducers({
-//    Datereducer,
-//     flightDataFetch
-//   })
-
-//   export default rootReducer;

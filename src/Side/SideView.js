@@ -61,13 +61,18 @@ class SideView extends Component {
         }
     }
     render() {
+        if(this.props.savedPoint){
+            if(this.props.savedFlight[this.props.currentindex])
         var sidePointList = this.props.savedPoint[this.props.currentindex].map((point, i) => {
             return (<Menu.Item disabled key={i}>{point.title}</Menu.Item>)
         });
-
+    }
+        if(this.props.savedFlight){
+            if(this.props.savedFlight[this.props.currentindex])
         var sideFlightList = this.props.savedFlight[this.props.currentindex].map((flight, i) => {
             return (<Menu.Item disabled key={i}>{flight.CarriersName + "  " + flight.FlightNumbers}</Menu.Item>)
         });
+    }
 
         return (
             <Menu

@@ -26,9 +26,9 @@ class MapApi extends Component {
     }
     var index = this.props.currentindex;
     var [...newSavePoint] = this.props.savedPoint;
-
     if (trigger) { newSavePoint[index] = newSavePoint[index].concat(this.savedPoint); }
     else { newSavePoint[index] = this.savedPoint; }
+
 
 
     this.props.savePoint(newSavePoint)
@@ -286,9 +286,15 @@ class MapApi extends Component {
       currentMarker = marker;
       currentMarker.position = marker.position;
       map.panTo(marker.getPosition());
-      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
-        addButton.disabled = true;
-        deleteButton.disabled = false;
+      if (thisRef.props.savedPoint) {
+        if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
+          addButton.disabled = true;
+          deleteButton.disabled = false;
+        }
+        else {
+          addButton.disabled = false;
+          deleteButton.disabled = true;
+        }
       }
       else {
         addButton.disabled = false;
@@ -328,8 +334,13 @@ class MapApi extends Component {
         // marker: currentMarker,
 
       }
-      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
+      if (thisRef.props.savedPoint) {
+        if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
 
+        }
+        else {
+          thisRef.savedPoint.push(currentSave);
+        }
       }
       else {
         thisRef.savedPoint.push(currentSave);
