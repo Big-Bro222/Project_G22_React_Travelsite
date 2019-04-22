@@ -114,8 +114,8 @@ class Welcome extends Component {
     generateTimeLine = () => {
         var timeline = this.timeLinearr(this.props.departuredate, this.props.returndate)
         var UI = Array(timeline.length).fill("Startview")
-        var savedPoint = Array(timeline.length).fill([])
-        var savedFlight = Array(timeline.length).fill([])
+        var savedPoint = Array(timeline.length).fill(["placeHolder"])
+        var savedFlight = Array(timeline.length).fill(["placeHolder"])
         this.props.generateTimeLine(timeline, UI, savedPoint, savedFlight);
         this.props.changeView("timeline");
     }

@@ -20,13 +20,19 @@ class MapApi extends Component {
 
   savePoint = (e) => {
     var trigger = true;
-    if (this.savedPoint.length < 1) { trigger = true; }
+    if (this.savedPoint.length <= 1) { trigger = true; }
     else {
       trigger = false;
     }
     var index = this.props.currentindex;
     var [...newSavePoint] = this.props.savedPoint;
-    if (trigger) { newSavePoint[index] = newSavePoint[index].concat(this.savedPoint); }
+    if (trigger) {
+       newSavePoint[index] = newSavePoint[index].concat(this.savedPoint);
+       if (this.props.savedPoint[index].length > 0) {
+        var [...currentSavedPoint] = newSavePoint[index];
+        this.savedPoint = currentSavedPoint;
+    }
+       }
     else { newSavePoint[index] = this.savedPoint; }
 
 
@@ -286,7 +292,7 @@ class MapApi extends Component {
       currentMarker = marker;
       currentMarker.position = marker.position;
       map.panTo(marker.getPosition());
-      if (thisRef.props.savedPoint) {
+      if (thisRef.props.savedPoint[thisRef.props.currentindex]) {
         if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
           addButton.disabled = true;
           deleteButton.disabled = false;
@@ -372,34 +378,28 @@ class MapApi extends Component {
 
     }
 
-    // function checkSavedPoint(marker){
-    //   map.panTo(marker.position);
-    //   clickHandler.getPlaceInformation(marker.id);
-    // }
+
 
     function deleteSavedPoint(marker) {
 
       function checkPoint(element) {
         return element.id === marker.id;
       }
+      var [...currentSavedPoint] = thisRef.props.savedPoint;
+      var index = thisRef.props.currentindex;
+
       if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
 
         var currentArray = thisRef.props.savedPoint[thisRef.props.currentindex];
         let i = currentArray.findIndex(checkPoint);
-        thisRef.savedPoint.splice(i, 1);
+        currentSavedPoint[index].splice(i, 1);
         marker.setMap(null);
         addButton.disabled = false;
         deleteButton.disabled = true;
-        // console.log(thisRef.props.savedPoint[thisRef.props.currentindex]);
       }
-      // marker.setMap(null);
-      // console.log("delete")
-      var [...currentSavedPoint] = thisRef.props.savedPoint;
-      var index = thisRef.props.currentindex;
 
-      currentSavedPoint[index] = thisRef.savedPoint;
       thisRef.props.deletePoint(currentSavedPoint);
-      // console.log(thisRef.savedPoint)
+   
 
     }
   }
