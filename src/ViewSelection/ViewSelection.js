@@ -28,19 +28,19 @@ class ViewSelection extends Component {
             case "DetailItem": {
                 return (
                     <div>
-                        <DetailItem />
+                        <DetailItem viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             case "Search": {
                 return (
                     <div>
-                       <Search />
+                       <Search viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             case "Map": {
                 return (
                     <div>
-                        <MapView />
+                        <MapView viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             default:

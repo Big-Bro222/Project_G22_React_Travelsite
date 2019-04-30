@@ -67,8 +67,8 @@ class ResultList extends Component {
 
 resultList=(
             resultList =   (<Alert
-            message="No search result,click submit again"
-            description="No search result currently. No worry! just click submit again! It is usually caused by API instability"
+            message="No search result,click submit again or change the search value"
+            description="No search result currently. No worry! Try click submit again! It may be caused by API instability"
             type="info"
             showIcon
           />)

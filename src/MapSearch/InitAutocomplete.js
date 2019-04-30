@@ -1,150 +1,118 @@
-import React, { Component } from 'react';
-import { Input, Card, Row, Col, Avatar } from 'antd';
-import "./MapSearch.css";
-import { connect } from 'react-redux'
-import ClickEventHandler from "./ClickEventHandler"
-
 /* global google */
-class MapApi extends Component {
-  state = {
+
+
+
+class ClickEventHandler {
+  constructor(map, origin) {
+    this.origin = origin;
+    this.map = map;
+    this.placesService = new google.maps.places.PlacesService(map);
+    this.infowindow = new google.maps.InfoWindow({
+      maxWidth: 600,
+      pixelOffset: new google.maps.Size(0, -40)
+    });
+    this.infowindowContent = '';
+    this.place_icon = '';
+    this.place_name = '';
+    this.place_address = '';
+    this.place_type = '';
+    this.place_tel ='';
+    this.place_openHour = '';
+    this.place_noPlace = document.getElementById("place-noPlace");
+    this.place_rate = '';
+    this.infowindow.setContent(this.place_noPlace);
+
+
+    this.currentId = 0;
+
+
+    // Listen for clicks on the map.
+    this.map.addListener('click', this.handleClick.bind(this));
   }
 
+  handleClick = function (event) {
+    // console.log('You clicked on: ' + event.latLng);
+    // If the event has a placeId, use it.
+    if (event.placeId) {
+      // console.log('You clicked on place:' + event.placeId);
+      this.infowindow.close();
+      // Calling e.stop() on the event prevents the default info window from
+      // showing.
+      // If you call stop here when there is no placeId you will prevent some
+      // other map click event handlers from receiving the event.
+      event.stop();
+      this.currentId = event.placeId;
+      this.getPlaceInformation(event.placeId);
 
-  constructor(props) {
-    super(props);
-    this.map = React.createRef();
-    this.searchInput = React.createRef();
-    this.savedPoint = [];
-
-  }
-
-  savePoint = (e) => {
-    var trigger = true;
-    if (this.savedPoint.length <= 1) { trigger = true; }
-    else {
-      trigger = false;
+    } else {
+      this.infowindowContent.style.display = 'none';
+      // console.log(this.place_noPlace.textContent);
+      this.place_noPlace.textContent = "Not a point of Interest " + event.latLng;
+      this.infowindow.open(this.map);
+      this.currentId = 0;
+      this.infowindow.setPosition(event.latLng);
     }
-    var index = this.props.currentindex;
-    var [...newSavePoint] = this.props.savedPoint;
-    if (trigger) {
-       newSavePoint[index] = newSavePoint[index].concat(this.savedPoint);
-       if (this.props.savedPoint[index].length > 0) {
-        var [...currentSavedPoint] = newSavePoint[index];
-        this.savedPoint = currentSavedPoint;
-    }
-       }
-    else { newSavePoint[index] = this.savedPoint; }
-
-
-
-    this.props.savePoint(newSavePoint)
-    // console.log(this.savedPoint)
-    //this.setState({UI:this.props.UI})
-
   }
 
-  deletePoint = () => {
+  getPlaceInformation = function (placeId) {
+    var me = this;
+    this.placesService.getDetails({ placeId: placeId }, function (place, status) {
+      if (status === 'OK') {
+        me.infowindow.close();
+        me.infowindow.setPosition(place.geometry.location);
+        me.infowindowContent.style.display = 'inline';
+        me.place_icon.style.display = 'inline';
+        if (place.photos == null) {
+          me.place_icon.src ='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';
+        }else{
+           me.place_icon.src = place.photos[0].getUrl();
+        }
+        me.place_name.textContent = place.name;
+        if (place.types == null) {
+          me.place_type.textContent = 'No information available';
 
-    // console.log("delete")
-    var [...currentSavedPoint] = this.props.savedPoint;
-    var index = this.props.currentindex;
+        } else {
+          me.place_type.textContent = place.types;
+        }
 
-    currentSavedPoint[index] = this.savedPoint;
-    this.props.deletePoint(currentSavedPoint);
+        if (place.international_phone_number == null) {
+          me.place_tel.textContent = 'No information available';
+        } else {
+          me.place_tel.textContent = place.international_phone_number;
+        }
+        // console.log(place.opening_hours);
+        if (place.opening_hours == null) {
+          me.place_openHour.textContent = 'No information available';
+        } else {
+          me.place_openHour.textContent = place.opening_hours.weekday_text;
+
+        }
+
+        if (place.rating === null) {
+          me.place_rate.textContent = 'No information available';
+        } else {
+          me.place_rate.textContent = 'Rate: ' + place.rating + '/5.0';
+        }
+        // console.log(me.place_rate);
+        // console.log(place.rating);
+        // me.place_rate.value = place.rating;
+
+
+        me.place_address.textContent = place.formatted_address;
+      } else {
+        alert(status);
+      }
+
+    });
   }
 
-
-  componentDidMount() {
-   this.initAutocomplete();
-    console.log("map mount")
-
-
-  }
-  componentWillMount() {
-
+  getCurrentId = function () {
+    return this.currentId;
   }
 
+}
 
-  render() {
-    
-    return (
-      <div>
-        <Row>
-          <Col xs={24} sm={6} md={24} lg={10} xl={10} >
-            <Input ref={this.searchInput}
-              id="pac-input"
-              className="controls"
-              size="large"
-              type="text"
-              placeholder='Try to search "attractions"'
-            />
-          </Col>
-          {/* <Col >
-            <button ref="addButton" type="button" onClick={this.savePoint}>Add to my plan</button>
-          </Col> */}
-        </Row>
-        <Row >
-          <Col xs={24} sm={6} md={24} lg={18} xl={18} >
-            <div ref={this.map} id="map"></div>
-
-          </Col>
-          <Col xs={24} sm={6} md={24} lg={6} xl={6}>
-            <div className="infoView" ref="infowindowcontent" display="none" >
-              <Card
-                bordered={true}
-                extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" disabled={false} ref="addButton" onClick={this.savePoint} >Add</button>}
-                //Place Name
-                title={<span ref="placename"></span>}
-                headStyle={{ padding: "0px", fontSize: "25px", position: "sticky" }}
-                bodyStyle={{ padding: "0px" }}
-                size="small"
-                className="cardStyle"
-                //Place Image
-                cover={<img ref="placeicon" alt="" src="" style={{ maxHeight: '270px' }} />}
-              >
-
-                <div className="colorDiv" >
-                  <p className="h4Style" ref="placerate"></p>
-                  <h5 className="h4Style" ref="placetype"> </h5>
-                </div>
-                <div className="div2Style" >
-                  <Row className="rowStyle">
-                    <Col span={4}>
-                      <Avatar size="small" icon="environment" className="avatarStyle" />  </Col>
-                    <Col span={20}>
-                      <div ref="placeaddress"></div>
-                    </Col>
-                  </Row>
-                  <Row className="rowStyle">
-                    <Col span={4}>
-                      <Avatar size="small" icon="phone" className="avatarStyle" />  </Col>
-                    <Col span={20}>
-                      <div ref="placetel"></div>
-                    </Col>
-                  </Row>
-                  <Row className="rowStyle">
-                    <Col span={4}>
-                      <Avatar size="small" icon="calendar" className="avatarStyle" />  </Col>
-                    <Col span={20}>
-                      <div ref="placeopeningHour" className="openHours"></div>
-                    </Col>
-
-
-                  </Row>
-
-                </div>
-                <button className="ant-btn ant-btn-block" disabled={true} ref="deleteButton" > Delete from my plan </button>
-              </Card>
-
-            </div>
-          </Col>
-        </Row>
-        <span id="place-noPlace"></span>
-      </div>
-    )
-  }
-
-  initAutocomplete() {
+function initAutocomplete() {
     var thisRef = this;
     var map = new google.maps.Map(this.map.current, {
       center: { lat: 59.325, lng: 18.070 },
@@ -431,30 +399,3 @@ class MapApi extends Component {
 
     }
   }
-}
-
-function mapStateToProps(state) {
-  const { savedPoint, currentindex } = state
-
-  return {
-    savedPoint,
-    currentindex
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    savePoint: (value) => {
-      const action = { type: "SAVE_POINT", payload: value };
-      dispatch(action);
-
-    },
-    deletePoint: (value) => {
-      const action = { type: "DELETE_POINT", payload: value };
-      dispatch(action);
-      // (console.log(value));
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapApi);

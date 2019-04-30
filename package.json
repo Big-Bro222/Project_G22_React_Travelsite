@@ -8,6 +8,7 @@
     "cross-fetch": "^3.0.1",
     "firebase": "^5.9.4",
     "firebase-admin": "^7.3.0",
+    "npm": "^6.9.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-horizontal-timeline": "^1.5.3",

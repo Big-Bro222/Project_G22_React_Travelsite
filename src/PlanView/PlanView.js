@@ -17,7 +17,7 @@ class PlanView extends Component {
     var len = this.props.timeline.length;
     var Content = [];
     for (var i = 0; i <= len - 1; i++) {
-      Content.push({ date: this.props.timeline[i], content: <ViewSelection UI={this.props.UI[i]} /> });
+      Content.push({ date: this.props.timeline[i], content: <ViewSelection UI={this.props.UI[i]} viewIndex={i}/> });
     }
     return Content;
     // var Content = [

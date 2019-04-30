@@ -49,7 +49,7 @@ class mapView extends Component {
     }
 }
 function mapStateToProps(state) {
-    const { isFetching, lastUpdated, items: posts } = state || {
+    const { isFetching, lastUpdated, items: posts,currentindex } = state || {
         isFetching: true,
         items: []
     }
@@ -57,7 +57,8 @@ function mapStateToProps(state) {
     return {
         posts,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        currentindex
     }
 }
 

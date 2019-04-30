@@ -53,7 +53,7 @@ class Search extends Component {
           
               <div className="searchView">
 
-                <Searchbar />
+                <Searchbar viewIndex={this.props.viewIndex}/>
               </div>
             {isFetching && <h2>Loading...</h2>}
             {isFetching && <Spin size="large" />}
