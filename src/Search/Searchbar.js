@@ -93,8 +93,8 @@ class Searchbars extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <Row style={{ width: "100%" }}>
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
-                        <Row >
-                        <input type="text" id={this.fromInputId} className="inp" placeholder="Flight from" style={{ width: "85%" }}></input>
+                        <Row style={{width:"100%"}} >
+                        <input type="text" id={this.fromInputId} className="inp inputFlight" placeholder="Flight from" style={{ width: "85%" }}></input>
                             {/* <Form.Item >
                                 {getFieldDecorator('From', { rules: [{ message: 'Please input your starting points', }], })(
                                     <Input  addonBefore="From" size="large" allowClear placeholder="Input IATA code,eg. ARN for Arlanda airport" style={{ width: "85%" }} />)}
@@ -109,8 +109,8 @@ class Searchbars extends Component {
                         </Row>
                     </Col>
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
-                        <Row >
-                        <input type="text" id={this.toInputId} className="inp" placeholder="To" style={{ width: "85%" }}></input>
+                        <Row style={{width:"100%"}}>
+                        <input type="text" id={this.toInputId} className="inp inputFlight" placeholder="To" style={{ width: "85%" }}></input>
 
                             {/* <Form.Item >
                                 {getFieldDecorator('To', { rules: [{ message: 'Please input your destination', }], })(
