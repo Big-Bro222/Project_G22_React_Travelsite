@@ -67,7 +67,7 @@ class Searchbars extends Component {
             formatting: `<div class="$(unique-result)"
                          single-result" 
                          data-index="$(i)"> 
-                       $(IATA) </div>`
+                       <b>$(IATA)</b> &nbsp $(name) &nbsp $(city), $(country) </div>`
         };
         // console.log(this.fromInputId)
         if (this.props.viewIndex === this.props.currentindex) {
