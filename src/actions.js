@@ -59,13 +59,21 @@ function fetchPosts(data) {
             method: "POST"
         })
 
-            .then(response =>
+            .then(response =>{
                 // console.log("@@" + response.headers.get('location'));
-                response.headers.get('location')
+                if(response.ok===true){
+         
+                console.log("ok")
+               return response.headers.get('location')
+              
+                }
+                else{
+                    Promise.reject("api fetch not ok")
+                }
+            }
             )
 
             .then(location => location.match(sessionKeyRegex)[1])
-
             .then(sessionLink => {
                 // console.log("sessionLink" + sessionLink);
                 return fetch(`${BASE_URLGET}${sessionLink}?sortType=price&sortOrder=asc&pageIndex=0&pageSize=10`,
@@ -80,6 +88,11 @@ function fetchPosts(data) {
             .then(json => {
                 // console.log(json);
                 dispatch(receivePosts(json));
+            })
+            .catch(reason=>{
+                console.log(reason);
+                dispatch(receivePosts({Itineraries:[]}));
+
             })
     }
 }

@@ -50,14 +50,19 @@ class Welcome extends Component {
     }
 
     onStartChange = (value) => {
+        if(value)
+        {
         this.onChange('startValue', value);
         this.props.onChangedeparture(value._d.getTime());
+        }
     }
 
     onEndChange = (value) => {
+        if(value){
         this.onChange('endValue', value);
         this.props.onChangereturn(value._d.getTime());
         // console.log(value._d.toISOString())
+        }
     }
 
     handleStartOpenChange = (open) => {
