@@ -55,8 +55,9 @@ class MapApi extends Component {
 
 
   componentDidMount() {
+   
    this.initAutocomplete();
-    console.log("map mount")
+    console.log("map mount"+this.props.currentindex)
 
 
   }
@@ -202,10 +203,10 @@ class MapApi extends Component {
     strokeWeight: 14
   };
 
-  if (thisRef.props.savedPoint[thisRef.props.currentindex].length === 1) {
+  if (thisRef.props.savedPoint[thisRef.props.viewIndex].length === 1) {
     
   } else {
-    thisRef.props.savedPoint[thisRef.props.currentindex].forEach(element => {
+    thisRef.props.savedPoint[thisRef.props.viewIndex].forEach(element => {
       var marker = new google.maps.Marker({
         id:element.id,
         position: element.position,
@@ -317,8 +318,8 @@ class MapApi extends Component {
       currentMarker = marker;
       currentMarker.position = marker.position;
       map.panTo(marker.getPosition());
-      if (thisRef.props.savedPoint[thisRef.props.currentindex]) {
-        if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
+      if (thisRef.props.savedPoint[thisRef.props.viewIndex]) {
+        if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === marker.id)) {
           addButton.disabled = true;
           deleteButton.disabled = false;
         }
@@ -367,7 +368,7 @@ class MapApi extends Component {
 
       }
       if (thisRef.props.savedPoint) {
-        if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
+        if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === currentSave.id)) {
 
         }
         else {
@@ -413,11 +414,11 @@ class MapApi extends Component {
         return element.id === marker.id;
       }
       var [...currentSavedPoint] = thisRef.props.savedPoint;
-      var index = thisRef.props.currentindex;
+      var index = thisRef.props.viewIndex;
 
-      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === marker.id)) {
+      if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === marker.id)) {
 
-        var currentArray = thisRef.props.savedPoint[thisRef.props.currentindex];
+        var currentArray = thisRef.props.savedPoint[thisRef.props.viewIndex];
         let i = currentArray.findIndex(checkPoint);
         savedMarkers.splice(i,1);
         currentSavedPoint[index].splice(i, 1);

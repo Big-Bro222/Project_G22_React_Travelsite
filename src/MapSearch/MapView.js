@@ -39,7 +39,7 @@ class mapView extends Component {
                     <Col xs={24} sm={24} md={15} lg={18} xl={19}>
 
                         <div>
-                            <MapApi />
+                            <MapApi viewIndex={this.props.viewIndex}/>
                         </div>
                     </Col>
                 </Row>
