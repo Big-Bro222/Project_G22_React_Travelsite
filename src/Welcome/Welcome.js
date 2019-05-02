@@ -61,6 +61,9 @@ class Welcome extends Component {
             this.onChange('startValue', value);
             this.props.onChangedeparture(value._d.getTime());
         }
+        else{
+            this.onChange('startValue', null);
+        }
     }
 
     onEndChange = (value) => {
@@ -68,6 +71,9 @@ class Welcome extends Component {
             this.onChange('endValue', value);
             this.props.onChangereturn(value._d.getTime());
             // console.log(value._d.toISOString())
+        }
+        else{
+            this.onChange('endValue', null);
         }
     }
 
@@ -142,7 +148,7 @@ class Welcome extends Component {
 
     render() {
         const { startValue, endValue, endOpen } = this.state;
-        // console.log(this.props.departuredate)
+ 
 
         return (
             <div >
@@ -187,7 +193,7 @@ class Welcome extends Component {
                             </Popover>
                         </Col>
                         <Col span={12} ><Link to="/Planview">
-                            <Button size="large" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start New Plan</Button>
+                            <Button size="large" type="primary" htmlType="submit" disabled={!startValue||!endValue} onClick={this.generateTimeLine}>Start New Plan</Button>
                         </Link></Col>
                         <Col span={6} align="left">
                             <Link to="/Planview"><Button size="large" onClick={() => { this.getData() }} type="primary" ghost>My Previous Plan</Button></Link></Col>

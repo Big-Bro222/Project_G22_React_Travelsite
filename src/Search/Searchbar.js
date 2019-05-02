@@ -54,9 +54,7 @@ class Searchbars extends Component {
         document.getElementById(this.fromInputId).value=arrvie;
         document.getElementById(this.toInputId).value=departure;
 
-        // this.props.form.setFieldsValue({
-        //     note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-        //   });
+
 
 
     }

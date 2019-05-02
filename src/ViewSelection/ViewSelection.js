@@ -18,9 +18,7 @@ class ViewSelection extends Component {
         var [...newUI]=this.props.UI
         newUI[index]="Search"
         this.props.addPlan(newUI)
-        //this.setState({UI:this.props.UI})
-        // console.log(newUI)
-        // console.log(this.props.UI)
+
     }
     render() {
     
