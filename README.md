@@ -12,7 +12,10 @@ We seperated the web to many views adn these views components are modueld and sa
 
 Now,begin to use the awesome web with creat a account and sign in to the website. At the home page, you can start to use it by choosing travel start and end date and clicking the "start new plan" button, then our web will creat a timeline for you! You can click the timeline date to change the day in your travel. Under the timeline, you can search filght information and add to your plan by click add button. The collected flight tittle will show at the sidebar. We fetch the api of Skyscanner and process it to get information. By click the side bar, you can swith the panel view from flight search to interest point explore in the map. You can search the place you woud like to go at the day and check the detail information and then add it to your plan. The saved places will show at the sidebar as childre of the menu. At the same time, both the saved flight information and interest points information will be saved to our realtime  cloud database build with firebase. In this way, from anytime you log in the web, you can check your previous travel plan by clicking "My previous plan" in the home page. You will find everything is come back to the way you edit them last time!
 
-Please enter the IATA code of airport to search flight curently. You can google it to get more information.Due to the limited time, building a global city and aitport auto suggest search bar is currently unavaliable. We will improve it in the future.
+~~Please enter the IATA code of airport to search flight curently. You can google it to get more information.Due to the limited time, building a global city and aitport auto suggest search bar is currently unavaliable. We will improve it in the future.~~
+
+New features:
+We have added tooltips in the homepage and fixed the space entering problem in the search bar. Also, we enhanced several usability like airport autocompelete.
 
 ## Available Scripts
 
@@ -43,26 +46,6 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 ### `Content` 
 src/App.js - root component. We added different routes to it<br>
