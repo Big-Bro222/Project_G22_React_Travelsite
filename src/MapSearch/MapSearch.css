@@ -89,7 +89,8 @@ body {
 
 .cardStyle{
   height: 540;
-  border-radius:8px
+  border-radius:8px;
+  word-break: keep-all;
 }
 
 .infoView {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Card, Row, Col,Avatar } from 'antd';
+import { Input, Card, Row, Col, Avatar } from 'antd';
 import "./MapSearch.css";
 import { connect } from 'react-redux'
 import ClickEventHandler from "./ClickEventHandler"
@@ -20,26 +20,43 @@ class MapApi extends Component {
 
   savePoint = (e) => {
     var trigger = true;
-    console.log(this.savedPoint.length)
     if (this.savedPoint.length <= 1) { trigger = true; }
     else {
       trigger = false;
     }
-    var index = this.props.currentindex
+    var index = this.props.currentindex;
     var [...newSavePoint] = this.props.savedPoint;
-
-    if (trigger) { newSavePoint[index] = newSavePoint[index].concat(this.savedPoint); }
+    if (trigger) {
+       newSavePoint[index] = newSavePoint[index].concat(this.savedPoint);
+       if (this.props.savedPoint[index].length > 0) {
+        var [...currentSavedPoint] = newSavePoint[index];
+        this.savedPoint = currentSavedPoint;
+    }
+       }
     else { newSavePoint[index] = this.savedPoint; }
 
 
-    this.props.savePoint(newSavePoint)
-    //this.setState({UI:this.props.UI})
 
+    this.props.savePoint(newSavePoint)
+
+
+  }
+
+  deletePoint = () => {
+
+    // console.log("delete")
+    var [...currentSavedPoint] = this.props.savedPoint;
+    var index = this.props.currentindex;
+
+    currentSavedPoint[index] = this.savedPoint;
+    this.props.deletePoint(currentSavedPoint);
   }
 
 
   componentDidMount() {
-    this.initAutocomplete();
+   
+   this.initAutocomplete();
+    console.log("map mount"+this.props.currentindex)
 
 
   }
@@ -49,6 +66,7 @@ class MapApi extends Component {
 
 
   render() {
+    
     return (
       <div>
         <Row>
@@ -61,9 +79,7 @@ class MapApi extends Component {
               placeholder='Try to search "attractions"'
             />
           </Col>
-          {/* <Col >
-            <button ref="addButton" type="button" onClick={this.savePoint}>Add to my plan</button>
-          </Col> */}
+       
         </Row>
         <Row >
           <Col xs={24} sm={6} md={24} lg={18} xl={18} >
@@ -71,53 +87,52 @@ class MapApi extends Component {
 
           </Col>
           <Col xs={24} sm={6} md={24} lg={6} xl={6}>
-          <div className="infoView" ref="infowindowcontent" display ="none" >
-                        <Card
-                            bordered = {true}
-                            extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" ref="addButton" onClick={this.savePoint} >Add</button>}
-                            //Place Name
-                            title={<span ref="placename"></span>}
-                            headStyle={{ padding: "0px", fontSize: "25px", position:"sticky"}}
-                            bodyStyle={{ padding: "0px" }}
-                            size="small"
-                            className="cardStyle"
-                            //Place Image
-                            cover={<img ref="placeicon" src="" style ={{maxHeight:'270px'}} />}
-                        >
+            <div className="infoView" ref="infowindowcontent" display="none" >
+              <Card
+                bordered={true}
+                extra={<button className="ant-btn ant-btn-primary ant-btn-lg ant-btn-background-ghost" disabled={false} ref="addButton" onClick={this.savePoint} >Add</button>}
+                //Place Name
+                title={<span ref="placename"></span>}
+                headStyle={{ padding: "0px", fontSize: "25px", position: "sticky" }}
+                bodyStyle={{ padding: "0px" }}
+                size="small"
+                className="cardStyle"
+                //Place Image
+                cover={<img ref="placeicon" alt="" src="" style={{ maxHeight: '270px' }} />}
+              >
 
-                            <div className="colorDiv" >
-                            <p className="h4Style" ref = "placerate"></p>
-                                <h5 className="h4Style" ref = "placetype"> </h5>
-                            </div>
-                            <div className="div2Style" >
-                            <Row className="rowStyle">
-                                <Col span={4}>
-                                <Avatar size="small" icon="environment" className="avatarStyle" />  </Col>
-                                <Col span = {20}>
-                                <div ref="placeaddress"></div>
-                                </Col>
-                                </Row>
-                                <Row className="rowStyle">
-                                <Col span={4}>
-                                <Avatar size="small" icon="phone" className="avatarStyle" />  </Col>
-                                <Col span = {20}>
-                                <div ref="placetel"></div>
-                                </Col>
-                                </Row>
-                                <Row className="rowStyle">
-                                <Col span={4}>
-                                <Avatar size="small" icon="calendar" className="avatarStyle" />  </Col>
-                                <Col span = {20}>
-                                <div ref="placeopeningHour" className="openHours"></div>
-                                </Col>
-                               
-                                
-                            </Row>
-                               
-                            </div>
-                            
+                <div className="colorDiv" >
+                  <p className="h4Style" ref="placerate"></p>
+                  <h5 className="h4Style" ref="placetype"> </h5>
+                </div>
+                <div className="div2Style" >
+                  <Row className="rowStyle">
+                    <Col span={4}>
+                      <Avatar size="small" icon="environment" className="avatarStyle" />  </Col>
+                    <Col span={20}>
+                      <div ref="placeaddress"></div>
+                    </Col>
+                  </Row>
+                  <Row className="rowStyle">
+                    <Col span={4}>
+                      <Avatar size="small" icon="phone" className="avatarStyle" />  </Col>
+                    <Col span={20}>
+                      <div ref="placetel"></div>
+                    </Col>
+                  </Row>
+                  <Row className="rowStyle">
+                    <Col span={4}>
+                      <Avatar size="small" icon="calendar" className="avatarStyle" />  </Col>
+                    <Col span={20}>
+                      <div ref="placeopeningHour" className="openHours"></div>
+                    </Col>
 
-                        </Card>
+
+                  </Row>
+
+                </div>
+                <button className="ant-btn ant-btn-block" disabled={true} ref="deleteButton" > Delete from my plan </button>
+              </Card>
 
             </div>
           </Col>
@@ -127,35 +142,33 @@ class MapApi extends Component {
     )
   }
 
-
-
-
   initAutocomplete() {
     var thisRef = this;
     var map = new google.maps.Map(this.map.current, {
       center: { lat: 59.325, lng: 18.070 },
       zoom: 12,
       mapTypeId: 'roadmap',
-      // clickableIcons: false
     });
 
     var clickHandler = new ClickEventHandler(map, { lat: 59.325, lng: 18.070 });
-    
+
     clickHandler.infowindowContent = this.refs.infowindowcontent;
-    clickHandler.infowindowContent.style.display ="none";
+    clickHandler.infowindowContent.style.display = "none";
     clickHandler.place_icon = this.refs.placeicon;
     clickHandler.place_name = this.refs.placename;
     clickHandler.place_address = this.refs.placeaddress;
     clickHandler.place_type = this.refs.placetype;
     clickHandler.place_tel = this.refs.placetel;
     clickHandler.place_openHour = this.refs.placeopeningHour;
-    clickHandler.place_rate = this.refs.placerate;  
+    clickHandler.place_rate = this.refs.placerate;
+
 
     // Create the search box and link it to the UI element.
     var input = this.searchInput.current.input;
     var searchBox = new google.maps.places.SearchBox(input);
     var addButton = this.refs.addButton;
-  
+    var deleteButton = this.refs.deleteButton;
+
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -165,35 +178,63 @@ class MapApi extends Component {
       searchBox.setBounds(map.getBounds());
     });
 
+    var savedMarkers = [];
     var markers = [];
     var currentMarker = {
       id: 0,
       title: 'unknow01',
       address: 'unkown Places01'
     };
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content: "testing",
-    //   maxWidth: 600
-    // });
+   
+   //style for saved marker  use as icon:goldstar
+   var goldStar = {
+    path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+    fillColor: 'yellow',
+    fillOpacity: 0.8,
+    scale: 0.05,
+    strokeColor: 'gold',
+    strokeWeight: 14
+  };
 
+  if (thisRef.props.savedPoint[thisRef.props.viewIndex].length === 1) {
+    
+  } else {
+    thisRef.props.savedPoint[thisRef.props.viewIndex].forEach(element => {
+      var marker = new google.maps.Marker({
+        id:element.id,
+        position: element.position,
+        icon:goldStar,
+        map:map,
+      });
 
+      marker.addListener('click',function(e){
+        setCurrentMarker(marker);
+        clickHandler.getPlaceInformation(marker.id);
+      });
+
+      savedMarkers.push(marker);
+
+    });
+  }
+  
+   
     //place service
+    // eslint-disable-next-line no-unused-vars
     var service = new google.maps.places.PlacesService(map);
     // var geocoder = new google.maps.Geocoder();
     addButton.addEventListener('click', function (e) {
       addSeletedMarkers();
       e.preventDefault();
+
     });
 
-    //style for saved marker  use as icon:goldstar
-    var goldStar = {
-      path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-      fillColor: 'yellow',
-      fillOpacity: 0.8,
-      scale: 0.05,
-      strokeColor: 'gold',
-      strokeWeight: 14
-    };
+    deleteButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      deleteSavedPoint(currentMarker);
+
+    })
+
+ 
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
@@ -214,7 +255,6 @@ class MapApi extends Component {
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
           return;
         }
 
@@ -241,9 +281,6 @@ class MapApi extends Component {
           setCurrentMarker(lastMarker);
           // openInfowindow(lastMarker);
           clickHandler.getPlaceInformation(lastMarker.id);
-
-          // thisRef.setState(clickHandler.place_rate);
-
         });
 
       });
@@ -254,7 +291,6 @@ class MapApi extends Component {
     function toggleBounce(marker) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
-        //preMarker=marker;
       } else {
         markers.forEach(function (marker) {
           marker.setAnimation(null);
@@ -268,9 +304,23 @@ class MapApi extends Component {
       currentMarker = marker;
       currentMarker.position = marker.position;
       map.panTo(marker.getPosition());
+      if (thisRef.props.savedPoint[thisRef.props.viewIndex]) {
+        if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === marker.id)) {
+          addButton.disabled = true;
+          deleteButton.disabled = false;
+        }
+        else {
+          addButton.disabled = false;
+          deleteButton.disabled = true;
+        }
+      }
+      else {
+        addButton.disabled = false;
+        deleteButton.disabled = true;
+      }
     }
 
-    //     //click add marker
+   //click add marker
     map.addListener('click', function (e) {
       placeMarker(e.latLng, map);
     });
@@ -288,21 +338,26 @@ class MapApi extends Component {
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
       }));
-      console.log(markers[0].id);
       setCurrentMarker(markers[0]);
     }
 
     function addSeletedMarkers() {
-      // console.log(this)
-      // console.log(this.savedPoint)
+      var lat = currentMarker.position.lat();
+      var lng = currentMarker.position.lng();
       var currentSave = {
         id: currentMarker.id,
         title: clickHandler.place_name.textContent,
-        address: clickHandler.place_address.textContent
+        address: clickHandler.place_address.textContent,
+        position:{"lat":lat,"lng":lng},
 
       }
-      if (thisRef.props.savedPoint[thisRef.props.currentindex].find(item => item.id === currentSave.id)) {
+      if (thisRef.props.savedPoint) {
+        if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === currentSave.id)) {
 
+        }
+        else {
+          thisRef.savedPoint.push(currentSave);
+        }
       }
       else {
         thisRef.savedPoint.push(currentSave);
@@ -320,13 +375,40 @@ class MapApi extends Component {
           marker.setMap(null);
         });
         markers = [];
-        // openInfowindow(marker);
         clickHandler.getPlaceInformation(marker.id);
-        // thisRef.setState(clickHandler.place_rate);
 
       });
+      currentMarker.setMap(null);
+      savedMarkers.push(marker);
+      setCurrentMarker(marker);
+      addButton.disabled = true;
+      deleteButton.disabled = false;
 
-      // console.log(thisRef.savedPoint);
+    }
+
+
+
+    function deleteSavedPoint(marker) {
+
+      function checkPoint(element) {
+        return element.id === marker.id;
+      }
+      var [...currentSavedPoint] = thisRef.props.savedPoint;
+      var index = thisRef.props.viewIndex;
+
+      if (thisRef.props.savedPoint[thisRef.props.viewIndex].find(item => item.id === marker.id)) {
+
+        var currentArray = thisRef.props.savedPoint[thisRef.props.viewIndex];
+        let i = currentArray.findIndex(checkPoint);
+        savedMarkers.splice(i,1);
+        currentSavedPoint[index].splice(i, 1);
+        marker.setMap(null);
+        addButton.disabled = false;
+        deleteButton.disabled = true;
+      }
+
+      thisRef.props.deletePoint(currentSavedPoint);
+   
 
     }
   }
@@ -346,7 +428,11 @@ function mapDispatchToProps(dispatch) {
     savePoint: (value) => {
       const action = { type: "SAVE_POINT", payload: value };
       dispatch(action);
-      // (console.log(value))
+
+    },
+    deletePoint: (value) => {
+      const action = { type: "DELETE_POINT", payload: value };
+      dispatch(action);
     },
   }
 }

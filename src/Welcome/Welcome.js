@@ -3,7 +3,7 @@ import React, {
 } from "react";
 import 'antd/dist/antd.css';
 import {
-    Button, DatePicker, Row, Col, Carousel,
+    Button, DatePicker, Row, Col, Carousel, Popover
 } from 'antd';
 import moment from "moment"
 import './Welcome.css'
@@ -12,10 +12,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import img01 from "../imgs/01.jpg"
 import img02 from "../imgs/02.jpg"
-import firebase from 'firebase'
-import {updateState,currentUID} from "../Firebase/FirebaseTool"
+import firebase from 'firebase/app'
 
 
+const toolTips = (
+    <div>
+        <p>Step 1: Choose your travel dates.</p>
+        <p>Step 2: Explore flight or attractions and edit your daily travel plan.</p>
+        <p>Step 3: Export your plan! Print it or save to share with friends!</p>
+        <p>Step 4: Enjoy your journey! :P</p>
+    </div>
+);
 
 class Welcome extends Component {
     constructor(props) {
@@ -48,14 +55,23 @@ class Welcome extends Component {
     }
 
     onStartChange = (value) => {
-        this.onChange('startValue', value);
-        this.props.onChangedeparture(value._d.getTime());
+        if (value) {
+            this.onChange('startValue', value);
+            this.props.onChangedeparture(value._d.getTime());
+        }
+        else{
+            this.onChange('startValue', null);
+        }
     }
 
     onEndChange = (value) => {
-        this.onChange('endValue', value);
-        this.props.onChangereturn(value._d.getTime());
-        console.log(value._d.toISOString())
+        if (value) {
+            this.onChange('endValue', value);
+            this.props.onChangereturn(value._d.getTime());
+        }
+        else{
+            this.onChange('endValue', null);
+        }
     }
 
     handleStartOpenChange = (open) => {
@@ -70,45 +86,40 @@ class Welcome extends Component {
         this.setState({ endOpen: open });
     }
 
-    updateData(value)
-    {
+    updateData(value) {
+        if (value.savedFlight) {
+
+        }
+        else {
+            value.savedFlight = Array(value.timeline.length).fill([]);
+        }
+        if (value.savedPoint) {
+
+        }
+        else {
+            value.savedPoint = Array(value.timeline.length).fill([]);
+        }
+        if (value.items) { }
+        else {
+            value.items = [];
+        }
         this.props.getData(value);
         this.props.changeView("printoutView");
     }
-    getData=()=>
-    {
+    getData = () => {
         var myUserId = firebase.auth().currentUser.uid;
-        var savedFlight=[];
-        var savedPoint=[];
-        var timeline=[];
         var thisRef = this;
-        firebase.database().ref('user-state/' + myUserId+'/state').once('value').then(function(snapshot) 
-        {
-            if(snapshot.val().savedFlight)
-            savedFlight=snapshot.val().savedFlight;
-            if(snapshot.val().savedPoint)
-            savedPoint=snapshot.val().savedPoint;
-            if(snapshot.val().timeline)
-            timeline=snapshot.val().timeline;
-            console.log(snapshot.val())
-            return thisRef.updateData(timeline=snapshot.val())
+        firebase.database().ref('user-state/' + myUserId + '/state').once('value').then(function (snapshot) {
+
+            return thisRef.updateData(snapshot.val())
 
         })
     }
-
-    // changeView = (value) => {
-    //     // e.preventDefault();
-    
-    // this.props.changeView(value)
-    // }
-
-    // Use generateTimeLine to creat a default timeline and give the store state UI default values ["Startview",...]
-
     generateTimeLine = () => {
         var timeline = this.timeLinearr(this.props.departuredate, this.props.returndate)
         var UI = Array(timeline.length).fill("Startview")
-        var savedPoint = Array(timeline.length).fill([])
-        var savedFlight = Array(timeline.length).fill([])
+        var savedPoint = Array(timeline.length).fill(["placeHolder"])
+        var savedFlight = Array(timeline.length).fill(["placeHolder"])
         this.props.generateTimeLine(timeline, UI, savedPoint, savedFlight);
         this.props.changeView("timeline");
     }
@@ -125,11 +136,10 @@ class Welcome extends Component {
 
     render() {
         const { startValue, endValue, endOpen } = this.state;
-        console.log(this.props.departuredate)
+ 
 
         return (
-            <div >
-                {/* <div>{this.props.departuredate + "this.props." + this.props.returndate}</div> */}
+            <div>
                 <Navbar />
                 <Carousel autoplay>
                     <div><img alt="1" style={{ maxWidth: "100%" }} src={img01}></img></div>
@@ -163,12 +173,17 @@ class Welcome extends Component {
                         </Col>
                     </Row>
                     <Row type="flex" justify="center" align="middle" className="buttonStyle">
-                        <Col span={6}></Col>
+                        <Col span={3}></Col>
+                        <Col span ={3}>
+                            <Popover content={toolTips} title="Four steps to create your personal travel plan">
+                                <Button size='large'>First Time User? </Button>
+                            </Popover>
+                        </Col>
                         <Col span={12} ><Link to="/Planview">
-                            <Button size="Default" type="primary" htmlType="submit" onClick={this.generateTimeLine}>Start New Plan</Button>
+                            <Button size="large" type="primary" htmlType="submit" disabled={!startValue||!endValue} onClick={this.generateTimeLine}>Start New Plan</Button>
                         </Link></Col>
                         <Col span={6} align="left">
-                            <Link to="/Planview"><Button size="Large" onClick={() => { this.getData() }} type="primary" ghost>My Previous Plan</Button></Link></Col>
+                            <Link to="/Planview"><Button size="large" onClick={() => { this.getData() }} type="primary" ghost>My Previous Plan</Button></Link></Col>
 
                     </Row>
                 </div>
@@ -190,15 +205,12 @@ function mapDispatchToProps(dispatch) {
         onChangedeparture: (value) => {
             const action = { type: "ON_CHANGE_DEPARTURE", payload: value };
             dispatch(action);
-            (console.log("input"))
         },
         onChangereturn: (value) => {
             const action = { type: "ON_CHANGE_RETURN", payload: value };
             dispatch(action);
-            (console.log("input2"))
         },
         generateTimeLine: (timeline, UI, savedPoint, savedFlight) => {
-            console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
                 timeline: timeline,
@@ -213,12 +225,11 @@ function mapDispatchToProps(dispatch) {
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            (console.log(value))
         },
         getData: (value) => {
             const action = {
-                type: "GET_DATA",payload:value
-                
+                type: "GET_DATA", payload: value
+
             };
             dispatch(action);
 

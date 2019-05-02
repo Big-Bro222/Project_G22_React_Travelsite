@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Affix,Alert } from 'antd';
-import SideView from "../Side/SideView";
+import { Row, Col,Alert } from 'antd';
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 import { connect } from "react-redux";
@@ -13,32 +12,14 @@ class PlanView extends Component {
     this.state = { value: 0, previous: 0 };
   }
   giveContent = () => {
-    console.log(this.props.currentindex);
+    
     var len = this.props.timeline.length;
     var Content = [];
     for (var i = 0; i <= len - 1; i++) {
-      Content.push({ date: this.props.timeline[i], content: <ViewSelection UI={this.props.UI[i]} /> });
+      Content.push({ date: this.props.timeline[i], content: <ViewSelection UI={this.props.UI[i]} viewIndex={i}/> });
     }
     return Content;
-    // var Content = [
-    //   {
-    //     date: '2019-01-04',
-    //     content: <PlanViewDetails UI="PlanItemView" />
-    //   },
-    //   {
-    //     date: '2019-01-05',
-    //     content: <PlanViewDetails />
-    //   },
-    //   {
-    //     date: '2019-01-08',
-    //     content: <PlanViewDetails />
-    //   },
-    //   {
-    //     date: '2019-01-10',
-    //     content: <PlanViewDetails />
-    //   }
-
-    // ];
+ 
   }
 
   componentWillMount() {
@@ -89,7 +70,6 @@ class PlanView extends Component {
         break;
       }
       case "printoutView": {
-        console.log("test pint")
         mainView = (
           <Row>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} >
@@ -111,15 +91,13 @@ class PlanView extends Component {
   }
   else mainView=(   <Alert
     message="There is no timeline now"
-    description="Please creat your timeline first and save it"
+    description="Please create your timeline first and save it"
     type="info"
   />)
         
         return (
           <div>
-            {/* <div>{this.props.timeline+"yes"}</div>
-        <div>{this.props.UI}</div>
-        <div>{this.props.currentindex}</div> */}
+    
 
             <Navbar />
 

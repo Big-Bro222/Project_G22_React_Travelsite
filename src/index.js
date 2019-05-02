@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import'firebase/database'
 
 var config = {
   apiKey: "AIzaSyBhzhhGWi1TLDQyl8dyDOhR6WIG-BRcYKc",

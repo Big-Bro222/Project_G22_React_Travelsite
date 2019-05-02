@@ -17,4 +17,128 @@
   margin-right: 10px;
   margin-left: 18px
   }
+
+  /* Flight input style */
+  .autocomplete-result {
+    cursor: pointer;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+    border-bottom: 1px solid #d9d9d9;
+  }
+    .autocomplete-result:hover {
+      background-color: #f2f2fc; }
   
+  .autocomplete-results {
+    position: inherit;
+    background-color: #fff;
+    z-index: 100;
+    border-radius: 0px 0px 10px 10px;
+    width: 80%;
+    margin-left: 10%;
+    border: 1px solid #d9d9d9;
+    word-break: keep-all;
+    font-size: 16px;
+   }
+
+  
+  * {
+    box-sizing: border-box; }
+    
+  .inp {
+    position: relative;
+    margin: auto;
+    width: 100%;
+}  
+
+
+.inputFlight input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 20px;
+  font-weight: 500;
+  border-bottom: 2px solid #C8CCD4;
+  background: none;
+  border-radius: 0;
+  color: #223254;
+  transition: all .15s ease; }
+  .inputFlight input:hover {
+    background: rgba(34, 50, 84, 0.03); }
+    .inputFlight input:not(:placeholder-shown) + span {
+    color: #0051ff;
+    transform: translateY(-26px) scale(0.75); }
+    .inputFlight input:focus {
+    background: none;
+    outline: none; }
+    .inputFlight input:focus + span {
+      transform: translateY(-26px) scale(0.75); }
+      .inputFlight input:focus + span + .border {
+        transform: scaleX(1); }
+
+        /*  SECTIONS  */
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px; }
+
+/*  COLUMN SETUP  */
+.col {
+  display: block;
+  float: left;
+  margin: 1% 0 1% 1%; }
+
+.col:first-child {
+  margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after {
+  content: "";
+  display: table; }
+
+.group:after {
+  clear: both; }
+
+.group {
+  zoom: 1;
+  /* For IE 6/7 */ }
+
+.span_5_of_5 {
+  width: 100%; }
+
+.span_4_of_5 {
+  width: 79.8%; }
+
+.span_3_of_5 {
+  width: 59.6%; }
+
+.span_2_of_5 {
+  width: 39.4%; }
+
+.span_1_of_5 {
+  width: 19.2%; }
+
+  /*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+  .col {
+    margin: 1% 0 1% 0%; }
+
+  .span_1_of_5,
+  .span_2_of_5,
+  .span_3_of_5,
+  .span_4_of_5,
+  .span_5_of_5 {
+    width: 100%; } }
+.logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 7%; }
+  .logo img {
+    max-width: 15%; }
+

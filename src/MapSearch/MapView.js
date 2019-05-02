@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Row, Col, Affix } from 'antd'
-import {
-    fetchPostsIfNeeded
-} from '../actions'
+import { Row, Col } from 'antd'
 import SideView from "../Side/SideView";
 import MapApi from "./MapApi"
 
@@ -18,24 +15,9 @@ class mapView extends Component {
     }
 
     handleSubmit(formData) {
-        // e.preventDefault()
-
-        // const { dispatch } = this.props
-        console.log("formData" + formData)
-        // dispatch(fetchPostsIfNeeded(formData))
     }
 
     render() {
-        const { posts, isFetching, lastUpdated } = this.props
-        console.log(posts.length)
-        let ResultListPlaceHoder;
-        // if(!(posts instanceof Array))
-        // {
-        // ResultListPlaceHoder = (<ResultList posts = {posts} lastTetchTime={lastUpdated}/>)
-        // console.log("come to list")
-        // }
-        // else
-        // ResultListPlaceHoder=(<div></div>)
         return (
             <div>
                 <Row>
@@ -49,7 +31,7 @@ class mapView extends Component {
                     <Col xs={24} sm={24} md={15} lg={18} xl={19}>
 
                         <div>
-                            <MapApi />
+                            <MapApi viewIndex={this.props.viewIndex}/>
                         </div>
                     </Col>
                 </Row>
@@ -59,7 +41,7 @@ class mapView extends Component {
     }
 }
 function mapStateToProps(state) {
-    const { isFetching, lastUpdated, items: posts } = state || {
+    const { isFetching, lastUpdated, items: posts,currentindex } = state || {
         isFetching: true,
         items: []
     }
@@ -67,11 +49,11 @@ function mapStateToProps(state) {
     return {
         posts,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        currentindex
     }
 }
 
 export default connect(mapStateToProps)(mapView)
 
-/*******************************ClassPeople--&&--SearchLocation*************************************/
 

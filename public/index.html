@@ -3,23 +3,12 @@
 
 <head>
 
-  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBhzhhGWi1TLDQyl8dyDOhR6WIG-BRcYKc",
-      authDomain: "travelplanner-web.firebaseapp.com",
-      databaseURL: "https://travelplanner-web.firebaseio.com",
-      projectId: "travelplanner-web",
-      storageBucket: "travelplanner-web.appspot.com",
-      messagingSenderId: "148373620558"
-    };
-    firebase.initializeApp(config);
-  </script>
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA40IKC5vzBQA1HUNW1Y1OnfMQZZZ8gbpA&libraries=places&callback=initAutocomplete"
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-database.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA40IKC5vzBQA1HUNW1Y1OnfMQZZZ8gbpA&libraries=places"
     async defer></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/airport-autocomplete-js@2.1.0/dist/index.browser.min.js"></script>
 
   <meta charset="utf-8" />
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -55,8 +44,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script src="../src/MapSearch/MapApi.js"></script>
-  <script src="../src/Firebase/Firebase.js"></script>
+
 
 
 

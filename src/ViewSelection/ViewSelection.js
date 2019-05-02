@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Startview from "../PlanView/Startview";
 import Search from "../Search/Search";
 import MapView from "../MapSearch/MapView";
 import { Button } from 'antd';
@@ -9,18 +8,12 @@ import { connect } from "react-redux";
 
 
 class ViewSelection extends Component {
-    // state = {UI:["PlanItemView","PlanItemView","PlanItemView"]
-    // }
-
-    // change the timeline view status to control the view display
     addPlan = () => {
         var index = this.props.currentindex
         var [...newUI]=this.props.UI
         newUI[index]="Search"
         this.props.addPlan(newUI)
-        //this.setState({UI:this.props.UI})
-        console.log(newUI)
-        console.log(this.props.UI)
+
     }
     render() {
     
@@ -28,19 +21,19 @@ class ViewSelection extends Component {
             case "DetailItem": {
                 return (
                     <div>
-                        <DetailItem />
+                        <DetailItem viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             case "Search": {
                 return (
                     <div>
-                       <Search />
+                       <Search viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             case "Map": {
                 return (
                     <div>
-                        <MapView />
+                        <MapView viewIndex={this.props.viewIndex}/>
                     </div>)
             }
             default:
@@ -48,7 +41,6 @@ class ViewSelection extends Component {
                     return (
                         <div>
                             <div>
-                                {/* <div>{this.state.UI}</div> */}
                                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
                             </div>
                         </div>)
@@ -70,7 +62,6 @@ function mapDispatchToProps(dispatch) {
         addPlan: (value) => {
             const action = { type: "ADD_PLAN", payload: value };
             dispatch(action);
-            (console.log(value))
         },
     }
 }

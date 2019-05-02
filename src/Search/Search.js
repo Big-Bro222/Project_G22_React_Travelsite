@@ -3,12 +3,8 @@ import './Search.css'
 import ResultList from "../ResultList/ResultList";
 import Searchbar from "./Searchbar"
 import { connect } from 'react-redux'
-import { Row, Col } from 'antd'
-import {
-  fetchPostsIfNeeded
-} from '../actions'
+import { Row, Col,Spin } from 'antd'
 import SideView from "../Side/SideView";
-import MapApi from "../MapSearch/MapApi"
 
 
 
@@ -21,24 +17,12 @@ class Search extends Component {
   }
 
   handleSubmit(formData) {
-    // e.preventDefault()
 
-    // const { dispatch } = this.props
-    console.log("formData" + formData)
-    // dispatch(fetchPostsIfNeeded(formData))
   }
 
   render() {
     const { posts, isFetching, lastUpdated } = this.props
-    console.log(posts.length)
-    let ResultListPlaceHoder;
-    // if(!(posts instanceof Array))
-    // {
-    // ResultListPlaceHoder = (<ResultList posts = {posts} lastTetchTime={lastUpdated}/>)
-    // console.log("come to list")
-    // }
-    // else
-    // ResultListPlaceHoder=(<div></div>)
+
     return (
       <div>
         <Row>
@@ -53,17 +37,16 @@ class Search extends Component {
           
               <div className="searchView">
 
-                <Searchbar />
+                <Searchbar viewIndex={this.props.viewIndex}/>
               </div>
             {isFetching && <h2>Loading...</h2>}
+            {isFetching && <Spin size="large" />}
             {!(posts instanceof Array) && (
               <div>
                 <ResultList posts={posts} lastTetchTime={lastUpdated} />
               </div>
             )}
-            {/* <div>
-              <MapApi/>
-            </div> */}
+      
           </Col>
         </Row>
         
@@ -85,6 +68,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Search)
-
-/*******************************ClassPeople--&&--SearchLocation*************************************/
 

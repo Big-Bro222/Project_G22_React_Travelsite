@@ -8,76 +8,62 @@ class Timeline extends Component {
     constructor(props) {
         super(props);
 
-    this.state = {
-        value: 0,
-        previous: 0,
-    
-        // Points: ["2019-01-04", "2019-01-05", "2019-01-06", "2019-01-07", "2019-01-08"]
-    };
-}
+        this.state = {
+            value: 0,
+            previous: 0,
 
-componentWillMount() {
-if(this.props.content)
-    this.dates = this.props.content.map((entry) => entry.date);
-  }
-   
-    
+        };
+    }
+
+    componentWillMount() {
+        if (this.props.content)
+            this.dates = this.props.content.map((entry) => entry.date);
+    }
 
     render() {
-        if(this.props.content){
-        var views = this.props.content.map((entry, index) => {
+        if (this.props.content) {
+            var views = this.props.content.map((entry, index) => {
+                return (
+                    <div key={index}>
+                        {entry.component}
+                    </div>
+                );
+            });
+
             return (
-              <div key={index}>
-                { entry.component }
-              </div>
+                <div>
+                    {/* Bounding box for the Timeline */}
+                    <div style={{ width: '80%', height: '100px', margin: '0 auto' }}>
+                        <HorizontalTimeline
+                            index={this.state.value}
+                            indexClick={(index) => {
+                                this.setState({ value: index, previous: this.state.value });
+                                this.props.timelineClick(index);
+                            }}
+                            values={this.dates}
+                            styles={{ background: '#ffffff', foreground: '#40a9ff', outline: '#bae7ff' }} />
+                    </div>
+                    <div className='text-center'>
+                        {/* any arbitrary component can go here */}
+                        <SwipeableViews
+                            index={this.state.value}
+                            onChangeIndex={(value, previous) => {
+                                this.setState({ value: value, previous: previous });
+                            }}
+                            resistance>
+                            {views}
+                        </SwipeableViews>
+                    </div>
+                </div>
             );
-          });
-      
-          
-          
-        
-
-        return (
-            <div>
-                {/* Bounding box for the Timeline */}
-                {/* <div>issisisi</div> */}
-                <div style={{ width: '80%', height: '100px', margin: '0 auto' }}>
-                    <HorizontalTimeline
-                        index={this.state.value}
-                        indexClick={(index) => {
-                            console.log(index)
-                            
-                            this.setState({ value: index, previous: this.state.value });
-                            this.props.timelineClick(index);
-                        }}
-                        values={this.dates}
-                        styles={{ background: '#ffffff', foreground: '#40a9ff', outline: '#bae7ff' }} />
-                </div>
-                <div className='text-center'>
-                    {/* any arbitrary component can go here */}
-                    {/* {this.state.value} */}
-                    <SwipeableViews
-                        index={this.state.value}
-                        onChangeIndex={(value, previous) => {
-                            this.setState({ value: value, previous: previous });
-                        }}
-                        resistance>
-                        {views}
-                    </SwipeableViews>
-                    
-                    {/* <PlanItemView /> */}
-
-                </div>
-            </div>
-        );
-                    }
-                    else
-                    return(<div></div>)
+        }
+        else
+            return (<div></div>)
     }
 }
 function mapStateToProps(state) {
     return {
-        currentindex:state.currentindex,
+        currentindex: state.currentindex,
     }
 }
 
