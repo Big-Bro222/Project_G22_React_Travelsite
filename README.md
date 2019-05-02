@@ -1,10 +1,21 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is bulit with skyscanner api and google api and the user data is saved in the cloud database with firebase realtime database; So ,user's account data and saved flight and place data are saved in the firebase remote database in realtime and fetch it once the user sign in again and check his previous plan. This project is built with React and due to the complex state relationship, we use the Redux and React-Redux to manage the state in the redux store.
+This project is created by group 22 byZY ZXY QZ and LRZ;
 
-Under Master branch is the project for mid-review or tag "mid_term"
+Under Master branch is the project for final review
 
-Now,begin to use with choosing travel start and end date and then you can search filght information under your timeline. We fetch the api from Skyscanner to get information.
+## Project strcture:
+We seperated the web to many views adn these views components are modueld and saved in individual folder with their class name; There are some main important views like Search view and Side view and map search view. They are made up of some children views component to make the code more clear and easy to reuse.
 
-Please enter the IATA code of airport to search flight curently. You can google it to get more information. We will improve it recently.
+
+## How to use Travel Planner:
+
+Now,begin to use the awesome web with creat a account and sign in to the website. At the home page, you can start to use it by choosing travel start and end date and clicking the "start new plan" button, then our web will creat a timeline for you! You can click the timeline date to change the day in your travel. Under the timeline, you can search filght information and add to your plan by click add button. The collected flight tittle will show at the sidebar. We fetch the api of Skyscanner and process it to get information. By click the side bar, you can swith the panel view from flight search to interest point explore in the map. You can search the place you woud like to go at the day and check the detail information and then add it to your plan. The saved places will show at the sidebar as childre of the menu. At the same time, both the saved flight information and interest points information will be saved to our realtime  cloud database build with firebase. In this way, from anytime you log in the web, you can check your previous travel plan by clicking "My previous plan" in the home page. You will find everything is come back to the way you edit them last time!
+
+~~Please enter the IATA code of airport to search flight curently. You can google it to get more information.Due to the limited time, building a global city and aitport auto suggest search bar is currently unavaliable. We will improve it in the future.~~
+
+New features:
+We have added tooltips in the homepage and fixed the space entering problem in the search bar. Also, we enhanced several usability like airport autocompelete.
 
 ## Available Scripts
 
@@ -18,7 +29,7 @@ and then
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
+
 You will also see any lint errors in the console.
 
 ### `npm test`
@@ -36,36 +47,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-### `Project description` 
-Our project is to build a web where users could plan their trip according to their free days. We provide flight search function, hotel search function and car rental search function but no paying function. The choices users have selected will be added to their trip timeline. Eventually, all the information(flights, hotels, car rental and some notes) will be shown in a timeline way.
-
-
-### `Layout` 
-We have already built the main pages' layouts of our website; Pages like My account, Loggin, Trip Plan Printout, Side bar haven't be completed or built, so we will keep perfecting all the pages
-Data: We were using react-redux to transmit data among App and all the components. Next we will use the data that we call through API to set state in the different component.
-
-
 ### `Content` 
 src/App.js - root component. We added different routes to it<br>
 src/index.js - where React is started, which is our root component.<br>
@@ -77,7 +58,20 @@ src/Timeline/Timeline - the component which located at the top of the whole page
 src/SideView/SideView - Sidebar<br>
 src/PlanView/StartView - Only the "Add your plan" button<br>
 src/SelectionView/SelectionView - once you select different days in the timeline, the views under the timeline will change accordingly<br>
-src/Search/Search - the search component where you can search for the flights(the function will be extended to search for hotel and car reantal in the future.)<br>
+src/Search/Search - the search component where you can search for the flights<br>
 src/Search/Searchbar - the form component which will be called in the Search.js file<br>
 src/ResultList/ResultList - the search results which will show after your search<br>
-src/Details/DetailsItem - (in building! ) the details of the search results<br>
+src/Details/DetailsItem - the details of the search results<br>
+src/PrintoutView/PrintoutView - the view there show the print out information<br>
+src/SignIn/SignIn - the js code to build a firebase authentication sign in function<br>
+src/SignUp/SignUp - the js code to build a firebase authentication sign up function<br>
+src/apiUtility/apiUtility - functions to support the api information process go here<br>
+src/Firebase/FirebaseTool - functions to support the firebase data user data and user's flight, place data upload and download go here<br>
+src/MapSearch/ - class and functions on map search and google map api fetch and the map view component go here<br>
+src/actions.js -Redux actions go here<br>
+src/auth.js -  firebase user authentication config go here<br>
+src/ConfigureStore.js - redux store configure file go here<br>
+src/Reducer.js - Redux reducer go here<br>
+src/Store.js - Redux store go here<br>
+src/protected.route.js ProtectedRoute class go here<br>
+
