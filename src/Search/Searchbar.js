@@ -8,9 +8,7 @@ import { connect } from 'react-redux'
 import {
     fetchPostsIfNeeded
 } from '../actions'
-// import {AirportInput} from'airport-autocomplete-js'
 
-// const Option = Select.Option;
 class Searchbars extends Component {
     constructor(props) {
         super(props);
@@ -25,16 +23,6 @@ class Searchbars extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        // this.props.form.validateFields((err, values) => {
-        //     if (!err) {
-        //         // console.log('Received values of form: ', values);
-        //         this.props.onSearchSubmit(values)
-
-        //     }
-
-        //     //   console.log('Received values of form: ',  this.getFormValue());
-
-        // });
         var fromIATA="";
         var toIATA="";
         var regex = /[A-Z]{3}/g;
@@ -67,7 +55,6 @@ class Searchbars extends Component {
                          data-index="$(i)"> 
                        <b>$(IATA)</b> &nbsp $(name) &nbsp $(city), $(country) </div>`
         };
-        // console.log(this.fromInputId)
         if (this.props.viewIndex === this.props.currentindex) {
             // eslint-disable-next-line no-undef
             AirportInput(this.fromInputId, options);
@@ -84,8 +71,6 @@ class Searchbars extends Component {
 
        this.fromInputId = "fromInputId" + this.props.viewIndex;
        this.toInputId = "toInputId" + this.props.viewIndex;
-        // const { onSearchSubmit } = this.props;
-        // const { getFieldDecorator } = this.props.form;
         return (
             <div>
             <Form onSubmit={this.handleSubmit}>
@@ -93,10 +78,6 @@ class Searchbars extends Component {
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
                         <Row style={{width:"100%"}} >
                         <input type="text" id={this.fromInputId} className="inp inputFlight" placeholder="Flight from" style={{ width: "85%" }}></input>
-                            {/* <Form.Item >
-                                {getFieldDecorator('From', { rules: [{ message: 'Please input your starting points', }], })(
-                                    <Input  addonBefore="From" size="large" allowClear placeholder="Input IATA code,eg. ARN for Arlanda airport" style={{ width: "85%" }} />)}
-                            </Form.Item> */}
                         </Row>
                     </Col>
                     <Col xs={2} sm={4} md={2} lg={4} xl={1}>
@@ -109,11 +90,6 @@ class Searchbars extends Component {
                     <Col xs={22} sm={18} md={21} lg={20} xl={10} >
                         <Row style={{width:"100%"}}>
                         <input type="text" id={this.toInputId} className="inp inputFlight" placeholder="To" style={{ width: "85%" }}></input>
-
-                            {/* <Form.Item >
-                                {getFieldDecorator('To', { rules: [{ message: 'Please input your destination', }], })(
-                                    <Input id={this.toInputId} addonBefore="To" size="large" allowClear placeholder="Input IATA code,eg. LAX for LosAngeles airport" style={{ width: "85%" }} />)}
-                            </Form.Item> */}
                         </Row>
                     </Col>
                     <Col xs={24} sm={6} md={24} lg={24} xl={3} >

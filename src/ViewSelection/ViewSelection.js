@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Startview from "../PlanView/Startview";
 import Search from "../Search/Search";
 import MapView from "../MapSearch/MapView";
 import { Button } from 'antd';
@@ -9,10 +8,6 @@ import { connect } from "react-redux";
 
 
 class ViewSelection extends Component {
-    // state = {UI:["PlanItemView","PlanItemView","PlanItemView"]
-    // }
-
-    // change the timeline view status to control the view display
     addPlan = () => {
         var index = this.props.currentindex
         var [...newUI]=this.props.UI
@@ -46,7 +41,6 @@ class ViewSelection extends Component {
                     return (
                         <div>
                             <div>
-                                {/* <div>{this.state.UI}</div> */}
                                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
                             </div>
                         </div>)
@@ -68,7 +62,6 @@ function mapDispatchToProps(dispatch) {
         addPlan: (value) => {
             const action = { type: "ADD_PLAN", payload: value };
             dispatch(action);
-            // (console.log(value))
         },
     }
 }

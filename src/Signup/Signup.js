@@ -59,13 +59,9 @@ class Signup extends Component {
     );
 
     firebase.auth().onAuthStateChanged(firebaseuser => {
-      // if (firebaseuser) { console.log(firebaseuser) }
-      // else (console.log("No logged in"))
+
     })
     if (formValid(this.state)) {
-  //     console.log(`
-  //       --SUBMITTING--
-  //  `);
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
@@ -108,7 +104,6 @@ class Signup extends Component {
 
   render() {
     const { formErrors } = this.state;
-    // console.log(this.state)
     return (
       <div className="wrapper">
         <div className="form-wrapper">

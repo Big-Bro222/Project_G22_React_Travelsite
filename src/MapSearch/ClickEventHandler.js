@@ -30,10 +30,8 @@ class ClickEventHandler {
   }
 
   handleClick = function (event) {
-    // console.log('You clicked on: ' + event.latLng);
     // If the event has a placeId, use it.
     if (event.placeId) {
-      // console.log('You clicked on place:' + event.placeId);
       this.infowindow.close();
       // Calling e.stop() on the event prevents the default info window from
       // showing.
@@ -45,7 +43,6 @@ class ClickEventHandler {
 
     } else {
       this.infowindowContent.style.display = 'none';
-      // console.log(this.place_noPlace.textContent);
       this.place_noPlace.textContent = "Not a point of Interest " + event.latLng;
       this.infowindow.open(this.map);
       this.currentId = 0;
@@ -79,7 +76,6 @@ class ClickEventHandler {
         } else {
           me.place_tel.textContent = place.international_phone_number;
         }
-        // console.log(place.opening_hours);
         if (place.opening_hours == null) {
           me.place_openHour.textContent = 'No information available';
         } else {
@@ -92,11 +88,6 @@ class ClickEventHandler {
         } else {
           me.place_rate.textContent = 'Rate: ' + place.rating + '/5.0';
         }
-        // console.log(me.place_rate);
-        // console.log(place.rating);
-        // me.place_rate.value = place.rating;
-
-
         me.place_address.textContent = place.formatted_address;
       } else {
         alert(status);

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { Row, Col } from 'antd'
-// import {
-//     fetchPostsIfNeeded
-// } from '../actions'
 import SideView from "../Side/SideView";
 import MapApi from "./MapApi"
 
@@ -18,11 +15,6 @@ class mapView extends Component {
     }
 
     handleSubmit(formData) {
-        // e.preventDefault()
-
-        // const { dispatch } = this.props
-        // console.log("formData" + formData)
-        // dispatch(fetchPostsIfNeeded(formData))
     }
 
     render() {

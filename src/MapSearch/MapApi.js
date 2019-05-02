@@ -38,8 +38,7 @@ class MapApi extends Component {
 
 
     this.props.savePoint(newSavePoint)
-    // console.log(this.savedPoint)
-    //this.setState({UI:this.props.UI})
+
 
   }
 
@@ -80,9 +79,7 @@ class MapApi extends Component {
               placeholder='Try to search "attractions"'
             />
           </Col>
-          {/* <Col >
-            <button ref="addButton" type="button" onClick={this.savePoint}>Add to my plan</button>
-          </Col> */}
+       
         </Row>
         <Row >
           <Col xs={24} sm={6} md={24} lg={18} xl={18} >
@@ -151,7 +148,6 @@ class MapApi extends Component {
       center: { lat: 59.325, lng: 18.070 },
       zoom: 12,
       mapTypeId: 'roadmap',
-      // clickableIcons: false
     });
 
     var clickHandler = new ClickEventHandler(map, { lat: 59.325, lng: 18.070 });
@@ -189,10 +185,7 @@ class MapApi extends Component {
       title: 'unknow01',
       address: 'unkown Places01'
     };
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content: "testing",
-    //   maxWidth: 600
-    // });
+   
    //style for saved marker  use as icon:goldstar
    var goldStar = {
     path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
@@ -262,7 +255,6 @@ class MapApi extends Component {
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
-          // console.log("Returned place contains no geometry");
           return;
         }
 
@@ -289,11 +281,6 @@ class MapApi extends Component {
           setCurrentMarker(lastMarker);
           // openInfowindow(lastMarker);
           clickHandler.getPlaceInformation(lastMarker.id);
-
-
-
-          // thisRef.setState(clickHandler.place_rate);
-
         });
 
       });
@@ -304,7 +291,6 @@ class MapApi extends Component {
     function toggleBounce(marker) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
-        //preMarker=marker;
       } else {
         markers.forEach(function (marker) {
           marker.setAnimation(null);
@@ -334,7 +320,7 @@ class MapApi extends Component {
       }
     }
 
-    //     //click add marker
+   //click add marker
     map.addListener('click', function (e) {
       placeMarker(e.latLng, map);
     });
@@ -352,7 +338,6 @@ class MapApi extends Component {
         position: latLng,
         animation: google.maps.Animation.BOUNCE,
       }));
-      // console.log(markers[0].id);
       setCurrentMarker(markers[0]);
     }
 
@@ -364,7 +349,6 @@ class MapApi extends Component {
         title: clickHandler.place_name.textContent,
         address: clickHandler.place_address.textContent,
         position:{"lat":lat,"lng":lng},
-        // marker: currentMarker,
 
       }
       if (thisRef.props.savedPoint) {
@@ -391,13 +375,9 @@ class MapApi extends Component {
           marker.setMap(null);
         });
         markers = [];
-        // openInfowindow(marker);
         clickHandler.getPlaceInformation(marker.id);
-        // thisRef.setState(clickHandler.place_rate);
 
       });
-
-      // console.log(thisRef.savedPoint);
       currentMarker.setMap(null);
       savedMarkers.push(marker);
       setCurrentMarker(marker);
@@ -453,7 +433,6 @@ function mapDispatchToProps(dispatch) {
     deletePoint: (value) => {
       const action = { type: "DELETE_POINT", payload: value };
       dispatch(action);
-      // (console.log(value));
     },
   }
 }

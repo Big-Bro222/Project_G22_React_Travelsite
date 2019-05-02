@@ -12,14 +12,11 @@ class Startview extends Component {
         newUI[index]="Search"
         
         this.props.addPlan(newUI)
-        //this.setState({UI:this.props.UI})
-        // console.log(newUI)
-        // console.log(this.props.UI)
+       
     }
     render() {
         return (
             <div>
-                {/* <div>{this.state.UI}</div> */}
                 <Button type="primary" shape="round" icon="edit" size={"large"} onClick={this.addPlan}>ADD YOUR PLAN</Button>
             </div>
         );
@@ -38,7 +35,6 @@ function mapDispatchToProps(dispatch) {
         addPlan: (value) => {
             const action = { type: "ADD_PLAN", payload: value };
             dispatch(action);
-            // (console.log("input"))
         },
     }
 }

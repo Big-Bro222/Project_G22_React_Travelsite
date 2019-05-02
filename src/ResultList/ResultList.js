@@ -11,16 +11,12 @@ class ResultList extends Component {
     }
     constructor(props) {
         super(props);
-
         this.savedFlight = [];
 
     }
     saveFlight = (e, flight) => {
         e.preventDefault();
-        // this.savedFlight.push(flight);
-
         var trigger = true;
-        // console.log(this.savedFlight.length)
         if (this.savedFlight.length <= 0) { trigger = true; }
         else {
             trigger = false;
@@ -55,10 +51,8 @@ class ResultList extends Component {
 
             this.props.saveFlight(newSaveFlight)
         }
-        //this.setState({UI:this.props.UI})
     }
     render() {
-        // console.log("list")
         var resultList = null
         if (this.props.posts) {
             const { Itineraries, Legs, Places, Carriers } = this.props.posts;
@@ -218,7 +212,6 @@ function mapDispatchToProps(dispatch) {
         saveFlight: (value) => {
             const action = { type: "SAVE_FLIGHT", payload: value };
             dispatch(action);
-            // (console.log(value))
         },
     }
 }

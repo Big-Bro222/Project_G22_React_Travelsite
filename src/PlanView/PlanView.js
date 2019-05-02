@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col,Alert } from 'antd';
-// import SideView from "../Side/SideView";
 import Timeline from "../Timeline/Timeline";
 import Navbar from "../Navbar/Navbar";
 import { connect } from "react-redux";
@@ -71,7 +70,6 @@ class PlanView extends Component {
         break;
       }
       case "printoutView": {
-        // console.log("test pint")
         mainView = (
           <Row>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} >

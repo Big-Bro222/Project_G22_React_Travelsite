@@ -4,32 +4,14 @@ import "./SideView.css"
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-// import {
-//     Button
-// } from 'antd';
-
-// const SubMenu = Menu.SubMenu;
 
 class SideView extends Component {
-    // rootSubmenuKeys = ['sub1', 'sub2'];
     constructor(props){
         super(props);
         this.deleteFlight = this.deleteFlight.bind(this);
      }
     state = {
-        // openKeys: ['sub1'],
     }
-
-    // onOpenChange = (openKeys) => {
-    //     const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-    //     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-    //       this.setState({ openKeys });
-    //     } else {
-    //       this.setState({
-    //         openKeys: latestOpenKey ? [latestOpenKey] : [],
-    //       });
-    //     }
-    //   }
 
     deleteFlight = ( e,flightNumber) => {
        e.preventDefault();  
@@ -61,24 +43,15 @@ class SideView extends Component {
 
                     newUI[index] = "Search"
                     this.props.changePlan(newUI)
-                    //this.setState({ UI: this.props.UI })
-                    // console.log(newUI)
-                    // console.log(this.props.UI)
                     break;
                 case "sub2":
                     newUI[index] = "Map"
                     this.props.changePlan(newUI)
-                    //this.setState({ UI: this.props.UI })
-                    // console.log(newUI)
-                    // console.log(this.props.UI)
                     break;
                 case "sub3":
                     this.props.changeView("printoutView")
                     break;
                 default:
-                // console.log(newUI)
-                // console.log(this.props.UI)
-
             }
 
         }
@@ -145,12 +118,10 @@ function mapDispatchToProps(dispatch) {
         changePlan: (value) => {
             const action = { type: "CHANGE_PLAN", payload: value };
             dispatch(action);
-            // (console.log(value))
         },
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            // (console.log(value))
         },
         deleteFlight: (value) => {
             const action = { type: "DELETE_FLIGHT", payload: value };

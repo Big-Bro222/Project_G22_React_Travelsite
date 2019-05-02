@@ -1,6 +1,5 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
-// import firebase from "firebase"
 export function updateState(uid, state) {
     // A post entry.
     var newState = {
@@ -8,11 +7,6 @@ export function updateState(uid, state) {
       uid: uid,
       state:state
     };
-  
-    // Get a key for a new Post.
-    // var newPostKey = firebase.database().ref().child('states').push().key;
-  
-    // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
     updates['/state/' ] = newState;
     updates['/user-state/' + uid] = newState;
@@ -39,12 +33,8 @@ export function updateState(uid, state) {
       currentUID = user.uid;
    
       writeUserData(user.uid, user.email);
-    //   startDatabaseQueries();
     } else {
-      // Set currentUID to null.
       currentUID = null;
-      // Display the splash page where you can sign-in.
-    //   splashPage.style.display = '';
     }
   }
   window.addEventListener('load', function() {

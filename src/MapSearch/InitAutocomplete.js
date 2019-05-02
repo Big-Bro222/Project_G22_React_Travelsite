@@ -46,7 +46,6 @@ class ClickEventHandler {
 
     } else {
       this.infowindowContent.style.display = 'none';
-      // console.log(this.place_noPlace.textContent);
       this.place_noPlace.textContent = "Not a point of Interest " + event.latLng;
       this.infowindow.open(this.map);
       this.currentId = 0;
@@ -80,7 +79,7 @@ class ClickEventHandler {
         } else {
           me.place_tel.textContent = place.international_phone_number;
         }
-        // console.log(place.opening_hours);
+
         if (place.opening_hours == null) {
           me.place_openHour.textContent = 'No information available';
         } else {
@@ -93,9 +92,7 @@ class ClickEventHandler {
         } else {
           me.place_rate.textContent = 'Rate: ' + place.rating + '/5.0';
         }
-        // console.log(me.place_rate);
-        // console.log(place.rating);
-        // me.place_rate.value = place.rating;
+
 
 
         me.place_address.textContent = place.formatted_address;
@@ -156,11 +153,6 @@ function initAutocomplete() {
       title: 'unknow01',
       address: 'unkown Places01'
     };
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content: "testing",
-    //   maxWidth: 600
-    // });
-   //style for saved marker  use as icon:goldstar
    var goldStar = {
     path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
     fillColor: 'yellow',
@@ -229,11 +221,9 @@ function initAutocomplete() {
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
-          // console.log("Returned place contains no geometry");
           return;
         }
 
-        // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
           id: place.place_id,
@@ -254,12 +244,7 @@ function initAutocomplete() {
         lastMarker.addListener('click', function (event) {
           toggleBounce(lastMarker);
           setCurrentMarker(lastMarker);
-          // openInfowindow(lastMarker);
           clickHandler.getPlaceInformation(lastMarker.id);
-
-
-
-          // thisRef.setState(clickHandler.place_rate);
 
         });
 

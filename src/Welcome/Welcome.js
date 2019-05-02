@@ -13,9 +13,7 @@ import { Link } from "react-router-dom";
 import img01 from "../imgs/01.jpg"
 import img02 from "../imgs/02.jpg"
 import firebase from 'firebase/app'
-// import'firebase/firebase-database'
-// import'firebase/firebase-auth'
-// import {updateState,currentUID} from "../Firebase/FirebaseTool"
+
 
 const toolTips = (
     <div>
@@ -70,7 +68,6 @@ class Welcome extends Component {
         if (value) {
             this.onChange('endValue', value);
             this.props.onChangereturn(value._d.getTime());
-            // console.log(value._d.toISOString())
         }
         else{
             this.onChange('endValue', null);
@@ -118,15 +115,6 @@ class Welcome extends Component {
 
         })
     }
-
-    // changeView = (value) => {
-    //     // e.preventDefault();
-
-    // this.props.changeView(value)
-    // }
-
-    // Use generateTimeLine to creat a default timeline and give the store state UI default values ["Startview",...]
-
     generateTimeLine = () => {
         var timeline = this.timeLinearr(this.props.departuredate, this.props.returndate)
         var UI = Array(timeline.length).fill("Startview")
@@ -151,8 +139,7 @@ class Welcome extends Component {
  
 
         return (
-            <div >
-                {/* <div>{this.props.departuredate + "this.props." + this.props.returndate}</div> */}
+            <div>
                 <Navbar />
                 <Carousel autoplay>
                     <div><img alt="1" style={{ maxWidth: "100%" }} src={img01}></img></div>
@@ -218,15 +205,12 @@ function mapDispatchToProps(dispatch) {
         onChangedeparture: (value) => {
             const action = { type: "ON_CHANGE_DEPARTURE", payload: value };
             dispatch(action);
-            // (console.log("input"))
         },
         onChangereturn: (value) => {
             const action = { type: "ON_CHANGE_RETURN", payload: value };
             dispatch(action);
-            // (console.log("input2"))
         },
         generateTimeLine: (timeline, UI, savedPoint, savedFlight) => {
-            // console.log(this.props)
             const action = {
                 type: "GENERATE_TIME_LINE",
                 timeline: timeline,
@@ -241,7 +225,6 @@ function mapDispatchToProps(dispatch) {
         changeView: (value) => {
             const action = { type: "CHANGE_VIEW", payload: value };
             dispatch(action);
-            // (console.log(value))
         },
         getData: (value) => {
             const action = {

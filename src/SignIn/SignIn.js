@@ -49,10 +49,6 @@ class SignIn extends Component {
     });}).catch(e =>this.setState({ errormessage: e.message }));
     
     if (formValid(this.state)) {
-      // console.log(`
-      //   --SUBMITTING--
-      // `
-      // );
       firebase.auth().onAuthStateChanged(onAuthStateChanged);
       
     } else {
@@ -80,11 +76,6 @@ class SignIn extends Component {
 
     this.setState({ formErrors, [name]: value }, () => {});
   };
-  // handleClick = () => {
-  //   auth.login(() => {
-  //     this.props.history.push("/app");
-  //   });
-  // }
   render() {
     const { formErrors } = this.state;
 
