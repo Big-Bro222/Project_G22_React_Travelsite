@@ -3,3 +3,13 @@
     border-radius:10px;
     border-bottom: solid 1px #d6e4ff;
 }
+
+.list{
+    width: 95%;
+    text-align: center;
+    border-bottom: solid 1px #f5f5f5;
+     padding-bottom:3%;
+
+}
+
+
