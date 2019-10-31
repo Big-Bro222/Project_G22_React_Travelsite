@@ -75,3 +75,5 @@ src/Reducer.js - Redux reducer go here<br>
 src/Store.js - Redux store go here<br>
 src/protected.route.js ProtectedRoute class go here<br>
 
+### `Link`
+Preview link:https://travelplanner-web.firebaseapp.com/
