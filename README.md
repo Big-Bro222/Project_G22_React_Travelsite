@@ -4,7 +4,7 @@ This project is created by group 22 byZY ZXY QZ and LRZ;
 
 Under Master branch is the project for final review
 
-### `Link`
+### `The live website address`
 Preview link:https://travelplanner-web.firebaseapp.com/
 
 ## Project strcture:
