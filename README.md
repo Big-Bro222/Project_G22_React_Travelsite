@@ -4,6 +4,9 @@ This project is created by group 22 byZY ZXY QZ and LRZ;
 
 Under Master branch is the project for final review
 
+### `Link`
+Preview link:https://travelplanner-web.firebaseapp.com/
+
 ## Project strcture:
 We seperated the web to many views adn these views components are modueld and saved in individual folder with their class name; There are some main important views like Search view and Side view and map search view. They are made up of some children views component to make the code more clear and easy to reuse.
 
@@ -75,5 +78,4 @@ src/Reducer.js - Redux reducer go here<br>
 src/Store.js - Redux store go here<br>
 src/protected.route.js ProtectedRoute class go here<br>
 
-### `Link`
-Preview link:https://travelplanner-web.firebaseapp.com/
+
